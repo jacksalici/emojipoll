@@ -24,6 +24,9 @@ export default {
 
       this.task = "";
     },
+    delEntry(i){
+        this.tasks.splice(i,1)
+    },
 
     getEmoji(i) {
       fetch(
@@ -35,6 +38,7 @@ export default {
           this.tasks.at(i)["emoji"] = data[0];
         });
     },
+
   },
 };
 </script>
@@ -47,9 +51,7 @@ export default {
         <tr>
         <th></th>
         <th>Emoji</th>
-        <th>Poll Entry</th>
-        <th></th>
-        <th></th>
+        <th>Entries</th>
         <th></th>
       </tr>
       </thead>
@@ -59,7 +61,7 @@ export default {
         <th>
            {{index}}
         </th>
-        <td  class="text-xl">
+        <td  class="text-3xl">
           {{ element.emoji }}
         </td>
 
@@ -67,16 +69,17 @@ export default {
           {{ element.name }}
         </td>
 
-        <td @click="getEmoji(index)">
-            ♻️
-        </td>
-         <td>
-            ✏️
-        </td>
-         <td>
-            ❌
-        </td>
-
+        <td>
+            <button class="btn btn-ghost" @click="getEmoji(index)">
+                ♻️
+            </button>
+             <button class="btn btn-ghost" @click="getEmoji(index)">
+                ✏️
+            </button>
+             <button class="btn btn-ghost" @click="delEntry(index)">
+                ❌
+            </button>
+        </td>   
       </tr>
           </template>
         </draggable>
