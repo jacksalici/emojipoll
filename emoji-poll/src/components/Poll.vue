@@ -151,7 +151,7 @@ export default {
         <div class="card-actions justify-end">
           <a role="button"
             :href="
-              'https://api.whatsapp.com/send/?text=' + this.prettyString.replace(' ', '%20').replace('\n','%0A')
+              'https://api.whatsapp.com/send/?text=' + this.prettyString.replace(' ', '%20').replace(/\n/g,'%0A')
             "
             class="btn btn-primary"
           >
