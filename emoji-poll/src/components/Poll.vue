@@ -1,5 +1,6 @@
 <script>
-import draggable from "vuedraggable";
+import draggable from 'vuedraggable'
+
 
 export default {
   name: "PollCore",
@@ -8,10 +9,9 @@ export default {
   },
   data() {
     return {
-      tasks: [],
+      list: [],
       task: "",
       count: 0,
-      draggable: false,
     };
   },
 
@@ -19,13 +19,16 @@ export default {
     addEntry() {
       const dict = { name: this.task, emoji: "..." };
       this.getEmoji(this.count);
-      this.tasks.push(dict);
+      this.list.push(dict);
       this.count++;
 
       this.task = "";
+      console.log(this.list);
     },
-    delEntry(i){
-        this.tasks.splice(i,1)
+    delEntry(i) {
+      this.list.splice(i, 1);
+      this.count--;
+      console.log(this.list);
     },
 
     getEmoji(i) {
@@ -35,57 +38,68 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           console.log(data[0]+i);
-          this.tasks.at(i)["emoji"] = data[0];
+          this.list.at(i)["emoji"] = data[0];
         });
     },
-
   },
+
+  computed: {
+    dragOptions() {
+      return {
+        animation: 200,
+        group: "description",
+        disabled: false,
+        ghostClass: "active"
+      };
+    }
+  }
 };
 </script>
 
 <template>
   <div>
-    
-     <table v-if="this.tasks.length>0" class="table w-full my-8">
+    <table v-if="this.list.length > 0" class="table w-full my-8">
       <thead>
         <tr>
-        <th></th>
-        <th>Emoji</th>
-        <th>Entries</th>
-        <th></th>
-      </tr>
+          <th></th>
+          <th>Emoji</th>
+          <th>Entries</th>
+          <th></th>
+        </tr>
       </thead>
-        <draggable v-model="tasks" tag="tbody" item-key="name">
-          <template #item="{ element, index }">
-      <tr>
-        <th>
-           {{index}}
-        </th>
-        <td  class="text-3xl">
-          {{ element.emoji }}
-        </td>
+      <draggable
+        class="list-group"
+        :list="list"
+        tag="tbody"
+        :component-data="{name: 'flip-list', type: 'transition-group' }"
+        v-bind="dragOptions"
+        item-key="name"
+        handle=".handle"
+        @start="isDragging = true"
+        @end="isDragging = false"
+      >
+        <template #item="{ element, index }">
+          <tr class="list-group-item">
+            <td class="handle">
+              <button class="btn btn-ghost">🔃</button>
+            </td>
+            <td class="text-3xl">
+              {{ element.emoji }}
+            </td>
 
-        <td>
-          {{ element.name }}
-        </td>
+            <td>
+              {{ element.name }}
+            </td>
 
-        <td>
-            <button class="btn btn-ghost" @click="getEmoji(index)">
-                ♻️
-            </button>
-             <button class="btn btn-ghost" @click="getEmoji(index)">
-                ✏️
-            </button>
-             <button class="btn btn-ghost" @click="delEntry(index)">
-                ❌
-            </button>
-        </td>   
-      </tr>
-          </template>
-        </draggable>
+            <td>
+              <button class="btn btn-ghost" @click="getEmoji(index)">♻️</button>
+              <button class="btn btn-ghost" @click="getEmoji(index)">✏️</button>
+              <button class="btn btn-ghost" @click="delEntry(index)">❌</button>
+            </td>
+          </tr>
+        </template>
+      </draggable>
     </table>
-
-    
 
     <form @submit.prevent="addEntry">
       <input
@@ -98,12 +112,20 @@ export default {
   </div>
 </template>
 
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
+<style>
+.flip-list-move {
+  transition: transform 0.5s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
-  opacity: 0;
+.no-move {
+  transition: transform 0s;
+}
+.list-group {
+  min-height: 20px;
+}
+.list-group-item {
+  cursor: move;
+}
+.list-group-item i {
+  cursor: pointer;
 }
 </style>
