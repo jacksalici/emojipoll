@@ -12,10 +12,26 @@ export default {
       list: [],
       task: "",
       count: 0,
+      prettyString: "",
+      tipIsOpen:false
     };
   },
 
   methods: {
+    pPrint(){
+    this.prettyString="Howdy! Please react to this message according to your choice:\n"
+    console.log(this.list);
+    this.list.forEach(element => {
+        this.prettyString+=element.emoji + "    " + element.name + "\n"
+    });
+    this.prettyString+="\n\n_Poll generated using EmojiPoll.tk!_"
+    this.tipIsOpen=false
+
+    },
+    copy(){
+        navigator.clipboard.writeText(this.prettyString);
+        this.tipIsOpen = true
+    },
     addEntry() {
       const dict = { name: this.task, emoji: "..." };
       this.getEmoji(this.count);
@@ -23,12 +39,15 @@ export default {
       this.count++;
 
       this.task = "";
-      console.log(this.list);
+      this.pPrint()
+
+      
     },
     delEntry(i) {
       this.list.splice(i, 1);
       this.count--;
-      console.log(this.list);
+            this.pPrint()
+
     },
 
     getEmoji(i) {
@@ -37,8 +56,9 @@ export default {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log(data[0]+i);
+          console.log(data[0]);
           this.list.at(i)["emoji"] = data[0];
+          this.pPrint()
         });
     },
   },
@@ -75,6 +95,7 @@ export default {
         v-bind="dragOptions"
         item-key="name"
         handle=".handle"
+        @change="this.pPrint()"
         @start="isDragging = true"
         @end="isDragging = false"
       >
@@ -93,7 +114,7 @@ export default {
 
             <td>
               <button class="btn btn-ghost" @click="getEmoji(index)">♻️</button>
-              <button class="btn btn-ghost" @click="getEmoji(index)">✏️</button>
+              <!--<button class="btn btn-ghost" @click="getEmoji(index)">✏️</button>-->
               <button class="btn btn-ghost" @click="delEntry(index)">❌</button>
             </td>
           </tr>
@@ -109,6 +130,26 @@ export default {
         v-model="task"
       />
     </form>
+
+    <div v-if="this.prettyString.length>0" class="card bg-accent mt-8 md:opacity-50 hover:opacity-100 ">
+        
+        <div class="card-body">
+            <div class="card-title">Poll Text:</div>
+            
+            <p class="font-mono" v-for="line in this.prettyString.split('\n')" :key="line">{{line}}</p>
+             <div class="card-actions justify-end">
+                 <button :href="'https://wa.me/?text='+encodeURIComponent(this.prettyString)" class="btn btn-ghost">Share it on WhatsApp</button>
+
+                <div class=" tooltip-primary" data-tip="copied" :class="{ 'tooltip-open': tipIsOpen, 'tooltip': tipIsOpen }">
+                 <button @click="copy()" class="btn btn-primary">📑 Copy Text</button>
+                </div>
+             </div>
+               
+        </div>
+
+    </div>
+
+
   </div>
 </template>
 
