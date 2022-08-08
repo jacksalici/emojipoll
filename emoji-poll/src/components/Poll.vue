@@ -1,6 +1,5 @@
 <script>
-import draggable from 'vuedraggable'
-
+import draggable from "vuedraggable";
 
 export default {
   name: "PollCore",
@@ -13,24 +12,24 @@ export default {
       task: "",
       count: 0,
       prettyString: "",
-      tipIsOpen:false
+      tipIsOpen: false,
     };
   },
 
   methods: {
-    pPrint(){
-    this.prettyString="Howdy! Please react to this message according to your choice:\n"
-    console.log(this.list);
-    this.list.forEach(element => {
-        this.prettyString+=element.emoji + "    " + element.name + "\n"
-    });
-    this.prettyString+="\n\n_Poll generated using EmojiPoll.tk!_"
-    this.tipIsOpen=false
-
+    pPrint() {
+      this.prettyString =
+        "Howdy! Please react to this message according to your choice:\n";
+      console.log(this.list);
+      this.list.forEach((element) => {
+        this.prettyString += element.emoji + "    " + element.name + "\n";
+      });
+      this.prettyString += "\n_Poll generated using EmojiPoll.tk!_";
+      this.tipIsOpen = false;
     },
-    copy(){
-        navigator.clipboard.writeText(this.prettyString);
-        this.tipIsOpen = true
+    copy() {
+      navigator.clipboard.writeText(this.prettyString);
+      this.tipIsOpen = true;
     },
     addEntry() {
       const dict = { name: this.task, emoji: "..." };
@@ -39,15 +38,12 @@ export default {
       this.count++;
 
       this.task = "";
-      this.pPrint()
-
-      
+      this.pPrint();
     },
     delEntry(i) {
       this.list.splice(i, 1);
       this.count--;
-            this.pPrint()
-
+      this.pPrint();
     },
 
     getEmoji(i) {
@@ -58,7 +54,7 @@ export default {
         .then((data) => {
           console.log(data[0]);
           this.list.at(i)["emoji"] = data[0];
-          this.pPrint()
+          this.pPrint();
         });
     },
   },
@@ -69,10 +65,10 @@ export default {
         animation: 200,
         group: "description",
         disabled: false,
-        ghostClass: "active"
+        ghostClass: "active",
       };
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -91,7 +87,7 @@ export default {
         class="list-group"
         :list="list"
         tag="tbody"
-        :component-data="{name: 'flip-list', type: 'transition-group' }"
+        :component-data="{ name: 'flip-list', type: 'transition-group' }"
         v-bind="dragOptions"
         item-key="name"
         handle=".handle"
@@ -125,31 +121,55 @@ export default {
     <form @submit.prevent="addEntry">
       <input
         type="text"
-        class="input input-lg input-bordered input-primary w-full max-w-xs"
-        placeholder="Add a new entry 🦄"
+        class="input input-lg input-bordered input-primary w-full focus:border-primary focus:ring-0"
+        placeholder="Add a new entry ✏️🦄"
         v-model="task"
       />
     </form>
 
-    <div v-if="this.prettyString.length>0" class="card bg-accent mt-8 md:opacity-50 hover:opacity-100 ">
-        
-        <div class="card-body">
-            <div class="card-title">Poll Text:</div>
+    <div
+      v-if="this.prettyString.length > 0"
+      class="card bg-accent mt-8"
+    >
+      <div class="card-body">
+        <div class="card-title collapse block" tabindex="0">
+           <div class="collapse-title text-xl text-left">
+                Text Poll: (click to view)
+            </div>
+           <p
+          class="font-mono collapse-content text-base text-left font-normal	"
+          v-for="line in this.prettyString.split('\n')"
+          :key="line"
+        >
+          {{ line }}
+        </p>
+         
             
-            <p class="font-mono" v-for="line in this.prettyString.split('\n')" :key="line">{{line}}</p>
-             <div class="card-actions justify-end">
-                 <button :href="'https://wa.me/?text='+encodeURIComponent(this.prettyString)" class="btn btn-ghost">Share it on WhatsApp</button>
-
-                <div class=" tooltip-primary" data-tip="copied" :class="{ 'tooltip-open': tipIsOpen, 'tooltip': tipIsOpen }">
-                 <button @click="copy()" class="btn btn-primary">📑 Copy Text</button>
-                </div>
-             </div>
-               
         </div>
 
+    
+        <div class="card-actions justify-end">
+          <a role="button"
+            :href="
+              'https://api.whatsapp.com/send/?text=' + this.prettyString.replace(' ', '%20').replace('\n','%0A')
+            "
+            class="btn btn-primary"
+          >
+            💚 Share it on WhatsApp
+          </a>
+
+          <div
+            class="tooltip-primary"
+            data-tip="copied"
+            :class="{ 'tooltip-open': tipIsOpen, tooltip: tipIsOpen }"
+          >
+            <button @click="copy()" class="btn btn-primary">
+              📑 Copy Text
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-
-
   </div>
 </template>
 
