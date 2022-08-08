@@ -1,20 +1,25 @@
 <script>
+import draggable from "vuedraggable";
+
 export default {
   name: "PollCore",
-
+  components: {
+    draggable,
+  },
   data() {
     return {
-      tasks: {},
+      tasks: [],
       task: "",
       count: 0,
+      draggable: false,
     };
   },
 
   methods: {
     addEntry() {
-      const dict = { desc: this.task, emoji: "" };
+      const dict = { name: this.task, emoji: "..." };
       this.getEmoji(this.count);
-      this.tasks[this.count] = dict;
+      this.tasks.push(dict);
       this.count++;
 
       this.task = "";
@@ -26,8 +31,8 @@ export default {
       )
         .then((response) => response.json())
         .then((data) => {
-          console.log(data[0]);
-          this.tasks[i]["emoji"] = data[0];
+          console.log(data[0]+i);
+          this.tasks.at(i)["emoji"] = data[0];
         });
     },
   },
@@ -36,37 +41,66 @@ export default {
 
 <template>
   <div>
-    <table v-if="tasks.lenght>0" class="table w-full my-8">
+    
+     <table v-if="this.tasks.length>0" class="table w-full my-8">
       <thead>
         <tr>
         <th></th>
-        <th>Emoji Choice</th>
+        <th>Emoji</th>
         <th>Poll Entry</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
       </thead>
-      <tbody>
-      <tr v-for="(task, index) in tasks" :key="index">
+        <draggable v-model="tasks" tag="tbody" item-key="name">
+          <template #item="{ element, index }">
+      <tr>
         <th>
-            {{index}}
+           {{index}}
         </th>
         <td  class="text-xl">
-          {{ task.emoji }}
+          {{ element.emoji }}
         </td>
 
         <td>
-          {{ task.desc }}
+          {{ element.name }}
         </td>
+
+        <td @click="getEmoji(index)">
+            ♻️
+        </td>
+         <td>
+            ✏️
+        </td>
+         <td>
+            ❌
+        </td>
+
       </tr>
-      </tbody>
+          </template>
+        </draggable>
     </table>
+
+    
 
     <form @submit.prevent="addEntry">
       <input
         type="text"
         class="input input-lg input-bordered input-primary w-full max-w-xs"
-        placeholder="Add new entry 🦄"
+        placeholder="Add a new entry 🦄"
         v-model="task"
       />
     </form>
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+  opacity: 0;
+}
+</style>
