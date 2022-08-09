@@ -8,7 +8,7 @@ export default {
   data() {
     return {
       
-      emoji: '🖕',
+      emoji: '🤠',
       groups: [],
       groupsOptions: ["ciao", "mamma"]
     }
