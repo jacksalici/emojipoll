@@ -19,7 +19,7 @@ export default {
   methods: {
     pPrint() {
       this.prettyString =
-        "Howdy! Please react to this message according to your choice:\n";
+        "Howdy! Please react to this message with the emoji that matches your choice:\n";
       console.log(this.list);
       this.list.forEach((element) => {
         this.prettyString += element.emoji + "    " + element.name + "\n";
@@ -74,7 +74,7 @@ export default {
 
 <template>
   <div>
-    <table v-if="this.list.length > 0" class="table w-full my-8">
+    <table v-if="this.list.length > 0" class="table w-full my-5">
       <thead>
         <tr>
           <th></th>
@@ -129,10 +129,10 @@ export default {
 
     <div
       v-if="this.prettyString.length > 0"
-      class="card bg-accent mt-8"
+      class="card bg-accent mt-5"
     >
       <div class="card-body">
-        <div class="card-title collapse block" tabindex="0">
+        <div class="card-title collapse block collapse-plus" tabindex="0">
            <div class="collapse-title text-xl text-left">
                 Text Poll: (click to view)
             </div>
@@ -151,7 +151,7 @@ export default {
         <div class="card-actions justify-end">
           <a role="button"
             :href="
-              'https://api.whatsapp.com/send/?text=' + this.prettyString.replace(' ', '%20').replace(/\n/g,'%0A')
+              'https://api.whatsapp.com/send/?text=' + this.prettyString.replace(/\x20+/g, '%20').replace(/\n/g,'%0A')
             "
             class="btn btn-primary"
           >

@@ -24,19 +24,7 @@ export default {
   components: {
     PollCore,
   },
-  data() {
-    return { emoji: this.getEmoji() };
-  },
-  methods: {
-    getEmoji() {
-      fetch(
-        "https://emoji.deta.dev/random?n=3&skintones=False&nogroup=Symbols,Flags&maxversion=14"
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          this.emoji = data[0] + data[1] + data[2];
-        });
-    },
-  },
+  
+  
 };
 </script>
