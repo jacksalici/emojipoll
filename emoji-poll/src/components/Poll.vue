@@ -19,16 +19,18 @@ export default {
 
   methods: {
     pPrint() {
-      this.prettyString =
-        "Howdy! Please react to this message with the emoji that matches your choice:\n";
-        if (this.title!=""){
-            this.prettyString+="\n*" + this.title.toUpperCase() + "*\n"
+      this.prettyString=""
+       if (this.title!=""){
+            this.prettyString+="*" + this.title.toUpperCase() + "*\n"
         }
+      this.prettyString +=
+        "React to this message with the emoji that matches your choice:\n";
+       
       console.log(this.list);
       this.list.forEach((element) => {
         this.prettyString += element.emoji + "    *" + element.name + "*\n";
       });
-      this.prettyString += "\n_Freshly generated using emojipoll.jacksalici.com_";
+      this.prettyString += "\n_Generated with emojipoll.jacksalici.com_";
       this.tipIsOpen = false;
     },
     copy() {
@@ -136,7 +138,7 @@ export default {
 
     <div v-if="this.prettyString.length > 0" class="card bg-accent mt-5">
       <div class="card-body">
-        <input type="text" placeholder="Insert the poll title" v-model="title" class="input input-bordered input-ghost w-full  max-w-xs" v-on:change="pPrint()"/>
+        <input type="text" placeholder="Insert the poll title" v-model="title" class="input input-bordered input-ghost w-full  max-w-xs mx-auto" v-on:change="pPrint()"/>
 
         <div class="card-title collapse block collapse-plus" tabindex="0">
           <div class="collapse-title text-left">Poll Text:</div>
