@@ -1,6 +1,5 @@
 node_modules/
-.cache/
-public
+.cache
 emoji-poll/localhost-key.pem
 .gitignore
 emoji-poll/localhost.pem
