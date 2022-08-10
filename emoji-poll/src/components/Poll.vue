@@ -1,4 +1,12 @@
 <script>
+
+/*
+ <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(255, 255, 255, 0); display: block;" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<circle cx="50" cy="50" fill="none" stroke="#1d0e0b" stroke-width="9" r="40" stroke-dasharray="188.49555921538757 64.83185307179586">
+  <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+</circle>
+</svg>
+*/
 import draggable from "vuedraggable";
 
 export default {
@@ -19,18 +27,19 @@ export default {
 
   methods: {
     pPrint() {
-      this.prettyString=""
-       if (this.title!=""){
-            this.prettyString+="*" + this.title.toUpperCase() + "*\n"
-        }
+      this.prettyString = "";
+      if (this.title != "") {
+        this.prettyString += "*" + this.title.toUpperCase() + "*\n";
+      }
       this.prettyString +=
-        "React to this message with the emoji that matches your choice:\n";
-       
+        "Answer to this message with the emoji that matches your choice:\n";
+
       console.log(this.list);
       this.list.forEach((element) => {
         this.prettyString += element.emoji + "    *" + element.name + "*\n";
       });
-      this.prettyString += "\n_Generated with emojipoll.jacksalici.com_";
+      this.prettyString +=
+        "\n_Check the result pasting all the answers on https://emojipoll.jacksalici.com/ans_";
       this.tipIsOpen = false;
     },
     copy() {
@@ -38,7 +47,10 @@ export default {
       this.tipIsOpen = true;
     },
     addEntry() {
-      const dict = { name: this.task, emoji: "..." };
+      const dict = {
+        name: this.task,
+        emoji: `...`,
+      };
       this.getEmoji(this.count);
       this.list.push(dict);
       this.count++;
@@ -83,11 +95,14 @@ export default {
     v-if="this.list.length == 0"
     class="max-w-screen-sm text-gray-600 sm:text-2xl"
   >
-    Create a poll using random emoji. Just fill the entries, copy the poll text
-    and paste it on your favorite reaction-featured instant-messaging app.
+    Create a poll using random emoji: just insert the entries and share the
+    generated text. Then paste your fellows' answers <a class="link" href="/ans">here</a>.
   </p>
-  <div class="md-5">
-    <table v-if="this.list.length > 0" class="table table-fixed w-full bg-base-200">
+  <div class="md-5 overflow-x-auto">
+    <table
+      v-if="this.list.length > 0"
+      class="table w-full bg-base-200 table-fixed"
+    >
       <draggable
         class="list-group"
         :list="list"
@@ -101,15 +116,13 @@ export default {
         @end="isDragging = false"
       >
         <template #item="{ element, index }">
-          <tr class="list-group-item ">
+          <tr class="list-group-item">
             <td class="handle p-2">
               <button class="btn btn-ghost px-1">🔃</button>
             </td>
-            <td class="text-xl p-2">
-              {{ element.emoji }}
-            </td>
+            <td class="text-xl p-2" v-html="element.emoji"></td>
 
-            <td class="p-2">
+            <td class="p-2 w-2/5 truncate">
               {{ element.name }}
             </td>
 
@@ -138,18 +151,24 @@ export default {
 
     <div v-if="this.prettyString.length > 0" class="card bg-accent mt-5">
       <div class="card-body">
-        <input type="text" placeholder="Insert the poll title" v-model="title" class="input input-bordered input-ghost w-full  max-w-xs mx-auto" v-on:change="pPrint()"/>
-
-        <div class="card-title collapse block collapse-plus" tabindex="0">
-          <div class="collapse-title text-left">Poll Text:</div>
-
-          <p
-            class="font-mono text-xs collapse-content text-base text-left font-normal"
+       
+          <input
+            type="text"
+            placeholder="Insert the poll's title (optional)"
+            v-model="title"
+            class="input input-bordered input-ghost"
+            v-on:change="pPrint()"
+          />
+        <div class="collapse collapse-plus max-w-sm ">
+          <input type="checkbox" class="peer" /> 
+          <div class="mx-0 text-left collapse-title text-primary-content text-neutral peer-checked:bg-accent peer-checked:text-secondary-content">Poll Text:</div>
+          <div
+            class="mx-0 text-left font-mono text-xs collapse-content  text-neutral text-base text-primary-content peer-checked:bg-accent peer-checked:text-secondary-content"
           >
-            <span v-for="line in this.prettyString.split('\n')" :key="line">
+            <p class="text-xs" v-for="line in this.prettyString.split('\n')" :key="line">
               {{ line }}<br />
-            </span>
-          </p>
+            </p>
+          </div>
         </div>
 
         <div class="card-actions justify-end">
@@ -173,9 +192,26 @@ export default {
               📑 Copy Text
             </button>
           </div>
+
+         
+
         </div>
+
+         <a
+          role="button"
+          href="
+            /ans
+            "
+          class="btn btn-xs btn-outline btn-primary mx-auto mr-0"
+        >
+          Parse the answers ⚗️
+        </a>
+
+        
       </div>
     </div>
+
+    
   </div>
 </template>
 
