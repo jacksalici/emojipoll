@@ -95,7 +95,7 @@ export default {
       });
       console.log(items)
       items.forEach((element) => {
-        let d = 14
+        let d = 24
         let b = 'xl'
         let f = 3
       
@@ -103,7 +103,7 @@ export default {
         <div>
         <div class="avatar placeholder">
         <div class="bg-neutral-focus text-neutral-content rounded-full w-${d}">
-         <span class="text-${f}">${element[0]}</span>
+         <span class="text-${f}xl">${element[0]}</span>
         </div>
         </div> 
         <div class="badge badge-${b} badge-accent">${element[1]}</div>
