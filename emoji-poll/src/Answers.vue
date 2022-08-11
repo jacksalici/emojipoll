@@ -96,7 +96,7 @@ export default {
       console.log(items)
       items.forEach((element) => {
         let d = 14
-        let b = 'lg'
+        let b = 'xl'
         let f = 3
       
         this.tally += `

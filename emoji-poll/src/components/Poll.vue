@@ -22,6 +22,7 @@ export default {
       count: 0,
       prettyString: "",
       tipIsOpen: false,
+      disabled: true,
     };
   },
 
@@ -39,7 +40,7 @@ export default {
         this.prettyString += element.emoji + "    *" + element.name + "*\n";
       });
       this.prettyString +=
-        "\n_Check the result pasting all the answers on https://emojipoll.jacksalici.com/ans_";
+        "\n_Check the result pasting all the answers on emojipoll.jacksalici.com/ans_";
       this.tipIsOpen = false;
     },
     copy() {
@@ -65,13 +66,20 @@ export default {
     },
 
     getEmoji(i) {
+      this.disabled = true
+      if(this.list.at(i) != undefined){
+        this.list.at(i)["emoji"] =  `...`
+        
+      }
       fetch(
+  
         "https://emoji.deta.dev/random?n=1&skintones=False&nogroup=Symbols,Flags&maxversion=14"
       )
         .then((response) => response.json())
         .then((data) => {
           console.log(data[0]);
           this.list.at(i)["emoji"] = data[0];
+          this.disabled = false
           this.pPrint();
         });
     },
@@ -178,7 +186,7 @@ export default {
               'https://api.whatsapp.com/send/?text=' +
               this.prettyString.replace(/\x20+/g, '%20').replace(/\n/g, '%0A')
             "
-            class="btn btn-primary btn-sm"
+            class="btn btn-primary btn-sm" :class="{'btn-disabled': disabled}"
           >
             Share on WhatsApp
           </a>
@@ -188,7 +196,7 @@ export default {
             data-tip="copied"
             :class="{ 'tooltip-open': tipIsOpen, tooltip: tipIsOpen }"
           >
-            <button @click="copy()" class="btn btn-primary btn-sm">
+            <button @click="copy()" class="btn btn-primary btn-sm" :class="{'btn-disabled': disabled}">
               📑 Copy Text
             </button>
           </div>
