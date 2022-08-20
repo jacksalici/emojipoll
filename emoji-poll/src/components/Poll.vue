@@ -15,7 +15,8 @@ export default {
   components: {
     draggable,
     Datepicker,
-  },
+    
+},
   mounted() {},
   data() {
     return {
@@ -164,7 +165,7 @@ export default {
           <span>The app is still work in progress, problems can occour.</span>
         </div>
       </div>
-      
+
   <p
     v-if="this.list.length == 0"
     class="max-w-screen-sm text-gray-600 sm:text-2xl"
@@ -231,34 +232,36 @@ export default {
     </div>
 
     <!--INPUT CARDS-->
-      <div
-        tabindex="0"
-        class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box m-3"
-        v-if="dates"
-      >
-        <div class="collapse-title font-medium">
-            Add a new date ✏️🦄
-            <button v-on:click="handleDates" class="btn btn-sm">Apply</button>
-        </div>
-        <div class="collapse-content">
+    
           <Datepicker
             v-model="datelist"
             :modelValue="string"
             modelType="EEE d/M"
+            :format="format"
             multiDates
             autoApply
             :closeOnAutoApply="false"
             :enableTimePicker="false"
             :clearable="false"
             hideInputIcon
-            inline
+            v-if="dates"
             menuClassName="bg-base-200 rounded"
             :monthChangeOnScroll="false"
-          />
-          
+          >
+          <template #dp-input="{ value }">
+          <div class="form-control m-3">
+              <div class="input-group">
 
-        </div>
-      </div>
+
+          <input type="text" :value="value"             placeholder="Add a new date ✏️🦄"
+
+                    class=" input input-bordered input-primary focus:border-primary focus:ring-0 w-5/6"
+/>    <button class="btn btn-primary" v-on:click="handleDates">ADD</button>
+</div></div>
+        </template>
+          </Datepicker>
+
+        
       <form @submit.prevent="addEntry(task)">
         <input
           type="text"
