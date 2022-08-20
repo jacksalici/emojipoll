@@ -7,34 +7,16 @@
 </svg>
 */
 import draggable from "vuedraggable";
-import Datepicker from "vanillajs-datepicker/Datepicker";
+import Datepicker from "@vuepic/vue-datepicker";
+import "@vuepic/vue-datepicker/dist/main.css";
 
 export default {
   name: "PollCore",
   components: {
     draggable,
+    Datepicker,
   },
-  mounted() {
-    const elem = document.querySelector('input[name="dataP"]');
-
-    const dp = new Datepicker(elem, {
-      format: "D dd/mm",
-      clearBtn: true,
-      buttonClass: "btn btn-sm btn-primary btn-outline m-2",
-      maxNumberOfDates: 0,
-      todayBtn: true,
-      container: "body",
-
-    });
-
-    elem.addEventListener("hide", () => {
-      showMessage(dp.getDate("D dd/mm"));
-    });
-
-    function showMessage(msg) {
-      console.log(msg);
-    }
-  },
+  mounted() {},
   data() {
     return {
       list: [],
@@ -45,6 +27,7 @@ export default {
       tipIsOpen: false,
       disabled: true,
       dates: true,
+      datelist: "",
     };
   },
 
@@ -52,8 +35,6 @@ export default {
     togglePollType(str) {
       if (str == "date") {
         this.dates = true;
-        this.dp.pickerElement.hidden= false
-
       } else if (str == "text") {
         this.dates = false;
       }
@@ -141,8 +122,9 @@ export default {
     generated text. Then paste your fellows' answers
     <a class="link" href="/ans">here</a>.
   </p>
-  <!--TABLE - ENTRY LIST -->
+  
   <div class="md-5 overflow-x-auto">
+    <!--TABLE - ENTRY LIST -->
     <table
       v-if="this.list.length > 0"
       class="table w-full bg-base-200 table-fixed"
@@ -184,17 +166,36 @@ export default {
       </draggable>
     </table>
 
-    <!--INPUT BOXS-->
-    <div class="tabs tabs-boxed">
-      <a class="tab ml-auto " :class="{'tab-active' : dates}" @click="togglePollType('date')">Dates survey</a>
-      <a class="tab mr-auto" :class="{'tab-active' : !dates}" @click="togglePollType('text')">Content survey</a>
+    <!--INPUT TAB-->
+    <div v-if="this.list.length == 0" class="tabs tabs-boxed">
+      <a
+        class="tab ml-auto"
+        :class="{ 'tab-active': dates }"
+        @click="togglePollType('date')"
+        >Dates survey</a
+      >
+      <a
+        class="tab mr-auto"
+        :class="{ 'tab-active': !dates }"
+        @click="togglePollType('text')"
+        >Content survey</a
+      >
     </div>
 
+    <!--INPUT CARDS-->
     <div class="card bg-base-200 mt-3">
-      <input
-        type="text"
-        name="dataP"
-        class="input input-bordered input-primary m-3"
+      <Datepicker
+        v-model="datelist"
+        multiDates
+        autoApply
+        :closeOnAutoApply="false"
+        :enableTimePicker="false"
+        :clearable="false"
+        hideInputIcon
+        :monthChangeOnScroll="false"
+        
+        calendarClassName="card-body"
+        inputClassName="input input-bordered input-primary m-3 w-5/6"
         placeholder="Add a new date 🗓🌂"
         v-if="dates"
       />
@@ -202,7 +203,7 @@ export default {
       <form @submit.prevent="addEntry">
         <input
           type="text"
-          class="m-3 input input-bordered input-primary focus:border-primary focus:ring-0"
+          class="m-3 input input-bordered input-primary focus:border-primary focus:ring-0 w-5/6"
           placeholder="Add a new entry ✏️🦄"
           v-model="task"
           v-if="!dates"
@@ -298,5 +299,4 @@ export default {
   cursor: pointer;
 }
 
-@import "/node_modules/vanillajs-datepicker/dist/css/datepicker";
 </style>
