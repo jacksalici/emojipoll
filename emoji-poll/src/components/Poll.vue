@@ -15,8 +15,7 @@ export default {
   components: {
     draggable,
     Datepicker,
-    
-},
+  },
   mounted() {},
   data() {
     return {
@@ -135,10 +134,7 @@ export default {
 </script>
 
 <template>
-
   <!--SUBHEADER-->
-
-  
 
   <h1
     v-if="this.list.length == 0"
@@ -148,23 +144,23 @@ export default {
   </h1>
 
   <div v-if="this.list.length == 0" class="alert alert-warning">
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="stroke-current flex-shrink-0 h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
-          <span>The app is still work in progress, problems can occour.</span>
-        </div>
-      </div>
+    <div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="stroke-current flex-shrink-0 h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+        />
+      </svg>
+      <span>The app is still work in progress, problems can occour.</span>
+    </div>
+  </div>
 
   <p
     v-if="this.list.length == 0"
@@ -175,7 +171,7 @@ export default {
     <a class="link" href="/ans">here</a>.
   </p>
 
-  <div class="md-5 overflow-x-auto">
+  <div class="md-5 overflow-x-auto ">
     <!--TABLE - ENTRY LIST -->
     <table v-if="this.list.length > 0" class="table w-full table-fixed">
       <draggable
@@ -232,47 +228,54 @@ export default {
     </div>
 
     <!--INPUT CARDS-->
-    
-          <Datepicker
-            v-model="datelist"
-            :modelValue="string"
-            modelType="EEE d/M"
-            :format="format"
-            multiDates
-            autoApply
-            :closeOnAutoApply="false"
-            :enableTimePicker="false"
-            :clearable="false"
-            hideInputIcon
-            v-if="dates"
-            menuClassName="bg-base-200 rounded"
-            :monthChangeOnScroll="false"
-          >
-          <template #dp-input="{ value }">
-          <div class="form-control m-3">
-              <div class="input-group">
 
+    <Datepicker
+      v-model="datelist"
+      :modelValue="string"
+      modelType="EEE d/M"
+      :format="format"
+      multiDates
+      autoApply
+      :closeOnAutoApply="false"
+      :enableTimePicker="false"
+      :clearable="false"
+      hideInputIcon
+      v-if="dates"
+      menuClassName="bg-base-200 rounded-2xl drop-shadow-xl"
+      :monthChangeOnScroll="false"
+    >
+      <template #dp-input="{ value }">
+        <div class="form-control m-3">
+          <div class="input-group">
+            <input
+              type="text"
+              :value="value"
+              placeholder="Add a new date ✏️🦄"
+              class="input input-bordered input-primary focus:border-primary focus:ring-0 w-5/6"
+            />
+            <button class="btn btn-primary" v-on:click="handleDates">
+              ADD
+            </button>
+          </div>
+        </div>
+      </template>
+    </Datepicker>
 
-          <input type="text" :value="value"             placeholder="Add a new date ✏️🦄"
-
-                    class=" input input-bordered input-primary focus:border-primary focus:ring-0 w-5/6"
-/>    <button class="btn btn-primary" v-on:click="handleDates">ADD</button>
-</div></div>
-        </template>
-          </Datepicker>
-
-        
-      <form @submit.prevent="addEntry(task)">
-        <input
+    <form @submit.prevent="addEntry(task)"           v-if="!dates">
+      <div class="form-control m-3">
+        <div class="input-group">
+          <input
           type="text"
-          class="m-3 input input-bordered input-primary focus:border-primary focus:ring-0 w-5/6"
+          class=" input input-bordered input-primary focus:border-primary focus:ring-0 w-5/6"
           placeholder="Add a new entry ✏️🦄"
           v-model="task"
-          v-if="!dates"
         />
-      </form>
+          <button class="btn btn-primary" >ADD</button>
+        </div>
+      </div>
+    </form>
     <!--RESULT CARD -->
-    <div v-if="this.prettyString.length > 0" class="card bg-accent mt-5">
+    <div v-if="this.prettyString.length > 0" class="card bg-base-200  mt-5">
       <div class="card-body">
         <input
           type="text"
