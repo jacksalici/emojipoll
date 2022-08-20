@@ -1,18 +1,39 @@
 <script>
-
 /*
- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(255, 255, 255, 0); display: block;" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgba(255, 255, 255, 0); display: block;" width="30px" height="30px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
 <circle cx="50" cy="50" fill="none" stroke="#1d0e0b" stroke-width="9" r="40" stroke-dasharray="188.49555921538757 64.83185307179586">
   <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
 </circle>
 </svg>
 */
 import draggable from "vuedraggable";
+import Datepicker from "vanillajs-datepicker/Datepicker";
 
 export default {
   name: "PollCore",
   components: {
     draggable,
+  },
+  mounted() {
+    const elem = document.querySelector('input[name="dataP"]');
+
+    const dp = new Datepicker(elem, {
+      format: "D dd/mm",
+      clearBtn: true,
+      buttonClass: "btn btn-sm btn-primary btn-outline m-2",
+      maxNumberOfDates: 0,
+      todayBtn: true,
+      container: "body",
+
+    });
+
+    elem.addEventListener("hide", () => {
+      showMessage(dp.getDate("D dd/mm"));
+    });
+
+    function showMessage(msg) {
+      console.log(msg);
+    }
   },
   data() {
     return {
@@ -23,10 +44,20 @@ export default {
       prettyString: "",
       tipIsOpen: false,
       disabled: true,
+      dates: true,
     };
   },
 
   methods: {
+    togglePollType(str) {
+      if (str == "date") {
+        this.dates = true;
+        this.dp.pickerElement.hidden= false
+
+      } else if (str == "text") {
+        this.dates = false;
+      }
+    },
     pPrint() {
       this.prettyString = "";
       if (this.title != "") {
@@ -66,22 +97,24 @@ export default {
     },
 
     getEmoji(i) {
-      this.disabled = true
-      if(this.list.at(i) != undefined){
-        this.list.at(i)["emoji"] =  `...`
-        
+      this.disabled = true;
+      if (this.list.at(i) != undefined) {
+        this.list.at(i)["emoji"] = `...`;
       }
       fetch(
-  
         "https://emoji.deta.dev/random?n=1&skintones=False&nogroup=Symbols,Flags&maxversion=14"
       )
         .then((response) => response.json())
         .then((data) => {
           console.log(data[0]);
           this.list.at(i)["emoji"] = data[0];
-          this.disabled = false
+          this.disabled = false;
           this.pPrint();
         });
+    },
+
+    boom() {
+      console.log("boom");
     },
   },
 
@@ -99,13 +132,16 @@ export default {
 </script>
 
 <template>
+  <!--SUBHEADER-->
   <p
     v-if="this.list.length == 0"
     class="max-w-screen-sm text-gray-600 sm:text-2xl"
   >
     Create a poll using random emoji: just insert the entries and share the
-    generated text. Then paste your fellows' answers <a class="link" href="/ans">here</a>.
+    generated text. Then paste your fellows' answers
+    <a class="link" href="/ans">here</a>.
   </p>
+  <!--TABLE - ENTRY LIST -->
   <div class="md-5 overflow-x-auto">
     <table
       v-if="this.list.length > 0"
@@ -148,32 +184,56 @@ export default {
       </draggable>
     </table>
 
-    <form @submit.prevent="addEntry">
+    <!--INPUT BOXS-->
+    <div class="tabs tabs-boxed">
+      <a class="tab ml-auto " :class="{'tab-active' : dates}" @click="togglePollType('date')">Dates survey</a>
+      <a class="tab mr-auto" :class="{'tab-active' : !dates}" @click="togglePollType('text')">Content survey</a>
+    </div>
+
+    <div class="card bg-base-200 mt-3">
       <input
         type="text"
-        class="mt-5 input input-bordered input-primary focus:border-primary focus:ring-0"
-        placeholder="Add a new entry ✏️🦄"
-        v-model="task"
+        name="dataP"
+        class="input input-bordered input-primary m-3"
+        placeholder="Add a new date 🗓🌂"
+        v-if="dates"
       />
-    </form>
 
+      <form @submit.prevent="addEntry">
+        <input
+          type="text"
+          class="m-3 input input-bordered input-primary focus:border-primary focus:ring-0"
+          placeholder="Add a new entry ✏️🦄"
+          v-model="task"
+          v-if="!dates"
+        />
+      </form>
+    </div>
+    <!--RESULT CARD -->
     <div v-if="this.prettyString.length > 0" class="card bg-accent mt-5">
       <div class="card-body">
-       
-          <input
-            type="text"
-            placeholder="Insert the poll's title (optional)"
-            v-model="title"
-            class="input input-bordered input-ghost"
-            v-on:change="pPrint()"
-          />
-        <div class="collapse collapse-plus max-w-sm ">
-          <input type="checkbox" class="peer" /> 
-          <div class="mx-0 text-left collapse-title text-primary-content text-neutral peer-checked:bg-accent peer-checked:text-secondary-content">Poll Text:</div>
+        <input
+          type="text"
+          placeholder="Insert the poll's title (optional)"
+          v-model="title"
+          class="input input-bordered input-ghost"
+          v-on:change="pPrint()"
+        />
+        <div class="collapse collapse-plus max-w-sm">
+          <input type="checkbox" class="peer" />
           <div
-            class="mx-0 text-left font-mono text-xs collapse-content  text-neutral text-base text-primary-content peer-checked:bg-accent peer-checked:text-secondary-content"
+            class="mx-0 text-left collapse-title text-primary-content text-neutral peer-checked:bg-accent peer-checked:text-secondary-content"
           >
-            <p class="text-xs" v-for="line in this.prettyString.split('\n')" :key="line">
+            Poll Text:
+          </div>
+          <div
+            class="mx-0 text-left font-mono text-xs collapse-content text-neutral text-base text-primary-content peer-checked:bg-accent peer-checked:text-secondary-content"
+          >
+            <p
+              class="text-xs"
+              v-for="line in this.prettyString.split('\n')"
+              :key="line"
+            >
               {{ line }}<br />
             </p>
           </div>
@@ -186,7 +246,8 @@ export default {
               'https://api.whatsapp.com/send/?text=' +
               this.prettyString.replace(/\x20+/g, '%20').replace(/\n/g, '%0A')
             "
-            class="btn btn-primary btn-sm" :class="{'btn-disabled': disabled}"
+            class="btn btn-primary btn-sm"
+            :class="{ 'btn-disabled': disabled }"
           >
             Share on WhatsApp
           </a>
@@ -196,16 +257,17 @@ export default {
             data-tip="copied"
             :class="{ 'tooltip-open': tipIsOpen, tooltip: tipIsOpen }"
           >
-            <button @click="copy()" class="btn btn-primary btn-sm" :class="{'btn-disabled': disabled}">
+            <button
+              @click="copy()"
+              class="btn btn-primary btn-sm"
+              :class="{ 'btn-disabled': disabled }"
+            >
               📑 Copy Text
             </button>
           </div>
-
-         
-
         </div>
 
-         <a
+        <a
           role="button"
           href="
             /ans
@@ -214,12 +276,8 @@ export default {
         >
           Parse the answers ⚗️
         </a>
-
-        
       </div>
     </div>
-
-    
   </div>
 </template>
 
@@ -239,4 +297,6 @@ export default {
 .list-group-item i {
   cursor: pointer;
 }
+
+@import "/node_modules/vanillajs-datepicker/dist/css/datepicker";
 </style>
