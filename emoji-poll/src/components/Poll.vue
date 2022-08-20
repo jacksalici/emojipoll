@@ -32,6 +32,24 @@ export default {
   },
 
   methods: {
+    handleDates() {
+      const names = [];
+      this.list.forEach((le) => {
+        const name = le["name"];
+
+        if (!this.datelist.includes(name)) {
+          this.delEntry(le);
+        } else {
+          names.push(name);
+        }
+      });
+
+      this.datelist.forEach((d) => {
+        if (!names.includes(d)) {
+          this.addEntry(d);
+        }
+      });
+    },
     togglePollType(str) {
       if (str == "date") {
         this.dates = true;
@@ -47,7 +65,6 @@ export default {
       this.prettyString +=
         "Answer to this message with the emoji that matches your choice:\n";
 
-      console.log(this.list);
       this.list.forEach((element) => {
         this.prettyString += element.emoji + "    *" + element.name + "*\n";
       });
@@ -59,9 +76,9 @@ export default {
       navigator.clipboard.writeText(this.prettyString);
       this.tipIsOpen = true;
     },
-    addEntry() {
+    addEntry(e) {
       const dict = {
-        name: this.task,
+        name: e,
         emoji: `...`,
       };
       this.getEmoji(this.count);
@@ -72,6 +89,10 @@ export default {
       this.pPrint();
     },
     delEntry(i) {
+      while (this.datelist.includes(this.list.at(i)["name"])) {
+        this.datelist.splice(this.datelist.indexOf(this.list.at(i)["name"]), 1);
+      }
+
       this.list.splice(i, 1);
       this.count--;
       this.pPrint();
@@ -94,8 +115,8 @@ export default {
         });
     },
 
-    boom() {
-      console.log("boom");
+    format(date) {
+      return `${date.length} selected. Click to add new dates.`;
     },
   },
 
@@ -113,7 +134,37 @@ export default {
 </script>
 
 <template>
+
   <!--SUBHEADER-->
+
+  
+
+  <h1
+    v-if="this.list.length == 0"
+    class="text-4xl font-bold sm:text-5xl lg:text-6xl"
+  >
+    EmojiPoll📮🏄
+  </h1>
+
+  <div v-if="this.list.length == 0" class="alert alert-warning">
+        <div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="stroke-current flex-shrink-0 h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+            />
+          </svg>
+          <span>The app is still work in progress, problems can occour.</span>
+        </div>
+      </div>
+      
   <p
     v-if="this.list.length == 0"
     class="max-w-screen-sm text-gray-600 sm:text-2xl"
@@ -122,13 +173,10 @@ export default {
     generated text. Then paste your fellows' answers
     <a class="link" href="/ans">here</a>.
   </p>
-  
+
   <div class="md-5 overflow-x-auto">
     <!--TABLE - ENTRY LIST -->
-    <table
-      v-if="this.list.length > 0"
-      class="table w-full bg-base-200 table-fixed"
-    >
+    <table v-if="this.list.length > 0" class="table w-full table-fixed">
       <draggable
         class="list-group"
         :list="list"
@@ -183,24 +231,35 @@ export default {
     </div>
 
     <!--INPUT CARDS-->
-    <div class="card bg-base-200 mt-3">
-      <Datepicker
-        v-model="datelist"
-        multiDates
-        autoApply
-        :closeOnAutoApply="false"
-        :enableTimePicker="false"
-        :clearable="false"
-        hideInputIcon
-        :monthChangeOnScroll="false"
-        
-        calendarClassName="card-body"
-        inputClassName="input input-bordered input-primary m-3 w-5/6"
-        placeholder="Add a new date 🗓🌂"
+      <div
+        tabindex="0"
+        class="collapse collapse-plus border border-base-300 bg-base-100 rounded-box m-3"
         v-if="dates"
-      />
+      >
+        <div class="collapse-title font-medium">
+            Add a new date ✏️🦄
+            <button v-on:click="handleDates" class="btn btn-sm">Apply</button>
+        </div>
+        <div class="collapse-content">
+          <Datepicker
+            v-model="datelist"
+            :modelValue="string"
+            modelType="EEE d/M"
+            multiDates
+            autoApply
+            :closeOnAutoApply="false"
+            :enableTimePicker="false"
+            :clearable="false"
+            hideInputIcon
+            inline
+            menuClassName="bg-base-200 rounded"
+            :monthChangeOnScroll="false"
+          />
+          
 
-      <form @submit.prevent="addEntry">
+        </div>
+      </div>
+      <form @submit.prevent="addEntry(task)">
         <input
           type="text"
           class="m-3 input input-bordered input-primary focus:border-primary focus:ring-0 w-5/6"
@@ -209,7 +268,6 @@ export default {
           v-if="!dates"
         />
       </form>
-    </div>
     <!--RESULT CARD -->
     <div v-if="this.prettyString.length > 0" class="card bg-accent mt-5">
       <div class="card-body">
@@ -298,5 +356,4 @@ export default {
 .list-group-item i {
   cursor: pointer;
 }
-
 </style>
