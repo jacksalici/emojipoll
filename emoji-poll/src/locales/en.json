@@ -1,0 +1,49 @@
+{
+  "wip": "The app is still work in progress, problems can occour.",
+  "ok": "OK",
+  "back": " 👈 Go back to the generator",
+  "title": {
+    "generator": "Emoji based poll text generator.",
+    "calc": "Answers parser"
+  },
+  "content": {
+    "generator": "Generate the text of your poll! Just insert the choices and share it with your fellows.",
+    "calc": "Execute the tally of the poll. Just paste below all your fellows text answers."
+  },
+  "menu":{
+    "generator":"🏡 Text generator",
+    "calc": "📊 Answer parsing",
+    "about": "💁‍♂️ About",
+    "lang": "🌐 Languages"
+  },
+  "core": {
+    "table":{
+      "header":"EmojiPoll choices"
+    },
+    "mode": {
+      "date": "Find a date",
+      "option": "Find an option"
+    },
+    "input": {
+      "date": "Add a new date ✏️🦄",
+      "option": "Add a new option ✏️🦄",
+      "add": "add",
+      "title": "Insert the poll's title (optional)"
+    },
+    "card":{
+      "title":"EmojiPoll text generated!",
+      "content":"You can now copy it and/or share it with anyone. Then, you can parse the answers pasting them in <a class='link' href='/calc'>the specific page.</a>",
+      "share-whatsapp":"Share on WhatsApp",
+      "copy-text":"Copy text",
+      "show-text":"Show the generated text"
+    },
+    "text":{
+      "content":"Please answer to this message with the emoji that matches your choice:\n",
+      "footer":"Generated with emojipoll.jacksalici.com"
+    }
+  },
+  "calc":{
+    "helper": "Please check below that all the poll's emoji had been parsed correctly and separated by a comma. Correct them if necessary.",
+    "input": "Paste the answers."
+  }
+}
