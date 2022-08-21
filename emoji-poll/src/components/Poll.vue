@@ -26,7 +26,7 @@ export default {
       prettyString: "",
       tipIsOpen: false,
       disabled: true,
-      dates: true,
+      mode: 0,
       datelist: "",
     };
   },
@@ -52,9 +52,9 @@ export default {
     },
     togglePollType(str) {
       if (str == "date") {
-        this.dates = true;
+        this.mode = 1;
       } else if (str == "text") {
-        this.dates = false;
+        this.mode = 2;
       }
     },
     pPrint() {
@@ -198,13 +198,13 @@ export default {
     <div v-if="this.list.length == 0" class="tabs tabs-boxed">
       <a
         class="tab ml-auto"
-        :class="{ 'tab-active': dates }"
+        :class="{ 'tab-active': mode==1 }"
         @click="togglePollType('date')"
         >Find a date</a
       >
       <a
         class="tab mr-auto"
-        :class="{ 'tab-active': !dates }"
+        :class="{ 'tab-active': mode==2 }"
         @click="togglePollType('text')"
         >Find an option</a
       >
@@ -223,7 +223,7 @@ export default {
       :enableTimePicker="false"
       :clearable="false"
       hideInputIcon
-      v-if="dates"
+      v-if="mode==1"
       menuClassName="bg-base-100 rounded-2xl shadow-2xl"
       :monthChangeOnScroll="false"
     >
@@ -244,7 +244,7 @@ export default {
       </template>
     </Datepicker>
 
-    <form @submit.prevent="addEntry(task)" v-if="!dates">
+    <form @submit.prevent="addEntry(task)" v-if="mode==2">
       <div class="form-control my-3">
         <div class="input-group">
           <input
