@@ -1,17 +1,17 @@
 <template>
     
      
-      <h1 class="text-2xl font-bold">Answers parser</h1>
+      <h1 class="text-2xl font-bold">  {{$t("title.calc")}}</h1>
       <p
    
     class="max-w-screen-sm"
   >
-    Execute the tally of the poll. Just paste below all your fellows text answers.
-  </p>
+  {{$t("content.calc")}}
+</p>
 
       <textarea
         class="textarea textarea-primary w-full"
-        placeholder="Paste the answers."
+        :placeholder='$t("calc.input")'
         v-model="answer"
         @input="count"
       ></textarea>
@@ -36,7 +36,7 @@
       </div>
 
       <a role="button" class="btn btn-xs ptn-primary ml-0 self-start" href="/">
-        👈 Go back to the generator</a
+        {{$t("back")}}</a
       >
 </template>
 

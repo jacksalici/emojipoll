@@ -4,10 +4,10 @@
   >
     <div class="alert alert-warning flex" v-if="!hideWipBanner">
       <div class="my-0 grid">
-        The app is still work in progress, problems can occour.
+        {{$t("wip")}}
       </div>
       <div class="mt-0 grid">
-        <button class="btn btn-sm" @click="wipBanner">OK</button>
+        <button class="btn btn-sm" @click="wipBanner">{{$t("ok")}}</button>
       </div>
     </div>
 
@@ -34,10 +34,10 @@
             tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p-2 shadow-xl bg-base-100 rounded-box w-52"
           >
-            <li><a href="/">🏡 Text generator</a></li>
-            <li><a href="/calc">📊 Answer parsing</a></li>
-            <li><a href="/about">💁‍♂️ About</a></li>
-            <li class="disabled"><a >🌐 Languages</a></li>
+            <li><a href="/">{{$t('menu.generator')}}</a></li>
+            <li><a href="/calc">{{$t('menu.calc')}}</a></li>
+            <li><a href="/about">{{$t('menu.about')}}</a></li>
+            <li class="disabled"><a >{{$t('menu.lang')}}</a></li>
           </ul>
         </div>
       </div>

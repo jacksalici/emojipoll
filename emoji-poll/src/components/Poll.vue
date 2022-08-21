@@ -62,13 +62,11 @@ export default {
       if (this.title != "") {
         this.prettyString += "*" + this.title.toUpperCase() + "*\n";
       }
-      this.prettyString +=
-        "Answer to this message with the emoji that matches your choice:\n";
-
+      this.prettyString += this.$t("core.text.content")
       this.list.forEach((element) => {
         this.prettyString += element.emoji + "    *" + element.name + "*\n";
       });
-      this.prettyString += "\n_Generated with emojipoll.jacksalici.com_";
+      this.prettyString += `\n_${this.$t("core.text.footer")}_`;
       this.tipIsOpen = false;
     },
     copy() {
@@ -142,11 +140,10 @@ export default {
     EmojiPoll📮🏄
   </h1>-->
 
-  <h1 class="text-2xl font-bold">Emoji based poll text generator</h1>
+  <h1 class="text-2xl font-bold">  {{$t("title.generator")}}</h1>
 
   <p v-if="this.list.length == 0" class="max-w-screen-sm text-center">
-    Generate the text of your poll! Just insert the choices and share it with
-    your fellows.
+    {{$t("content.generator")}}
   </p>
 
   <div class="md-5 overflow-x-auto">
@@ -154,7 +151,7 @@ export default {
     <table v-if="this.list.length > 0" class="table w-full table-fixed">
       <thead>
         <tr>
-          <th colspan="4" class="text-center">EMOJIPOLL CHOICES</th>
+          <th colspan="4" class="text-center">  {{$t("core.table.header")}}</th>
         </tr>
       </thead>
       <draggable
@@ -200,13 +197,13 @@ export default {
         class="tab ml-auto"
         :class="{ 'tab-active': mode==1 }"
         @click="togglePollType('date')"
-        >Find a date</a
+        >{{$t("core.mode.date")}}</a
       >
       <a
         class="tab mr-auto"
         :class="{ 'tab-active': mode==2 }"
         @click="togglePollType('text')"
-        >Find an option</a
+        >{{$t("core.mode.option")}}</a
       >
     </div>
 
@@ -233,7 +230,7 @@ export default {
             <input
               type="text"
               :value="value"
-              placeholder="Add a new date ✏️🦄"
+              :placeholder='$t("core.input.date")'
               class="input input-bordered input-primary focus:border-primary focus:ring-0 w-full"
             />
             <button class="btn btn-primary" v-on:click="handleDates">
@@ -250,10 +247,10 @@ export default {
           <input
             type="text"
             class="input input-bordered input-primary focus:border-primary focus:ring-0 w-full"
-            placeholder="Add a new option ✏️🦄"
+            :placeholder='$t("core.input.option")'
             v-model="task"
           />
-          <button class="btn btn-primary">ADD</button>
+          <button class="btn btn-primary">{{$t("core.input.add")}}</button>
         </div>
       </div>
     </form>
@@ -264,7 +261,7 @@ export default {
         <input
           type="text"
           v-if="this.list.length > 0"
-          placeholder="Insert the poll's title (optional)"
+          :placeholder='$t("core.input.title")'
           
           v-model="title"
           class="input input-bordered input-ghost w-full"
@@ -273,11 +270,9 @@ export default {
         
     <div v-if="this.list.length > 0" class="card bg-base-200 mt-5">
       <div class="card-body">
-        <h2 class="card-title">EmojiPoll text generated!</h2>
-        <p class="text-left">
-          You can now copy it and/or share it with anyone. Then, you can parse
-          the answers pasting them in
-          <a class="link" href="/ans">the specific page.</a>
+        <h2 class="card-title">{{$t("core.card.title")}}</h2>
+        <p class="text-left" v-html='$t("core.card.content")'>
+    
         </p>
 
         <!--<div class="collapse collapse-plus max-w-sm">
@@ -310,7 +305,7 @@ export default {
             class="btn btn-primary btn-sm"
             :class="{ 'btn-disabled': disabled }"
           >
-            Share on WhatsApp
+            {{$t("core.card.share-whatsapp")}}
           </a>
 
           <div
@@ -323,7 +318,7 @@ export default {
               class="btn btn-primary btn-sm"
               :class="{ 'btn-disabled': disabled }"
             >
-              📑 Copy Text
+               {{$t("core.card.copy-text")}}
             </button>
           </div>
         </div>
