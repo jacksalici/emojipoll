@@ -1,19 +1,15 @@
 <template>
- 
-  
-  
-  
   <div
     class="container mx-auto px-4 py-4 sm:px-6 xl:px-12 max-w-3xl items-center justify-center space-y-6 text-center"
   >
-   <div  class="alert bg-primary flex" v-if="wipBanner">
-    
-    <div class="my-0 grid">
-      The app is still work in progress, problems can occour.
-      
+    <div class="alert bg-primary flex" v-if="wipBanner">
+      <div class="my-0 grid">
+        The app is still work in progress, problems can occour.
+      </div>
+      <div class="mt-0 grid">
+        <button class="btn btn-sm" @click="wipBanner = false">OK</button>
+      </div>
     </div>
-    <div class="mt-0 grid"> <button class="btn btn-sm" @click="wipBanner=false">OK</button></div>
-  </div>
 
     <div class="navbar bg-base-200 rounded-3xl">
       <div class="navbar-start">
@@ -38,17 +34,18 @@
             tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p-2 shadow-xl bg-base-100 rounded-box w-52"
           >
-            <li><a href="/">Homepage</a></li>
-            <li><a href="/ans">Answer parsing</a></li>
-            <li><a>About</a></li>
-            <li><a>Help</a></li>
+            <li><a href="/">🏡 Text generator</a></li>
+            <li><a href="/ans">📊 Answer parsing</a></li>
+            <li><a href="/about">💁‍♂️ About</a></li>
+            <li class="disabled"><a >🌐 Languages</a></li>
           </ul>
         </div>
       </div>
       <div class="navbar-center">
-        <p class="text-xl font-bold">EmojiPoll 📮🏄</p>
+        <a href="/" class="btn btn-ghost normal-case text-xl font-bold">EmojiPoll 📮🏄</a>
       </div>
-      <div class="navbar-end">
+      <div class="navbar-end"></div>
+      <!--<div class="navbar-end">
         <div class="dropdown">
           <label tabindex="0" class="btn btn-ghost btn-circle">
             <svg
@@ -73,7 +70,7 @@
             <li><a>🙋ℹ️</a></li>
           </ul>
         </div>
-      </div>
+      </div>-->
     </div>
 
     <component :is="currentView" />
@@ -84,10 +81,12 @@
 import PollCore from "./components/Poll.vue";
 import AppAnswers from "./pages/Answers.vue";
 import NotFound from "./pages/NotFound.vue";
+import AboutPage from "./pages/AboutPage.vue";
 
 const routes = {
   "/": PollCore,
   "/ans": AppAnswers,
+  "/about": AboutPage
 };
 
 export default {
@@ -99,16 +98,14 @@ export default {
   data() {
     return {
       currentPath: window.location.pathname,
-      wipBanner: true
+      wipBanner: true,
     };
   },
   computed: {
     currentView() {
-      return routes[this.currentPath|| "/"] || NotFound;
+      return routes[this.currentPath || "/"] || NotFound;
     },
   },
-  mounted() {
-    
-  },
+  mounted() {},
 };
 </script>

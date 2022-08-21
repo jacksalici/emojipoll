@@ -68,8 +68,7 @@ export default {
       this.list.forEach((element) => {
         this.prettyString += element.emoji + "    *" + element.name + "*\n";
       });
-      this.prettyString +=
-        "\n_Generated with emojipoll.jacksalici.com_";
+      this.prettyString += "\n_Generated with emojipoll.jacksalici.com_";
       this.tipIsOpen = false;
     },
     copy() {
@@ -104,7 +103,7 @@ export default {
         this.list.at(i)["emoji"] = `...`;
       }
       fetch(
-        "https://emoji.deta.dev/random?n=1&skintones=False&nogroup=Symbols,Flags&maxversion=14"
+        "https://emoji.deta.dev/random?n=1&skintones=False&maxversion=14"
       )
         .then((response) => response.json())
         .then((data) => {
@@ -145,21 +144,19 @@ export default {
 
   <h1 class="text-2xl font-bold">Emoji based poll text generator</h1>
 
-  <p
-    v-if="this.list.length == 0"
-    class="max-w-screen-sm text-center"
-  >
-    Generate the text of your poll! Just insert the choices and share it with your fellows.
+  <p v-if="this.list.length == 0" class="max-w-screen-sm text-center">
+    Generate the text of your poll! Just insert the choices and share it with
+    your fellows.
   </p>
 
-  <div class="md-5 overflow-x-auto ">
+  <div class="md-5 overflow-x-auto">
     <!--TABLE - ENTRY LIST -->
     <table v-if="this.list.length > 0" class="table w-full table-fixed">
-    <thead>
-      <tr>
-        <th colspan="4" class="text-center">EMOJIPOLL CHOICES</th>
-      </tr>
-    </thead>
+      <thead>
+        <tr>
+          <th colspan="4" class="text-center">EMOJIPOLL CHOICES</th>
+        </tr>
+      </thead>
       <draggable
         class="list-group"
         :list="list"
@@ -203,13 +200,13 @@ export default {
         class="tab ml-auto"
         :class="{ 'tab-active': dates }"
         @click="togglePollType('date')"
-        >Dates survey</a
+        >Find a date</a
       >
       <a
         class="tab mr-auto"
         :class="{ 'tab-active': !dates }"
         @click="togglePollType('text')"
-        >Content survey</a
+        >Find an option</a
       >
     </div>
 
@@ -220,7 +217,6 @@ export default {
       :modelValue="string"
       modelType="EEE d/M"
       :format="format"
-      
       multiDates
       autoApply
       :closeOnAutoApply="false"
@@ -248,32 +244,42 @@ export default {
       </template>
     </Datepicker>
 
-    <form @submit.prevent="addEntry(task)"           v-if="!dates">
+    <form @submit.prevent="addEntry(task)" v-if="!dates">
       <div class="form-control my-3">
         <div class="input-group">
           <input
-          type="text"
-          class=" input input-bordered input-primary focus:border-primary focus:ring-0 w-full"
-          placeholder="Add a new entry ✏️🦄"
-          v-model="task"
-        />
-          <button class="btn btn-primary" >ADD</button>
+            type="text"
+            class="input input-bordered input-primary focus:border-primary focus:ring-0 w-full"
+            placeholder="Add a new option ✏️🦄"
+            v-model="task"
+          />
+          <button class="btn btn-primary">ADD</button>
         </div>
       </div>
     </form>
     <!--RESULT CARD -->
-    <input
+    
+    
+      
+        <input
           type="text"
+          v-if="this.list.length > 0"
           placeholder="Insert the poll's title (optional)"
+          
           v-model="title"
           class="input input-bordered input-ghost w-full"
           v-on:change="pPrint()"
         />
+        
     <div v-if="this.list.length > 0" class="card bg-base-200 mt-5">
       <div class="card-body">
         <h2 class="card-title">EmojiPoll text generated!</h2>
-        <p class="text-left">You can now copy it and/or share it with anyone. Then, you can parse the answers pasting them in <a class="link" href="/ans">the specific page.</a></p>
-        
+        <p class="text-left">
+          You can now copy it and/or share it with anyone. Then, you can parse
+          the answers pasting them in
+          <a class="link" href="/ans">the specific page.</a>
+        </p>
+
         <!--<div class="collapse collapse-plus max-w-sm">
           <input type="checkbox" class="peer" />
           <div

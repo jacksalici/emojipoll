@@ -1,12 +1,12 @@
 <template>
     
      
-      <h1 class="text-2xl font-bold">Answer parser</h1>
+      <h1 class="text-2xl font-bold">Answers parser</h1>
       <p
    
     class="max-w-screen-sm"
   >
-    Execute the tally of the answer. Just paste below all your fellows text answers.
+    Execute the tally of the poll. Just paste below all your fellows text answers.
   </p>
 
       <textarea
