@@ -42,7 +42,7 @@
         />
       </div>
 
-      <div class="card bg-primary text-primary-content">
+      <div class="card bg-base-200 text-primary-content">
         <div class="card-body" v-html="tally"></div>
       </div>
 
@@ -95,18 +95,16 @@ export default {
       });
       console.log(items)
       items.forEach((element) => {
-        let d = 24
-        let b = 'xl'
-        let f = 3
+        let b = '2xl'
       
         this.tally += `
         <div>
         <div class="avatar placeholder">
-        <div class="bg-neutral-focus text-neutral-content rounded-full w-${d}">
-         <span class="text-${f}xl">${element[0]}</span>
+        <div class="bg-neutral-focus text-neutral-content rounded-full w-20">
+         <span class="text-2xl">${element[0]}</span>
         </div>
         </div> 
-        <div class="badge badge-${b} badge-accent">${element[1]}</div>
+        <div class="badge badge-${b} badge-primary">${element[1]}</div>
 
         </div>
         
