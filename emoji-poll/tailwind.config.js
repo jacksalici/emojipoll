@@ -12,7 +12,7 @@ module.exports = {
     require('daisyui'),
   ],
   daisyui: {
-    themes: ['acid'],
+    themes: ['cupcake'],
     darkTheme: "synthwave",
 
   },
