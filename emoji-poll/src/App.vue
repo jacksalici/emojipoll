@@ -6,15 +6,13 @@
   <div
     class="container mx-auto px-4 py-4 sm:px-6 xl:px-12 max-w-3xl items-center justify-center space-y-6 text-center"
   >
-   <div  class="alert alert-warning bg-primary" v-if="wipBanner">
-    <div>
-      <span class="text-lg">🤦</span>
-    </div>
-    <div>
+   <div  class="alert bg-primary flex" v-if="wipBanner">
+    
+    <div class="my-0 grid">
       The app is still work in progress, problems can occour.
       
     </div>
-    <div class="flex-none"> <button class="btn btn-sm" @click="wipBanner=false">OK</button></div>
+    <div class="mt-0 grid"> <button class="btn btn-sm" @click="wipBanner=false">OK</button></div>
   </div>
 
     <div class="navbar bg-base-200 rounded-3xl">

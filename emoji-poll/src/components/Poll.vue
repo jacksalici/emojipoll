@@ -143,11 +143,11 @@ export default {
     EmojiPoll📮🏄
   </h1>-->
 
-  
+  <h1 class="text-2xl font-bold">Emoji based poll text generator</h1>
 
   <p
     v-if="this.list.length == 0"
-    class="max-w-screen-sm"
+    class="max-w-screen-sm text-center"
   >
     Generate the text of your poll! Just insert the choices and share it with your fellows.
   </p>
