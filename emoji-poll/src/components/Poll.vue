@@ -69,7 +69,7 @@ export default {
         this.prettyString += element.emoji + "    *" + element.name + "*\n";
       });
       this.prettyString +=
-        "\n_Check the result pasting all the answers on emojipoll.jacksalici.com/ans_";
+        "\n_Generated with emojipoll.jacksalici.com_";
       this.tipIsOpen = false;
     },
     copy() {
@@ -136,12 +136,12 @@ export default {
 <template>
   <!--SUBHEADER-->
 
-  <h1
+  <!--<h1
     v-if="this.list.length == 0"
     class="text-4xl font-bold sm:text-5xl lg:text-6xl"
   >
     EmojiPoll📮🏄
-  </h1>
+  </h1>-->
 
   <div v-if="this.list.length == 0" class="alert alert-warning">
     <div>
@@ -164,16 +164,19 @@ export default {
 
   <p
     v-if="this.list.length == 0"
-    class="max-w-screen-sm text-gray-600 sm:text-2xl"
+    class="max-w-screen-sm"
   >
-    Create a poll using random emoji: just insert the entries and share the
-    generated text. Then paste your fellows' answers
-    <a class="link" href="/ans">here</a>.
+    Generate the text of your poll! Just insert the choice and share it with your fellows.
   </p>
 
   <div class="md-5 overflow-x-auto ">
     <!--TABLE - ENTRY LIST -->
     <table v-if="this.list.length > 0" class="table w-full table-fixed">
+    <thead>
+      <tr>
+        <th colspan="4" class="text-center">EMOJIPOLL CHOICES</th>
+      </tr>
+    </thead>
       <draggable
         class="list-group"
         :list="list"
@@ -234,6 +237,7 @@ export default {
       :modelValue="string"
       modelType="EEE d/M"
       :format="format"
+      
       multiDates
       autoApply
       :closeOnAutoApply="false"
@@ -241,17 +245,17 @@ export default {
       :clearable="false"
       hideInputIcon
       v-if="dates"
-      menuClassName="bg-base-200 rounded-2xl drop-shadow-xl"
+      menuClassName="bg-base-100 rounded-2xl shadow-2xl"
       :monthChangeOnScroll="false"
     >
       <template #dp-input="{ value }">
-        <div class="form-control m-3">
+        <div class="form-control my-3">
           <div class="input-group">
             <input
               type="text"
               :value="value"
               placeholder="Add a new date ✏️🦄"
-              class="input input-bordered input-primary focus:border-primary focus:ring-0 w-5/6"
+              class="input input-bordered input-primary focus:border-primary focus:ring-0 w-full"
             />
             <button class="btn btn-primary" v-on:click="handleDates">
               ADD
@@ -262,11 +266,11 @@ export default {
     </Datepicker>
 
     <form @submit.prevent="addEntry(task)"           v-if="!dates">
-      <div class="form-control m-3">
+      <div class="form-control my-3">
         <div class="input-group">
           <input
           type="text"
-          class=" input input-bordered input-primary focus:border-primary focus:ring-0 w-5/6"
+          class=" input input-bordered input-primary focus:border-primary focus:ring-0 w-full"
           placeholder="Add a new entry ✏️🦄"
           v-model="task"
         />
@@ -275,16 +279,19 @@ export default {
       </div>
     </form>
     <!--RESULT CARD -->
-    <div v-if="this.prettyString.length > 0" class="card bg-base-200  mt-5">
-      <div class="card-body">
-        <input
+    <input
           type="text"
           placeholder="Insert the poll's title (optional)"
           v-model="title"
-          class="input input-bordered input-ghost"
+          class="input input-bordered input-ghost w-full"
           v-on:change="pPrint()"
         />
-        <div class="collapse collapse-plus max-w-sm">
+    <div v-if="this.list.length > 0" class="card bg-base-200 mt-5">
+      <div class="card-body">
+        <h2 class="card-title">EmojiPoll text generated!</h2>
+        <p class="text-left">You can now copy it and/or share it with anyone. Then, you can parse the answers pasting them in <a class="link" href="/ans">the specific page.</a></p>
+        
+        <!--<div class="collapse collapse-plus max-w-sm">
           <input type="checkbox" class="peer" />
           <div
             class="mx-0 text-left collapse-title text-primary-content text-neutral peer-checked:bg-accent peer-checked:text-secondary-content"
@@ -302,7 +309,7 @@ export default {
               {{ line }}<br />
             </p>
           </div>
-        </div>
+        </div>-->
 
         <div class="card-actions justify-end">
           <a
@@ -332,7 +339,7 @@ export default {
           </div>
         </div>
 
-        <a
+        <!--<a
           role="button"
           href="
             /ans
@@ -340,7 +347,7 @@ export default {
           class="btn btn-xs btn-outline btn-primary mx-auto mr-0"
         >
           Parse the answers ⚗️
-        </a>
+        </a>-->
       </div>
     </div>
   </div>

@@ -13,6 +13,8 @@ module.exports = {
   ],
   daisyui: {
     themes: ['acid'],
+    darkTheme: "synthwave",
+
   },
 }
 

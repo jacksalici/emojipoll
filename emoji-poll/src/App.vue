@@ -2,7 +2,7 @@
   <div
     class="container mx-auto px-4 py-4 sm:px-6 xl:px-12 max-w-3xl items-center justify-center space-y-6 text-center"
   >
-    <div class="navbar bg-base-100 shadow-xl rounded-3xl">
+    <div class="navbar bg-base-200 rounded-3xl">
       <div class="navbar-start">
         <div class="dropdown">
           <label tabindex="0" class="btn btn-ghost btn-circle">
@@ -25,15 +25,15 @@
             tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li><a>Homepage</a></li>
-            <li><a>Answer parsing</a></li>
+            <li><a href="/">Homepage</a></li>
+            <li><a href="/ans">Answer parsing</a></li>
             <li><a>About</a></li>
             <li><a>Help</a></li>
           </ul>
         </div>
       </div>
       <div class="navbar-center">
-        <a class="btn btn-ghost normal-case text-xl">EmojiPoll 📮🏄</a>
+        <a href="/" class="btn btn-ghost normal-case text-xl">EmojiPoll 📮🏄</a>
       </div>
       <div class="navbar-end">
         <button class="btn btn-ghost btn-circle">🇺🇸</button>
