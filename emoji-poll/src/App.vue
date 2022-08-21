@@ -2,12 +2,12 @@
   <div
     class="container mx-auto px-4 py-4 sm:px-6 xl:px-12 max-w-3xl items-center justify-center space-y-6 text-center"
   >
-    <div class="alert bg-primary flex" v-if="wipBanner">
+    <div class="alert bg-primary flex" v-if="!hideWipBanner">
       <div class="my-0 grid">
         The app is still work in progress, problems can occour.
       </div>
       <div class="mt-0 grid">
-        <button class="btn btn-sm" @click="wipBanner = false">OK</button>
+        <button class="btn btn-sm" @click="wipBanner">OK</button>
       </div>
     </div>
 
@@ -98,7 +98,7 @@ export default {
   data() {
     return {
       currentPath: window.location.pathname,
-      wipBanner: true,
+      hideWipBanner: false,
     };
   },
   computed: {
@@ -106,6 +106,16 @@ export default {
       return routes[this.currentPath || "/"] || NotFound;
     },
   },
-  mounted() {},
+  mounted() {
+    if(sessionStorage.getItem("emojipoll-wip")){
+      this.hideWipBanner=true 
+    }
+  },
+  methods: {
+    wipBanner(){
+      sessionStorage.setItem("emojipoll-wip", true)
+       this.hideWipBanner=true 
+    }
+  }
 };
 </script>
