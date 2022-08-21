@@ -8,16 +8,7 @@ module.exports = defineConfig({
         template: 'public/index.html',
         title: 'Home',
       },
-      'tool': {
-        entry: './src/tool.js',
-        template: 'public/index.html',
-        title: 'Tool',
-      },
-      'ans': {
-        entry: './src/answers.js',
-        template: 'public/index.html',
-        title: 'Answers',
-      }
+      
     
   }
 })

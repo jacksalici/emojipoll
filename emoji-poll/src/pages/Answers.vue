@@ -1,25 +1,14 @@
 <template>
-  <div class="container mx-auto px-4 py-14 sm:px-6 xl:px-12 max-w-3xl items-center justify-center space-y-6 text-center ">
     
-      <div class="alert alert-warning">
-        <div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="stroke-current flex-shrink-0 h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-            />
-          </svg>
-          <span>The app is still work in progress, problems can occour.</span>
-        </div>
-      </div>
-      <h1 class="text-4xl font-bold sm:text-5xl lg:text-6xl">EmojiPoll📮🏄</h1>
+     
+      <h1 class="text-2xl font-bold">Answer parser</h1>
+      <p
+   
+    class="max-w-screen-sm"
+  >
+    Execute the tally of the answer. Just paste below all your fellows text answers.
+  </p>
+
       <textarea
         class="textarea textarea-primary w-full"
         placeholder="Paste the answers."
@@ -27,7 +16,7 @@
         @input="count"
       ></textarea>
 
-      <div v-if="emoji != ''" class="form-control w-full max-w-xs">
+      <div v-if="emoji != ''" class="form-control w-full ">
         <label class="label">
           <span class="label-text"
             >Please check below that all the poll's emoji had been parsed
@@ -36,7 +25,7 @@
         </label>
         <input
           type="text"
-          class="input input-bordered input-primary w-full max-w-xs"
+          class="input input-bordered input-primary w-full"
           v-model="emoji"
           @input="talling()"
         />
@@ -49,7 +38,6 @@
       <a role="button" class="btn btn-xs ptn-primary ml-0 self-start" href="/">
         👈 Go back to the generator</a
       >
-  </div>
 </template>
 
 <script>
