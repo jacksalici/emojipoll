@@ -1,0 +1,50 @@
+{
+	"back": " 👈 Retournez au générateur",
+	"calc": {
+		"helper": "Veuillez vérifier ci-dessous que tous les emoji du sondage ont été analysés correctement et séparés par une virgule. Corrigez-les si nécessaire.",
+		"input": "Collez les réponses."
+	},
+	"content": {
+		"calc": "Exécuter le décompte du scrutin. Collez simplement ci-dessous toutes les réponses textuelles de vos collègues.",
+		"generator": "Créez le texte de votre sondage ! Insérez simplement les choix et partagez-les avec vos collègues."
+	},
+	"core": {
+		"card": {
+			"content": "Vous pouvez maintenant le copier et/ou le partager avec n'importe qui. Ensuite, vous pouvez analyser les réponses en les collant dans <a class='link' href='/calc'>la page spécifique.</a>",
+			"copy-text": "Copiez le texte",
+			"share-whatsapp": "Partager sur Whatsapp",
+			"show-text": "Afficher le texte généré",
+			"title": "Texte EmojiPoll généré !"
+		},
+		"input": {
+			"add": "Ajouter",
+			"date": "Ajouter une nouvelle date ✏️🦄",
+			"format": "{num} sélectionné. Cliquez pour ajouter de nouvelles dates.",
+			"option": "Ajouter une nouvelle option ✏️🦄",
+			"title": "Insérez le titre du sondage (facultatif)"
+		},
+		"mode": {
+			"date": "Trouver un rendez-vous",
+			"option": "Trouver une option"
+		},
+		"table": {
+			"header": "Choix d'EmojiPoll"
+		},
+		"text": {
+			"content": "Merci de répondre à ce message avec l'emoji correspondant à votre choix :\n",
+			"footer": "Généré avec emojipoll.jacksalici.com"
+		}
+	},
+	"menu": {
+		"about": "💁‍♂️ À propos",
+		"calc": "📊 Calculatrice",
+		"generator": "🏡 Générateur",
+		"lang": "🌐 Langues"
+	},
+	"ok": "D'accord",
+	"title": {
+		"calc": "Analyseur de réponses",
+		"generator": "Générateur de copie de sondages basé sur Emoji."
+	},
+	"wip": "L'application est toujours en cours de développement, des problèmes peuvent survenir."
+}

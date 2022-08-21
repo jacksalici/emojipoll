@@ -4,10 +4,10 @@
   >
     <div class="alert alert-warning flex" v-if="!hideWipBanner">
       <div class="my-0 grid">
-        {{$t("wip")}}
+        {{ $t("wip") }}
       </div>
       <div class="mt-0 grid">
-        <button class="btn btn-sm" @click="wipBanner">{{$t("ok")}}</button>
+        <button class="btn btn-sm" @click="wipBanner">{{ $t("ok") }}</button>
       </div>
     </div>
 
@@ -34,15 +34,32 @@
             tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p-2 shadow-xl bg-base-100 rounded-box w-52"
           >
-            <li><a href="/">{{$t('menu.generator')}}</a></li>
-            <li><a href="/calc">{{$t('menu.calc')}}</a></li>
-            <li><a href="/about">{{$t('menu.about')}}</a></li>
-            <li class="disabled"><a >{{$t('menu.lang')}}</a></li>
+            <li>
+              <a href="/">{{ $t("menu.generator") }}</a>
+            </li>
+            <li>
+              <a href="/calc">{{ $t("menu.calc") }}</a>
+            </li>
+            <li>
+              <a href="/about">{{ $t("menu.about") }}</a>
+            </li>
+            <li tabindex="0">
+              <span>{{ $t("menu.lang") }}</span>
+              <ul class="bg-base-100 shadow-xl">
+                <li><button class="btn btn-ghost btn-sm" @click="lang('en')">🇺🇸</button></li>
+                <li><button class="btn btn-ghost btn-sm" @click="lang('it')">🇮🇹</button></li>
+                <li><button class="btn btn-ghost btn-sm" @click="lang('fr')">🇫🇷</button></li>
+                <li><button class="btn btn-ghost btn-sm" @click="lang('es')">🇪🇸</button></li>
+                <li><button class="btn btn-ghost btn-sm" @click="lang('de')">🇩🇪</button></li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
       <div class="navbar-center">
-        <a href="/" class="btn btn-ghost normal-case text-xl font-bold">EmojiPoll 📮🏄</a>
+        <a href="/" class="btn btn-ghost normal-case text-xl font-bold"
+          >EmojiPoll 📮🏄</a
+        >
       </div>
       <div class="navbar-end"></div>
       <!--<div class="navbar-end">
@@ -86,7 +103,7 @@ import AboutPage from "./pages/AboutPage.vue";
 const routes = {
   "/": PollCore,
   "/calc": AppAnswers,
-  "/about": AboutPage
+  "/about": AboutPage,
 };
 
 export default {
@@ -107,15 +124,20 @@ export default {
     },
   },
   mounted() {
-    if(sessionStorage.getItem("emojipoll-wip")){
-      this.hideWipBanner=true 
+    if (sessionStorage.getItem("emojipoll-wip")) {
+      this.hideWipBanner = true;
     }
   },
   methods: {
-    wipBanner(){
-      sessionStorage.setItem("emojipoll-wip", true)
-       this.hideWipBanner=true 
+    wipBanner() {
+      sessionStorage.setItem("emojipoll-wip", true);
+      this.hideWipBanner = true;
+    },
+    lang(lang){
+      sessionStorage.setItem("lang", lang)
+      this.$i18n.locale = lang
+
     }
-  }
+  },
 };
 </script>

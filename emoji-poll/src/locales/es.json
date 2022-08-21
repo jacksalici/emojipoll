@@ -1,0 +1,50 @@
+{
+	"back": " 👈 Volver al generador",
+	"calc": {
+		"helper": "Verifique a continuación que todos los emoji de la encuesta se hayan analizado correctamente y separados por una coma. Corríjalos si es necesario.",
+		"input": "Pega las respuestas."
+	},
+	"content": {
+		"calc": "Ejecutar el conteo de la encuesta. Simplemente pegue debajo de todas las respuestas de texto de sus compañeros.",
+		"generator": "¡Crea el texto de tu encuesta! Simplemente inserte las opciones y compártalas con sus compañeros."
+	},
+	"core": {
+		"card": {
+			"content": "Ahora puede copiarlo y/o compartirlo con cualquier persona. Luego, puede analizar las respuestas y pegarlas en <a class='link' href='/calc'>la página específica.</a>",
+			"copy-text": "copia el texto",
+			"share-whatsapp": "Compartir en WhatsApp",
+			"show-text": "Mostrar el texto generado",
+			"title": "EmojiEncuesta de texto generada!"
+		},
+		"input": {
+			"add": "Añadir",
+			"date": "Agrega una nueva fecha ✏️🦄",
+			"format": "{num} seleccionado. Haga clic para agregar nuevas fechas.",
+			"option": "Agrega una nueva opción ✏️🦄",
+			"title": "Inserta el título de la encuesta (opcional)"
+		},
+		"mode": {
+			"date": "Encuentra una fecha",
+			"option": "Encuentra una opción"
+		},
+		"table": {
+			"header": "EmojiOpciones de encuesta"
+		},
+		"text": {
+			"content": "Responda a este mensaje con el emoji que coincida con su elección:\n",
+			"footer": "Generado con emojipoll.jacksalici.com"
+		}
+	},
+	"menu": {
+		"about": "💁‍♂️ Acerca de",
+		"calc": "📊 Calculadora",
+		"generator": "🏡 Generador",
+		"lang": "🌐 Idiomas"
+	},
+	"ok": "De acuerdo",
+	"title": {
+		"calc": "Analizador de respuestas",
+		"generator": "Generador de copia de encuestas basado en emoji."
+	},
+	"wip": "La aplicación todavía está en progreso, pueden ocurrir problemas."
+}

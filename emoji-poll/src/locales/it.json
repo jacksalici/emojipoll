@@ -1,0 +1,50 @@
+{
+	"back": " 👈 Ritorna al generatore",
+	"calc": {
+		"helper": "Controlla di seguito che tutte le emoji del sondaggio siano state analizzate correttamente e che siano separate da una virgola. Correggerli se necessario.",
+		"input": "Incolla le risposte."
+	},
+	"content": {
+		"calc": "Esegui il conteggio del sondaggio. È sufficiente incollare di seguito il testo di tutte le risposte dei tuoi amici",
+		"generator": "Crea il testo del tuo sondaggio! Basta inserire le scelte e condividere il testo generato con chi vuoi."
+	},
+	"core": {
+		"card": {
+			"content": "Ora puoi copiarlo e/o condividerlo con chiunque. Puoi poi conteggiare le risposte incollandole nella <a class='link' href='/calc'>pagina apposita.</a>",
+			"copy-text": "Copia il testo",
+			"share-whatsapp": "Condividi su WhatsApp",
+			"show-text": "Mostra il testo generato",
+			"title": "Testo EmojiPoll generato!"
+		},
+		"input": {
+			"add": "inserisci",
+			"date": "Aggiungi una nuova data ✏️🦄",
+			"format": "{num} selezionate. Clicca per aggiungere nuove date.",
+			"option": "Aggiungi una nuova opzione ✏️🦄",
+			"title": "Inserisci il titolo del sondaggio (facoltativo)"
+		},
+		"mode": {
+			"date": "Trova una data",
+			"option": "Trova un'opzione"
+		},
+		"table": {
+			"header": "Scelte dell'EmojiPoll"
+		},
+		"text": {
+			"content": "Rispondi a questo messaggio con l'emoji che corrisponde alla tua scelta:\n",
+			"footer": "Generato con emojipoll.jacksalici.com"
+		}
+	},
+	"menu": {
+		"about": "💁‍♂️ About",
+		"calc": "📊 Calcolatore",
+		"generator": "🏡 Generatore",
+		"lang": "🌐 Lingue"
+	},
+	"ok": "Ok",
+	"title": {
+		"calc": "Calcola le risposte",
+		"generator": "Generatore di testi per sondaggi basato su emoji."
+	},
+	"wip": "L'app è ancora in fase di sviluppo, possono verificarsi problemi."
+}

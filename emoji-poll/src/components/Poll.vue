@@ -113,7 +113,7 @@ export default {
     },
 
     format(date) {
-      return `${date.length} selected. Click to add new dates.`;
+      return `${ this.$t('core.input.format', {num: date.length})}`;
     },
   },
 
@@ -234,7 +234,7 @@ export default {
               class="input input-bordered input-primary focus:border-primary focus:ring-0 w-full"
             />
             <button class="btn btn-primary" v-on:click="handleDates">
-              ADD
+              {{$t("core.input.add")}}
             </button>
           </div>
         </div>
