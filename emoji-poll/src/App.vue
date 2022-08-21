@@ -35,7 +35,7 @@
             class="menu menu-compact dropdown-content mt-3 p-2 shadow-xl bg-base-100 rounded-box w-52"
           >
             <li><a href="/">🏡 Text generator</a></li>
-            <li><a href="/ans">📊 Answer parsing</a></li>
+            <li><a href="/calc">📊 Answer parsing</a></li>
             <li><a href="/about">💁‍♂️ About</a></li>
             <li class="disabled"><a >🌐 Languages</a></li>
           </ul>
@@ -85,7 +85,7 @@ import AboutPage from "./pages/AboutPage.vue";
 
 const routes = {
   "/": PollCore,
-  "/ans": AppAnswers,
+  "/calc": AppAnswers,
   "/about": AboutPage
 };
 
