@@ -35,6 +35,10 @@ export default {
 
   methods: {
     handleDates() {
+      if (!this.datelist){
+        this.list = []
+        return
+      }
       console.log(this.datelist)
       const names = [];
       const options = { weekday: 'short', day: 'numeric' };
