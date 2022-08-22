@@ -28,23 +28,31 @@ export default {
       disabled: true,
       mode: 0,
       datelist: "",
+      datelistLocale: ""
+      
     };
   },
 
   methods: {
     handleDates() {
+      console.log(this.datelist)
       const names = [];
+      const options = { weekday: 'short', day: 'numeric' };
+      const dateTimeFormat = new Intl.DateTimeFormat(this.$i18n.locale, options);
+
+      this.datelistLocale = this.datelist.map(x=>{
+        return dateTimeFormat.format(x)
+      })
       this.list.forEach((le) => {
         const name = le["name"];
-
-        if (!this.datelist.includes(name)) {
+        if (!this.datelistLocale.includes(name)) {
           this.delEntry(le);
         } else {
           names.push(name);
         }
       });
 
-      this.datelist.forEach((d) => {
+      this.datelistLocale.forEach((d) => {
         if (!names.includes(d)) {
           this.addEntry(d);
         }
@@ -86,8 +94,10 @@ export default {
       this.pPrint();
     },
     delEntry(i) {
-      while (this.datelist.includes(this.list.at(i)["name"])) {
-        this.datelist.splice(this.datelist.indexOf(this.list.at(i)["name"]), 1);
+      while (this.datelistLocale.includes(this.list.at(i)["name"])) {
+
+        this.datelistLocale.splice(this.datelistLocale.indexOf(this.list.at(i)["name"]), 1);
+        this.datelist.splice(this.datelistLocale.indexOf(this.list.at(i)["name"]), 1);
       }
 
       this.list.splice(i, 1);
@@ -207,14 +217,15 @@ export default {
       >
     </div>
 
-    <!--INPUT CARDS-->
+    <!--INPUT CARDS       modelType="EEE d/M"
+-->
 
     <Datepicker
       v-model="datelist"
-      :modelValue="string"
-      modelType="EEE d/M"
       :format="format"
       multiDates
+      :modelValue="date"       
+      :locale= "$i18n.locale" 
       autoApply
       :closeOnAutoApply="false"
       :enableTimePicker="false"
@@ -223,6 +234,7 @@ export default {
       v-if="mode==1"
       menuClassName="bg-base-100 rounded-2xl shadow-2xl"
       :monthChangeOnScroll="false"
+      
     >
       <template #dp-input="{ value }">
         <div class="form-control my-3">
