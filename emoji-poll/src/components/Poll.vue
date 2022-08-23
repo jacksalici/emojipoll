@@ -17,7 +17,7 @@ export default {
     Datepicker,
   },
   mounted() {
-    this.emoji = require("emoji-random-list")
+    this.emoji = require("emoji-random-list");
   },
   data() {
     return {
@@ -27,29 +27,32 @@ export default {
       count: 0,
       prettyString: "",
       tipIsOpen: false,
-      disabled: true,
+      disabled: false,
       mode: 0,
-      datelist: "",
-      datelistLocale: "",
+      datelist: [],
+      datelistLocale: [],
       emoji: "",
-      off: ""
+      off: "",
     };
   },
 
   methods: {
     handleDates() {
-      if (!this.datelist){
-        this.list = []
-        return
+      if (!this.datelist) {
+        this.list = [];
+        return;
       }
-      console.log(this.datelist)
+      console.log(this.datelist);
       const names = [];
-      const options = { weekday: 'short', day: 'numeric' };
-      const dateTimeFormat = new Intl.DateTimeFormat(this.$i18n.locale, options);
+      const options = { weekday: "short", day: "numeric" };
+      const dateTimeFormat = new Intl.DateTimeFormat(
+        this.$i18n.locale,
+        options
+      );
 
-      this.datelistLocale = this.datelist.map(x=>{
-        return dateTimeFormat.format(x)
-      })
+      this.datelistLocale = this.datelist.map((x) => {
+        return dateTimeFormat.format(x);
+      });
       this.list.forEach((le) => {
         const name = le["name"];
         if (!this.datelistLocale.includes(name)) {
@@ -77,7 +80,7 @@ export default {
       if (this.title != "") {
         this.prettyString += "*" + this.title.toUpperCase() + "*\n";
       }
-      this.prettyString += this.$t("core.text.content")
+      this.prettyString += this.$t("core.text.content");
       this.list.forEach((element) => {
         this.prettyString += element.emoji + "    *" + element.name + "*\n";
       });
@@ -91,11 +94,11 @@ export default {
     addEntry(e) {
       const dict = {
         name: e,
-        emoji: this.getEmoji()
+        emoji: this.getEmoji(),
       };
-      
+
       this.list.push(dict);
-     
+
       this.count++;
 
       this.task = "";
@@ -103,45 +106,59 @@ export default {
     },
     delEntry(i) {
       while (this.datelistLocale.includes(this.list.at(i)["name"])) {
-
-        this.datelistLocale.splice(this.datelistLocale.indexOf(this.list.at(i)["name"]), 1);
-        this.datelist.splice(this.datelistLocale.indexOf(this.list.at(i)["name"]), 1);
+        this.datelistLocale.splice(
+          this.datelistLocale.indexOf(this.list.at(i)["name"]),
+          1
+        );
+        this.datelist.splice(
+          this.datelistLocale.indexOf(this.list.at(i)["name"]),
+          1
+        );
       }
 
       this.list.splice(i, 1);
       this.count--;
       this.pPrint();
     },
-    setEmoji({i, e}){
-      console.log(this.list.at(i))
-      if (e==undefined)
-        this.list.at(i)["emoji"] = this.getEmoji()
-      else  
-{        this.list.at(i)["emoji"] = e
-
-}    },
+    setEmoji({ i, e }) {
+      console.log(this.list.at(i));
+      if (e == undefined) this.list.at(i)["emoji"] = this.getEmoji();
+      else {
+        this.list.at(i)["emoji"] = e;
+      }
+      this.pPrint();
+    },
     getEmoji() {
-
-      let l = this.emoji.random({n:1, skintones:false, gender:false, nogroup:"flags,symbols"})
+      let l = this.emoji.random({
+        n: 1,
+        skintones: false,
+        genders: false,
+        nogroup: "flags,symbols",
+      });
 
       return l[0];
-      
     },
 
-    regenerateAll(){
-      this.off = Math.floor(Math.random()*this.emoji.len)
+    regenerateAll() {
+      this.off = Math.floor(Math.random() * this.emoji.len);
 
-      let emojis = this.emoji.list({n:this.list.length, skintones:false, gender:false, nogroup:"flags,symbols", offset:this.off})
-      console.log(emojis)
+      let emojis = this.emoji.list({
+        n: this.list.length,
+        skintones: false,
+        genders: false,
+        nogroup: "flags,symbols",
+        offset: this.off,
+      });
+      console.log(emojis);
       // eslint-disable-next-line
       emojis.forEach((element, index) => {
-        console.log(element+index)
-        this.setEmoji({i: index, e: element})
-      })
+        console.log(element + index);
+        this.setEmoji({ i: index, e: element });
+      });
     },
 
     format(date) {
-      return `${ this.$t('core.input.format', {num: date.length})}`;
+      return `${this.$t("core.input.format", { num: date.length })}`;
     },
   },
 
@@ -168,10 +185,10 @@ export default {
     EmojiPoll📮🏄
   </h1>-->
 
-  <h1 class="text-2xl font-bold">  {{$t("title.generator")}}</h1>
+  <h1 class="text-2xl font-bold">{{ $t("title.generator") }}</h1>
 
   <p v-if="this.list.length == 0" class="max-w-screen-sm text-center">
-    {{$t("content.generator")}}
+    {{ $t("content.generator") }}
   </p>
 
   <div class="md-5 overflow-x-auto">
@@ -179,7 +196,7 @@ export default {
     <table v-if="this.list.length > 0" class="table w-full table-fixed">
       <thead>
         <tr>
-          <th colspan="4" class="text-center">  {{$t("core.table.header")}}</th>
+          <th colspan="4" class="text-center">{{ $t("core.table.header") }}</th>
         </tr>
       </thead>
       <draggable
@@ -206,7 +223,10 @@ export default {
             </td>
 
             <td class="p-2">
-              <button class="btn btn-ghost px-1" @click="setEmoji({i: index})">
+              <button
+                class="btn btn-ghost px-1"
+                @click="setEmoji({ i: index })"
+              >
                 ♻️
               </button>
               <!--<button class="btn btn-ghost" @click="getEmoji(index)">✏️</button>-->
@@ -223,15 +243,15 @@ export default {
     <div v-if="this.list.length == 0" class="tabs tabs-boxed">
       <a
         class="tab ml-auto"
-        :class="{ 'tab-active': mode==1 }"
+        :class="{ 'tab-active': mode == 1 }"
         @click="togglePollType('date')"
-        >{{$t("core.mode.date")}}</a
+        >{{ $t("core.mode.date") }}</a
       >
       <a
         class="tab mr-auto"
-        :class="{ 'tab-active': mode==2 }"
+        :class="{ 'tab-active': mode == 2 }"
         @click="togglePollType('text')"
-        >{{$t("core.mode.option")}}</a
+        >{{ $t("core.mode.option") }}</a
       >
     </div>
 
@@ -241,17 +261,16 @@ export default {
       v-model="datelist"
       :format="format"
       multiDates
-      :modelValue="date"       
-      :locale= "$i18n.locale" 
+      :modelValue="date"
+      :locale="$i18n.locale"
       autoApply
       :closeOnAutoApply="false"
       :enableTimePicker="false"
       :clearable="false"
       hideInputIcon
-      v-if="mode==1"
+      v-if="mode == 1"
       menuClassName="bg-base-100 rounded-2xl shadow-2xl"
       :monthChangeOnScroll="false"
-      
     >
       <template #dp-input="{ value }">
         <div class="form-control my-3">
@@ -259,52 +278,53 @@ export default {
             <input
               type="text"
               :value="value"
-              :placeholder='$t("core.input.date")'
+              :placeholder="$t('core.input.date')"
               class="input input-bordered input-primary focus:border-primary focus:ring-0 w-full"
             />
             <button class="btn btn-primary" v-on:click="handleDates">
-              {{$t("core.input.add")}}
+              {{ $t("core.input.add") }}
             </button>
           </div>
         </div>
       </template>
     </Datepicker>
 
-    <form @submit.prevent="addEntry(task)" v-if="mode==2">
+    <form @submit.prevent="addEntry(task)" v-if="mode == 2">
       <div class="form-control my-3">
         <div class="input-group">
           <input
             type="text"
             class="input input-bordered input-primary focus:border-primary focus:ring-0 w-full"
-            :placeholder='$t("core.input.option")'
+            :placeholder="$t('core.input.option')"
             v-model="task"
           />
-          <button class="btn btn-primary">{{$t("core.input.add")}}</button>
+          <button class="btn btn-primary">{{ $t("core.input.add") }}</button>
         </div>
       </div>
     </form>
     <!--RESULT CARD -->
-    
-    
-      
-        <input
-          type="text"
-          v-if="this.list.length > 0"
-          :placeholder='$t("core.input.title")'
-          
-          v-model="title"
-          class="input input-bordered input-ghost w-full"
-          v-on:change="pPrint()"
-        />
 
-        <button v-if="this.list.length > 0" class="btn btn-primary btn-outline my-5" @click="regenerateAll()">♻️ Regenerate all emoji</button>
-        
+    <input
+      type="text"
+      v-if="this.list.length > 0"
+      :placeholder="$t('core.input.title')"
+      v-model="title"
+      class="input input-bordered input-ghost w-full"
+      v-on:change="pPrint()"
+    />
+
+    <button
+      v-if="this.list.length > 0"
+      class="btn btn-primary btn-outline my-5"
+      @click="regenerateAll()"
+    >
+      ♻️ Regenerate all emoji
+    </button>
+
     <div v-if="this.list.length > 0" class="card bg-base-200 mt-5">
       <div class="card-body">
-        <h2 class="card-title">{{$t("core.card.title")}}</h2>
-        <p class="text-left" v-html='$t("core.card.content")'>
-    
-        </p>
+        <h2 class="card-title">{{ $t("core.card.title") }}</h2>
+        <p class="text-left" v-html="$t('core.card.content')"></p>
 
         <!--<div class="collapse collapse-plus max-w-sm">
           <input type="checkbox" class="peer" />
@@ -336,7 +356,7 @@ export default {
             class="btn btn-primary btn-sm"
             :class="{ 'btn-disabled': disabled }"
           >
-            {{$t("core.card.share-whatsapp")}}
+            {{ $t("core.card.share-whatsapp") }}
           </a>
 
           <div
@@ -349,7 +369,7 @@ export default {
               class="btn btn-primary btn-sm"
               :class="{ 'btn-disabled': disabled }"
             >
-               {{$t("core.card.copy-text")}}
+              {{ $t("core.card.copy-text") }}
             </button>
           </div>
         </div>
