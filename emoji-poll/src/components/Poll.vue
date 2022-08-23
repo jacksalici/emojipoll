@@ -240,7 +240,13 @@ export default {
     </table>
 
     <!--INPUT TAB-->
-    <div v-if="this.list.length == 0" class="tabs tabs-boxed">
+    <div v-if="mode == 0" class="mt-5">
+    <button @click="togglePollType('date')" class="btn btn-primary m-2">{{ $t("core.mode.date") }}</button>
+    <button @click="togglePollType('text')" class="btn btn-primary m-2">{{ $t("core.mode.option") }}</button>
+    </div>
+
+
+    <div v-if="this.list.length == 0 && mode != 0" class="tabs tabs-boxed">
       <a
         class="tab ml-auto"
         :class="{ 'tab-active': mode == 1 }"
@@ -313,13 +319,21 @@ export default {
       v-on:change="pPrint()"
     />
 
-    <button
+    <div class="my-5">
+<button
       v-if="this.list.length > 0"
-      class="btn btn-primary btn-outline my-5"
+      class="btn btn-primary btn-outline m-1"
       @click="regenerateAll()"
     >
-      ♻️ Regenerate all emoji
+      {{$t("settings.regenerate")}}
     </button>
+     <button
+      v-if="this.list.length > 0"
+      class="btn btn-primary btn-disabled m-1"
+    >
+      {{$t("settings.settings")}}
+    </button>
+    </div>
 
     <div v-if="this.list.length > 0" class="card bg-base-200 mt-5">
       <div class="card-body">

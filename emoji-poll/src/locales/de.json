@@ -1,50 +1,54 @@
 {
-	"back": " 👈 Geh zurück zum Generator",
-	"calc": {
-		"helper": "Bitte überprüfen Sie unten, ob alle Emojis der Umfrage korrekt geparst und durch ein Komma getrennt wurden. Korrigieren Sie sie gegebenenfalls.",
-		"input": "Fügen Sie die Antworten ein."
-	},
-	"content": {
-		"calc": "Führen Sie die Auszählung der Umfrage durch. Fügen Sie einfach unter allen Textantworten Ihrer Kollegen ein.",
-		"generator": "Erstellen Sie den Text Ihrer Umfrage! Fügen Sie einfach die Auswahl ein und teilen Sie sie mit Ihren Kollegen."
-	},
-	"core": {
-		"card": {
-			"content": "Sie können es jetzt kopieren und/oder mit anderen teilen. Anschließend können Sie die Antworten parsen, indem Sie sie in <a class='link' href='/calc'>der jeweiligen Seite einfügen.</a>",
-			"copy-text": "Kopieren Sie den Text",
-			"share-whatsapp": "Auf WhatsApp teilen",
-			"show-text": "Zeigen Sie den generierten Text an",
-			"title": "EmojiPoll-Text generiert!"
-		},
-		"input": {
-			"add": "Hinzufügen",
-			"date": "Neues Datum hinzufügen ✏️🦄",
-			"format": "{num} ausgewählt. Klicken Sie hier, um neue Daten hinzuzufügen.",
-			"option": "Füge eine neue Option hinzu ✏️🦄",
-			"title": "Geben Sie den Titel der Umfrage ein (optional)"
-		},
-		"mode": {
-			"date": "Finden Sie ein Datum",
-			"option": "Finden Sie eine Option"
-		},
-		"table": {
-			"header": "EmojiPoll-Auswahlmöglichkeiten"
-		},
-		"text": {
-			"content": "Bitte antworten Sie auf diese Nachricht mit dem Emoji, das Ihrer Wahl entspricht:\n",
-			"footer": "Erstellt mit emojipoll.jacksalici.com"
-		}
-	},
-	"menu": {
-		"about": "💁‍♂️ Über",
-		"calc": "📊 Rechner",
-		"generator": "🏡Generator",
-		"lang": "🌐 Sprachen"
-	},
-	"ok": "OK",
-	"title": {
-		"calc": "Antwort-Parser",
-		"generator": "Emoji-basierter Umfragen-Kopiergenerator."
-	},
-	"wip": "Die App ist noch in Arbeit, es können Probleme auftreten."
+  "back": " 👈 Geh zurück zum Generator",
+  "calc": {
+    "helper": "Bitte überprüfen Sie unten, ob alle Emojis der Umfrage korrekt geparst und durch ein Komma getrennt wurden. Korrigieren Sie sie gegebenenfalls.",
+    "input": "Fügen Sie die Antworten ein."
+  },
+  "content": {
+    "calc": "Führen Sie die Auszählung der Umfrage durch. Fügen Sie einfach unter allen Textantworten Ihrer Kollegen ein.",
+    "generator": "Erstellen Sie den Text Ihrer Umfrage! Fügen Sie einfach die Auswahl ein und teilen Sie sie mit Ihren Kollegen."
+  },
+  "core": {
+    "card": {
+      "content": "Sie können es jetzt kopieren und/oder mit anderen teilen. Anschließend können Sie die Antworten parsen, indem Sie sie in <a class='link' href='/calc'>der jeweiligen Seite einfügen.</a>",
+      "copy-text": "Kopieren Sie den Text",
+      "share-whatsapp": "Auf WhatsApp teilen",
+      "show-text": "Zeigen Sie den generierten Text an",
+      "title": "EmojiPoll-Text generiert!"
+    },
+    "input": {
+      "add": "Hinzufügen",
+      "date": "Neues Datum hinzufügen ✏️🦄",
+      "format": "{num} ausgewählt. Klicken Sie hier, um neue Daten hinzuzufügen.",
+      "option": "Füge eine neue Option hinzu ✏️🦄",
+      "title": "Geben Sie den Titel der Umfrage ein (optional)"
+    },
+    "mode": {
+      "date": "Finden Sie ein Datum",
+      "option": "Finden Sie eine Option"
+    },
+    "table": {
+      "header": "EmojiPoll-Auswahlmöglichkeiten"
+    },
+    "text": {
+      "content": "Bitte antworten Sie auf diese Nachricht mit dem Emoji, das Ihrer Wahl entspricht:\n",
+      "footer": "Erstellt mit emojipoll.jacksalici.com"
+    }
+  },
+  "menu": {
+    "about": "💁‍♂️ Über",
+    "calc": "📊 Rechner",
+    "generator": "🏡Generator",
+    "lang": "🌐 Sprachen"
+  },
+  "ok": "OK",
+  "title": {
+    "calc": "Antwort-Parser",
+    "generator": "Emoji-basierter Umfragen-Kopiergenerator."
+  },
+  "wip": "Die App ist noch in Arbeit, es können Probleme auftreten.",
+  "settings": {
+    "regenerate": "♻️ Regenerieren Sie alle Emoji",
+    "settings": "⚙️ Einstellungen (bald verfügbar)"
+  }
 }
