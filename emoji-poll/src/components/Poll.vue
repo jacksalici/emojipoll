@@ -16,7 +16,9 @@ export default {
     draggable,
     Datepicker,
   },
-  mounted() {},
+  mounted() {
+    this.emoji = require("emoji-random-list")
+  },
   data() {
     return {
       list: [],
@@ -28,8 +30,8 @@ export default {
       disabled: true,
       mode: 0,
       datelist: "",
-      datelistLocale: ""
-      
+      datelistLocale: "",
+      emoji: ""
     };
   },
 
@@ -90,8 +92,9 @@ export default {
         name: e,
         emoji: `...`,
       };
-      this.getEmoji(this.count);
+      
       this.list.push(dict);
+      this.getEmoji(this.count);
       this.count++;
 
       this.task = "";
@@ -114,16 +117,15 @@ export default {
       if (this.list.at(i) != undefined) {
         this.list.at(i)["emoji"] = `...`;
       }
-      fetch(
-        "https://emoji.deta.dev/random?n=1&skintones=False&maxversion=14"
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data[0]);
-          this.list.at(i)["emoji"] = data[0];
-          this.disabled = false;
-          this.pPrint();
-        });
+      let l = this.emoji.random()
+      
+       
+      console.log(l);
+      console.log(this.list.at(i))
+      this.list.at(i)["emoji"] = l[0];
+      this.disabled = false;
+      this.pPrint();
+        
     },
 
     format(date) {
