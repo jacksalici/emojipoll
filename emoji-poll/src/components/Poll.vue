@@ -31,7 +31,8 @@ export default {
       mode: 0,
       datelist: "",
       datelistLocale: "",
-      emoji: ""
+      emoji: "",
+      off: ""
     };
   },
 
@@ -90,11 +91,11 @@ export default {
     addEntry(e) {
       const dict = {
         name: e,
-        emoji: `...`,
+        emoji: this.getEmoji()
       };
       
       this.list.push(dict);
-      this.getEmoji(this.count);
+     
       this.count++;
 
       this.task = "";
@@ -111,21 +112,32 @@ export default {
       this.count--;
       this.pPrint();
     },
-
-    getEmoji(i) {
-      this.disabled = true;
-      if (this.list.at(i) != undefined) {
-        this.list.at(i)["emoji"] = `...`;
-      }
-      let l = this.emoji.random()
-      
-       
-      console.log(l);
+    setEmoji({i, e}){
       console.log(this.list.at(i))
-      this.list.at(i)["emoji"] = l[0];
-      this.disabled = false;
-      this.pPrint();
-        
+      if (e==undefined)
+        this.list.at(i)["emoji"] = this.getEmoji()
+      else  
+{        this.list.at(i)["emoji"] = e
+
+}    },
+    getEmoji() {
+
+      let l = this.emoji.random({n:1, skintones:false, gender:false, nogroup:"flags,symbols"})
+
+      return l[0];
+      
+    },
+
+    regenerateAll(){
+      this.off = Math.floor(Math.random()*this.emoji.len)
+
+      let emojis = this.emoji.list({n:this.list.length, skintones:false, gender:false, nogroup:"flags,symbols", offset:this.off})
+      console.log(emojis)
+      // eslint-disable-next-line
+      emojis.forEach((element, index) => {
+        console.log(element+index)
+        this.setEmoji({i: index, e: element})
+      })
     },
 
     format(date) {
@@ -194,7 +206,7 @@ export default {
             </td>
 
             <td class="p-2">
-              <button class="btn btn-ghost px-1" @click="getEmoji(index)">
+              <button class="btn btn-ghost px-1" @click="setEmoji({i: index})">
                 ♻️
               </button>
               <!--<button class="btn btn-ghost" @click="getEmoji(index)">✏️</button>-->
@@ -223,8 +235,7 @@ export default {
       >
     </div>
 
-    <!--INPUT CARDS       modelType="EEE d/M"
--->
+    <!--INPUT CARDS -->
 
     <Datepicker
       v-model="datelist"
@@ -285,6 +296,8 @@ export default {
           class="input input-bordered input-ghost w-full"
           v-on:change="pPrint()"
         />
+
+        <button v-if="this.list.length > 0" class="btn btn-primary btn-outline my-5" @click="regenerateAll()">♻️ Regenerate all emoji</button>
         
     <div v-if="this.list.length > 0" class="card bg-base-200 mt-5">
       <div class="card-body">

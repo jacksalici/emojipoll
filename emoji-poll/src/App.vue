@@ -2,14 +2,10 @@
   <div
     class="container mx-auto px-4 py-4 sm:px-6 xl:px-12 max-w-3xl items-center justify-center space-y-6 text-center"
   >
-    <div class="alert alert-warning flex" v-if="!hideWipBanner">
-      <div class="my-0 grid">
-        {{ $t("wip") }}
-      </div>
-      <div class="mt-0 grid">
-        <button class="btn btn-sm" @click="wipBanner">{{ $t("ok") }}</button>
-      </div>
-    </div>
+    <p class="text-accent" v-if="!hideWipBanner">
+        {{ $t("wip") }}  <button class="btn btn-accent btn-outline btn-xs mr-3" @click="wipBanner">{{ $t("ok") }}</button>
+      </p>
+      
 
     <div class="navbar bg-base-200 rounded-3xl">
       <div class="navbar-start">
