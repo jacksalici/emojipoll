@@ -3,9 +3,8 @@
     class="container mx-auto px-4 py-4 sm:px-6 xl:px-12 max-w-3xl items-center justify-center space-y-6 text-center"
   >
     <p class="text-accent" v-if="!hideWipBanner">
-        {{ $t("wip") }}  
-      </p>
-      
+      {{ $t("wip") }}
+    </p>
 
     <div class="navbar bg-base-200 rounded-3xl">
       <div class="navbar-start">
@@ -30,9 +29,9 @@
             tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p-2 shadow-xl bg-base-100 rounded-box w-52"
           >
-          <li class="menu-title">
-    <span>Core</span>
-  </li>
+            <li class="menu-title">
+              <span>CORE</span>
+            </li>
             <li>
               <a href="/">{{ $t("menu.generator") }}</a>
             </li>
@@ -40,8 +39,8 @@
               <a href="/calc">{{ $t("menu.calc") }}</a>
             </li>
             <li class="menu-title">
-    <span>Nerd</span>
-  </li>
+              <span>NERD</span>
+            </li>
             <li>
               <a href="/about">{{ $t("menu.about") }}</a>
             </li>
@@ -49,16 +48,36 @@
               <a href="/tool">{{ $t("menu.tool") }}</a>
             </li>
             <li class="menu-title">
-    <span>Locale</span>
-  </li>
+              <span>LOCALE</span>
+            </li>
             <li tabindex="0">
               <span>{{ $t("menu.lang") }}</span>
               <ul class="bg-base-100 shadow-xl">
-                <li><button class="btn btn-ghost btn-sm" @click="lang('en')">🇺🇸</button></li>
-                <li><button class="btn btn-ghost btn-sm" @click="lang('it')">🇮🇹</button></li>
-                <li><button class="btn btn-ghost btn-sm" @click="lang('fr')">🇫🇷</button></li>
-                <li><button class="btn btn-ghost btn-sm" @click="lang('es')">🇪🇸</button></li>
-                <li><button class="btn btn-ghost btn-sm" @click="lang('de')">🇩🇪</button></li>
+                <li>
+                  <button class="btn btn-ghost btn-sm" @click="lang('en')">
+                    🇺🇸
+                  </button>
+                </li>
+                <li>
+                  <button class="btn btn-ghost btn-sm" @click="lang('it')">
+                    🇮🇹
+                  </button>
+                </li>
+                <li>
+                  <button class="btn btn-ghost btn-sm" @click="lang('fr')">
+                    🇫🇷
+                  </button>
+                </li>
+                <li>
+                  <button class="btn btn-ghost btn-sm" @click="lang('es')">
+                    🇪🇸
+                  </button>
+                </li>
+                <li>
+                  <button class="btn btn-ghost btn-sm" @click="lang('de')">
+                    🇩🇪
+                  </button>
+                </li>
               </ul>
             </li>
           </ul>
@@ -113,7 +132,7 @@ const routes = {
   "/": PollCore,
   "/calc": AppAnswers,
   "/about": AboutPage,
-  "/tool": ToolBox
+  "/tool": ToolBox,
 };
 
 export default {
@@ -143,11 +162,10 @@ export default {
       sessionStorage.setItem("emojipoll-wip", true);
       this.hideWipBanner = true;
     },
-    lang(lang){
-      sessionStorage.setItem("lang", lang)
-      this.$i18n.locale = lang
-
-    }
+    lang(lang) {
+      sessionStorage.setItem("lang", lang);
+      this.$i18n.locale = lang;
+    },
   },
 };
 </script>
