@@ -4,7 +4,7 @@ import SettingsComponent from './../components/Settings.vue'
 export default {
   name: 'ToolBox',
     components: { SettingsComponent },
-
+  
   data() {
     return {
       list: ""
@@ -28,8 +28,11 @@ export default {
         >
   </p>
 
-  {{list}}
   
+  <div class="mockup-code bg-base-200 text-primary-content text-left">
+  <pre class="select-all"><code>{{list}}</code></pre>
+</div>
+
       <SettingsComponent v-model="list"/>
    
 </template>

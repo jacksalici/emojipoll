@@ -18,6 +18,8 @@ export default {
   },
   mounted() {
     this.emoji = require("emoji-random-list");
+
+    
   },
   data() {
     return {
@@ -244,7 +246,7 @@ export default {
     </table>
 
     <!--INPUT TAB-->
-    <div v-if="mode == 0" class="mt-5">
+    <div v-if="mode == 0">
     <button @click="togglePollType('date')" class="btn btn-primary m-2">{{ $t("core.mode.date") }}</button>
     <button @click="togglePollType('text')" class="btn btn-primary m-2">{{ $t("core.mode.option") }}</button>
     </div>

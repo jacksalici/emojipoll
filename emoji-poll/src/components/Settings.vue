@@ -6,6 +6,7 @@ export default {
   emits: ["update:modelValue"],
   mounted() {
     this.emoji = require("emoji-random-list");
+    this.setEmoji();
   },
   data() {
     return {
@@ -19,6 +20,7 @@ export default {
       random: true,
       genders: false,
       maxversion: 14,
+      nerdness: 0,
       search: "",
       offset: "",
       groups: [true, true, true, true, true, true, true, true, false, false],
@@ -43,6 +45,13 @@ export default {
     },
     getEmoji() {
       let gs = "";
+      if(this.nerdness==2){
+        this.v=true
+      } else {
+        this.v=false
+      }
+
+
       this.groupsOptions.forEach((element, index) => {
         if (this.groups.at(index))
           gs +=
@@ -60,7 +69,16 @@ export default {
         noduplicates: this.noduplicates,
         maxversion: this.maxversion,
       });
+      
       console.log(l);
+
+      if (this.nerdness == 0){
+        let s = ""
+        l.forEach(element => {
+            s+=element
+        })
+        return s;
+      }
       return l;
     },
   },
@@ -68,22 +86,25 @@ export default {
 </script>
 
 <template>
-  <p class="text-xl font-bold">Settings</p>
-  <button class="btn btn-primary" v-on:click="setEmoji()">Regenerate</button>
+<div class="card bg-base-200">
+    <div class="card-body text-center">
+
+  <p class="card-title font-bold m-auto">Settings</p>
+  <button class="btn btn-primary my-5" v-on:click="setEmoji()">Regenerate</button>
 
   <p class="text-lg">Number of emoji</p>
   <div class="flex">
     <input
       type="range"
       min="1"
-      max="100"
+      max="20"
       class="range range-primary my-auto mr-5"
       v-model="n"
       v-on:change="setEmoji()"
     />
     <input
       type="text"
-      class="input input-bordered w-1/6 max-w-xs"
+      class="input input-bordered w-1/5 max-w-xs"
       v-model="n"
       v-on:change="setEmoji()"
     />
@@ -139,27 +160,17 @@ export default {
     </label>
   </div>
 
-  <div class="form-control">
-    <label class="label cursor-pointer">
-      <span class="label-text">Verbose </span>
-      <input
-        type="checkbox"
-        class="toggle toggle-primary"
-        v-model="v"
-        v-on:change="setEmoji()"
-      />
-    </label>
-  </div>
+
 
   <p class="text-lg">Allowed groups of emoji</p>
 
   <div
     v-for="(opt, ind) in groupsOptions"
     v-bind:key="ind"
-    class="m-0 p-0 m-auto"
+    class="mx-0 space-y-0"
   >
-    <label class="label cursor-pointer my-0">
-      <span class="label-text my-0">{{ opt }}</span>
+    <label class="label cursor-pointer my-0 py-1">
+      <span class="label-text">{{ opt }}</span>
       <input
         type="checkbox"
         v-model="groups[ind]"
@@ -168,5 +179,18 @@ export default {
       />
     </label>
   </div>
+
+
+      <p class="text-lg">Nerdness</p>
+
+  <input type="range" min="0" max="2" v-model="nerdness" class="range range-primary" step="1"  v-on:change="setEmoji()"/>
+<div class="w-full flex justify-between text-xs px-2 mt-0">
+  <span>|</span>
+  <span>|</span>
+  <span>|</span>
+  
+</div>
+</div>
+</div>
 </template>
 

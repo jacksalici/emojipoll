@@ -47,7 +47,7 @@
     "calc": "Analizador de respuestas",
     "generator": "Generador de copia de encuestas basado en emoji."
   },
-  "wip": "La aplicación todavía está en progreso, pueden ocurrir problemas.",
+  "wip": "🧑‍💻 La aplicación aún está en proceso.",
   "settings": {
     "regenerate": "♻️ Regenerar todos los emoji",
     "settings": "⚙️ Configuración (Pronto disponible)"

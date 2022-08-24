@@ -3,7 +3,7 @@
     class="container mx-auto px-4 py-4 sm:px-6 xl:px-12 max-w-3xl items-center justify-center space-y-6 text-center"
   >
     <p class="text-accent" v-if="!hideWipBanner">
-        {{ $t("wip") }}  <button class="btn btn-accent btn-outline btn-xs mr-3" @click="wipBanner">{{ $t("ok") }}</button>
+        {{ $t("wip") }}  
       </p>
       
 
