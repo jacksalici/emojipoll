@@ -10,8 +10,8 @@ export default {
   data() {
     return {
       emoji: "",
-      n: 5,
       list: "👉🕹",
+      s : {n: 5,
       skintones: false,
       v: false,
       noduplicates: true,
@@ -22,7 +22,7 @@ export default {
       nerdness: 0,
       search: "",
       offset: 0,
-      groups: [true, true, true, true, true, true, true, false, false],
+      groups: [true, true, true, true, true, true, true, false, false],},
       groupsOptions: [
         "Smileys & Emotion",
         "People & Body",
@@ -37,19 +37,23 @@ export default {
     };
   },
   methods: {
+    saveSettings(){
+
+        window.localStorage.setItem()
+    },
     resetSettings(){
-      this.n= 5,
-      this.skintones= false,
-      this.v= false,
-      this.noduplicates= true,
-      this.allstatus= false,
-      this.random= true,
-      this.genders= false,
-      this.maxversion= 14,
-      this.nerdness= 0,
-      this.search= "",
-      this.offset= 0,
-      this.groups= [true, true, true, true, true, true, true, false, false],
+      this.s['n']= 5,
+      this.s['skintones']= false,
+      this.s['v']= false,
+      this.s['noduplicates']= true,
+      this.s['allstatus']= false,
+      this.s['random']= true,
+      this.s['genders']= false,
+      this.s['maxversion']= 14,
+      this.s['nerdness']= 0,
+      this.s['search']= "",
+      this.s['offset']= 0,
+      this.s['groups']= [true, true, true, true, true, true, true, false, false],
       this.setEmoji()
     },
     setEmoji() {
@@ -57,16 +61,16 @@ export default {
       this.$emit("update:modelValue", this.list);
     },
     getEmoji() {
-      console.log(this.groups);
+      console.log(this.s['groups']);
       let gs = "";
-      if (this.nerdness == 2) {
-        this.v = true;
+      if (this.s['nerdness'] == 2) {
+        this.s['v'] = true;
       } else {
-        this.v = false;
+        this.s['v'] = false;
       }
 
       this.groupsOptions.forEach((element, index) => {
-        if (this.groups.at(index))
+        if (this.s['groups'].at(index))
           gs +=
             String(element.toLowerCase())
               .replace("-", " ")
@@ -74,42 +78,42 @@ export default {
       });
       let l;
 
-      if (this.random) {
+      if (this.s['random']) {
         l = this.emoji.random({
-          n: this.n,
-          skintones: this.skintones,
-          genders: this.genders,
+          n: this.s['n'],
+          skintones: this.s['skintones'],
+          genders: this.s['genders'],
           group: gs,
-          v: this.v,
-          allstatus: this.allstatus,
-          noduplicates: this.noduplicates,
-          maxversion: this.maxversion,
-          search: this.search
-        });
+          v: this.s['v'],
+          allstatus: this.s['allstatus'],
+          noduplicates: this.s['noduplicates'],
+          maxversion: this.s['maxversion'],
+          search: this.s['search']
+        })
       } else {
         l = this.emoji.list({
-          n: this.n,
-          skintones: this.skintones,
-          genders: this.genders,
+          n: this.s['n'],
+          skintones: this.s['skintones'],
+          genders: this.s['genders'],
           group: gs,
-          v: this.v,
-          allstatus: this.allstatus,
-          noduplicates: this.noduplicates,
-          maxversion: this.maxversion,
-          offset: this.offset,
-          search: this.search
+          v: this.s['v'],
+          allstatus: this.s['allstatus'],
+          noduplicates: this.s['noduplicates'],
+          maxversion: this.s['maxversion'],
+          offset: this.s['offset'],
+          search: this.s['search']
 
         });
       }
 
       console.log(l);
 
-      if (this.nerdness == 0) {
-        let s = "";
+      if (this.s['nerdness'] == 0) {
+        let sa = "";
         l.forEach((element) => {
-          s += element;
+          sa += element;
         });
-        return s;
+        return sa;
       }
       return l;
     },
@@ -131,7 +135,7 @@ export default {
           <input
             type="checkbox"
             class="toggle toggle-primary"
-            v-model="random"
+            v-model="s['random']"
             v-on:change="setEmoji()"
           />
         </label>
@@ -144,31 +148,31 @@ export default {
           min="1"
           max="20"
           class="range range-primary my-auto mr-2"
-          v-model="n"
+          v-model="s['n']"
           v-on:change="setEmoji()"
         />
         <input
           type="text"
           class="input input-bordered w-1/4 p-2 max-w-xs"
-          v-model="n"
+          v-model="s['n']"
           @input="setEmoji()"
         />
       </div>
 
-      <p v-if="random == false" class="text-lg">Offset</p>
-      <div class="flex" v-if="random == false">
+      <p v-if="s['random'] == false" class="text-lg">Offset</p>
+      <div class="flex" v-if="s['random'] == false">
         <input
           type="range"
           min="1"
           max="5000"
           class="range range-primary my-auto mr-2"
-          v-model="offset"
+          v-model="s['offset']"
           v-on:change="setEmoji()"
         />
         <input
           type="text"
           class="input input-ghost p-0 w-1/4 max-w-xs"
-          v-model="offset"
+          v-model="s['offset']"
           @input="setEmoji()"
         />
       </div>
@@ -181,7 +185,7 @@ export default {
           <input
             type="checkbox"
             class="toggle toggle-primary"
-            v-model="skintones"
+            v-model="s['skintones']"
             v-on:change="setEmoji()"
           />
         </label>
@@ -193,7 +197,7 @@ export default {
           <input
             type="checkbox"
             class="toggle toggle-primary"
-            v-model="noduplicates"
+            v-model="s['noduplicates']"
             v-on:change="setEmoji()"
           />
         </label>
@@ -205,7 +209,7 @@ export default {
           <input
             type="checkbox"
             class="toggle toggle-primary"
-            v-model="allstatus"
+            v-model="s['allstatus']"
             v-on:change="setEmoji()"
           />
         </label>
@@ -217,7 +221,7 @@ export default {
           <input
           type="text"
           class="input input-bordered input-xs w-1/5 max-w-xs"
-          v-model="maxversion"
+          v-model="s['maxversion']"
           @input="setEmoji()"
         />
         </label>
@@ -229,7 +233,7 @@ export default {
           <input
           type="text"
           class="input input-bordered input-sm w-1/3 max-w-xs"
-          v-model="search"
+          v-model="s['search']"
           @input="setEmoji()"
         />
         </label>
@@ -246,7 +250,7 @@ export default {
           <span class="label-text">{{ opt }}</span>
           <input
             type="checkbox"
-            v-model="groups[ind]"
+            v-model="s['groups'][ind]"
             v-on:change="setEmoji()"
             class="checkbox my-0"
           />
@@ -257,7 +261,7 @@ export default {
         <a
           class="link"
           @click="
-            groups.fill(false);
+            s['groups'].fill(false);
             setEmoji();
           "
           >None</a
@@ -266,7 +270,7 @@ export default {
         <a
           class="link"
           @click="
-            groups.fill(true);
+            s['groups'].fill(true);
             setEmoji();
           "
           >All</a
@@ -279,7 +283,7 @@ export default {
         type="range"
         min="0"
         max="2"
-        v-model="nerdness"
+        v-model="s['nerdness']"
         class="range range-primary"
         step="1"
         v-on:change="setEmoji()"
