@@ -1,11 +1,9 @@
 <script>
-//import VueMultiselect from 'vue-multiselect'
 
 export default {
   name: "SettingComponent",
   props: ["modelValue"],
   emits: ["update:modelValue"],
-  // components: { VueMultiselect },
   mounted() {
     this.emoji = require("emoji-random-list");
   },
@@ -70,8 +68,9 @@ export default {
 </script>
 
 <template>
-  <!--<button class="btn btn-primary" v-on:click="setEmoji()">GENERATE EMOJI</button>-->
   <p class="text-xl font-bold">Settings</p>
+  <button class="btn btn-primary" v-on:click="setEmoji()">Regenerate</button>
+
   <p class="text-lg">Number of emoji</p>
   <div class="flex">
     <input
@@ -89,16 +88,6 @@ export default {
       v-on:change="setEmoji()"
     />
   </div>
-
-  <!--<VueMultiselect v-model="groups" :options="groupsOptions" @select="setEmoji()"
-      :multiple="true"
-    :close-on-select="false"
-    :clear-on-select="false"
-    :preserve-search="true"
-    placeholder="Pick some"
-    :preselect-first="true"
-      
-      ></VueMultiselect>-->
 
   <p class="text-lg">Other settings</p>
 
@@ -181,4 +170,3 @@ export default {
   </div>
 </template>
 
-<style src="vue-multiselect/dist/vue-multiselect.css"></style>
