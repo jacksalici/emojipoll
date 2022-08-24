@@ -30,15 +30,27 @@
             tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p-2 shadow-xl bg-base-100 rounded-box w-52"
           >
+          <li class="menu-title">
+    <span>Core</span>
+  </li>
             <li>
               <a href="/">{{ $t("menu.generator") }}</a>
             </li>
             <li>
               <a href="/calc">{{ $t("menu.calc") }}</a>
             </li>
+            <li class="menu-title">
+    <span>Nerd</span>
+  </li>
             <li>
               <a href="/about">{{ $t("menu.about") }}</a>
             </li>
+            <li>
+              <a href="/tool">{{ $t("menu.tool") }}</a>
+            </li>
+            <li class="menu-title">
+    <span>Locale</span>
+  </li>
             <li tabindex="0">
               <span>{{ $t("menu.lang") }}</span>
               <ul class="bg-base-100 shadow-xl">

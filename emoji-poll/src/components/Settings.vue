@@ -1,5 +1,6 @@
 <script>
 
+
 export default {
   name: "SettingComponent",
   props: ["modelValue"],
@@ -39,11 +40,13 @@ export default {
     };
   },
   methods: {
+
     setEmoji() {
       this.list = this.getEmoji();
       this.$emit("update:modelValue", this.list);
     },
     getEmoji() {
+    console.log(this.groups)
       let gs = "";
       if(this.nerdness==2){
         this.v=true
@@ -92,6 +95,18 @@ export default {
   <p class="card-title font-bold m-auto">Settings</p>
   <button class="btn btn-primary my-5" v-on:click="setEmoji()">Regenerate</button>
 
+    <div class="form-control">
+    <label class="label cursor-pointer">
+      <span class="label-text">Randomness </span>
+      <input
+        type="checkbox"
+        class="toggle toggle-primary"
+        v-model="random"
+        v-on:change="setEmoji()"
+      />
+    </label>
+  </div>
+  
   <p class="text-lg">Number of emoji</p>
   <div class="flex">
     <input
@@ -106,6 +121,24 @@ export default {
       type="text"
       class="input input-bordered w-1/5 max-w-xs"
       v-model="n"
+      v-on:change="setEmoji()"
+    />
+  </div>
+
+  <p v-if="random==false" class="text-lg">Offset</p>
+  <div class="flex" v-if="random==false">
+    <input
+      type="range"
+      min="1"
+      max="20"
+      class="range range-primary my-auto mr-5"
+      v-model="offset"
+      v-on:change="setEmoji()"
+    />
+    <input
+      type="text"
+      class="input input-bordered w-1/5 max-w-xs"
+      v-model="offset"
       v-on:change="setEmoji()"
     />
   </div>
@@ -136,17 +169,7 @@ export default {
     </label>
   </div>
 
-  <div class="form-control">
-    <label class="label cursor-pointer">
-      <span class="label-text">Randomness </span>
-      <input
-        type="checkbox"
-        class="toggle toggle-primary"
-        v-model="random"
-        v-on:change="setEmoji()"
-      />
-    </label>
-  </div>
+  
 
   <div class="form-control">
     <label class="label cursor-pointer">
@@ -180,6 +203,12 @@ export default {
     </label>
   </div>
 
+        <p class="text-sm">
+            <a class="link" @click="groups.fill(false); setEmoji()">None</a>
+            |
+             <a class="link" @click="groups.fill(true); setEmoji()">All</a>
+        </p>
+       
 
       <p class="text-lg">Nerdness</p>
 
