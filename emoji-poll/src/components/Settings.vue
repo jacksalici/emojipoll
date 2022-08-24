@@ -1,59 +1,67 @@
 <script>
-import VueMultiselect from 'vue-multiselect'
+//import VueMultiselect from 'vue-multiselect'
 
 export default {
   name: 'SettingComponent',
-    components: { VueMultiselect },
-
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
+   // components: { VueMultiselect },
+  mounted() {
+    this.emoji = require("emoji-random-list");
+  },
   data() {
     return {
+      emoji: "",
       n:5,
-      emoji: "👉🕹",
+      list: "👉🕹",
       skintones: false,
       v: false,
       noduplicates: true,
       allstatus: false,
       random: true,
-      groups: ['Smileys & Emotion', 'People & Body', 'Component', 'Animals & Nature', 'Food & Drink', 'Travel & Places', 'Activities', 'Objects'],
+      genders: false,
+      groups: [true, true, true, true, true, true, true, true, false, false],
       groupsOptions: ['Smileys & Emotion', 'People & Body', 'Component', 'Animals & Nature', 'Food & Drink', 'Travel & Places', 'Activities', 'Objects', 'Symbols', 'Flags']
     }
   },
   methods: {
-    getEmoji() {
-     let g = ""
-     this.groups.forEach(element => {
-      g+=element.replace(/\x20+/g, '-').replace(/&/g, 'and')+','
-     });
-     fetch(
-
-        
-        "https://emoji.deta.dev/random?n="+this.n+"&skintones=False&group="+g+"&maxversion=14"
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          this.emoji=data
-        });
+    setEmoji() {
+      this.list=this.getEmoji()
+      this.$emit("update:modelValue", this.list)
     },
-  }
+    getEmoji() {
+
+      let gs = ""
+      this.groupsOptions.forEach((element, index)=>{
+        if(this.groups.at(index))
+            gs+=String(element.toLowerCase()).replace("-", " ").replace("and", "&") + ","
+      })
+      let l = this.emoji.random({
+        n: this.n,
+        skintones: this.skintones,
+        genders: this.genders,
+        group: gs,
+        v: this.v,
+        allstatus: this.allstatus,
+        noduplicates: this.noduplicates,
+      })
+      console.log(l)
+      return l
+   }
+}
 }
 
 </script>
 
 <template>
 
-
-  
-    
-      <div class="mockup-code">
-        <pre>{{emoji}}</pre>
-      </div>
-
-      <!--<button class="btn btn-primary" v-on:click="getEmoji()">GENERATE EMOJI</button>-->
-      
-      <input type="range" min="1" max="100" class="range range-primary" v-model="n" v-on:change="getEmoji()"/>
+      <!--<button class="btn btn-primary" v-on:click="setEmoji()">GENERATE EMOJI</button>-->
+      <p class="text-xl font-bold">Settings</p>
+      <p class="text-lg">Number of emoji</p>
+      <input type="range" min="1" max="100" class="range range-primary" v-model="n" v-on:change="setEmoji()" />
       {{n}}
 
-      <VueMultiselect v-model="groups" :options="groupsOptions" @select="getEmoji()"
+      <!--<VueMultiselect v-model="groups" :options="groupsOptions" @select="setEmoji()"
       :multiple="true"
     :close-on-select="false"
     :clear-on-select="false"
@@ -61,40 +69,49 @@ export default {
     placeholder="Pick some"
     :preselect-first="true"
       
-      ></VueMultiselect>
+      ></VueMultiselect>-->
+              <p class="text-lg">Allowed groups of emoji</p>
+
+      <div v-for="(opt, ind) in groupsOptions" v-bind:key="ind" class="m-0 p-0 m-auto">
+        <label class="label cursor-pointer my-0">
+        <span class="label-text my-0">{{opt}}</span> 
+        <input type="checkbox" v-model="groups[ind]" v-on:change="setEmoji()" class="checkbox my-0" />
+        </label>
+        </div>
+                  <p class="text-lg">Other settings</p>
 
       <div class="form-control">
   <label class="label cursor-pointer">
     <span class="label-text">Skintones </span>
-    <input type="checkbox" class="toggle toggle-primary" v-model="skintones" v-on:change="getEmoji()"/>
+    <input type="checkbox" class="toggle toggle-primary" v-model="skintones" v-on:change="setEmoji()"/>
   </label>
 </div>
 
 <div class="form-control">
   <label class="label cursor-pointer">
     <span class="label-text">No Duplicates </span>
-    <input type="checkbox" class="toggle toggle-primary" v-model="noduplicates" v-on:change="getEmoji()"/>
+    <input type="checkbox" class="toggle toggle-primary" v-model="noduplicates" v-on:change="setEmoji()"/>
   </label>
 </div>
 
 <div class="form-control">
   <label class="label cursor-pointer">
     <span class="label-text">Randomness </span>
-    <input type="checkbox" class="toggle toggle-primary" v-model="random" v-on:change="getEmoji()"/>
+    <input type="checkbox" class="toggle toggle-primary" v-model="random" v-on:change="setEmoji()"/>
   </label>
 </div>
     
     <div class="form-control">
   <label class="label cursor-pointer">
     <span class="label-text">All Status </span>
-    <input type="checkbox" class="toggle toggle-primary" v-model="allstatus" v-on:change="getEmoji()"/>
+    <input type="checkbox" class="toggle toggle-primary" v-model="allstatus" v-on:change="setEmoji()"/>
   </label>
 </div>
 
 <div class="form-control">
   <label class="label cursor-pointer">
     <span class="label-text">Verbose </span>
-    <input type="checkbox" class="toggle toggle-primary" v-model="v" v-on:change="getEmoji()"/>
+    <input type="checkbox" class="toggle toggle-primary" v-model="v" v-on:change="setEmoji()"/>
   </label>
 </div>
  

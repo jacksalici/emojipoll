@@ -7,7 +7,7 @@ export default {
 
   data() {
     return {
-      
+      list: ""
     }
   },
   methods: {
@@ -28,9 +28,10 @@ export default {
         >
   </p>
 
-  <SettingsComponent/>
-
+  {{list}}
   
+      <SettingsComponent v-model="list"/>
+   
 </template>
 
 
