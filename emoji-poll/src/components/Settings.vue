@@ -6,23 +6,29 @@ export default {
   mounted() {
     this.emoji = require("emoji-random-list");
     this.setEmoji();
+
+    if (window.localStorage.getItem("saved-settings"))
+        this.recoverDisabled = false
   },
   data() {
     return {
       emoji: "",
       list: "👉🕹",
-      s : {n: 5,
-      skintones: false,
-      v: false,
-      noduplicates: true,
-      allstatus: false,
-      random: true,
-      genders: false,
-      maxversion: 14,
-      nerdness: 0,
-      search: "",
-      offset: 0,
-      groups: [true, true, true, true, true, true, true, false, false],},
+      recoverDisabled: true,
+      s: {
+        n: 5,
+        skintones: false,
+        v: false,
+        noduplicates: true,
+        allstatus: false,
+        random: true,
+        genders: false,
+        maxversion: 14,
+        nerdness: 0,
+        search: "",
+        offset: 0,
+        groups: [true, true, true, true, true, true, true, false, false],
+      },
       groupsOptions: [
         "Smileys & Emotion",
         "People & Body",
@@ -37,40 +43,57 @@ export default {
     };
   },
   methods: {
-    saveSettings(){
-
-        window.localStorage.setItem()
+    recoverSettings(){
+       let t = window.localStorage.getItem("saved-settings")
+        console.log(t)
+       if (t)
+        this.s = JSON.parse(t)
     },
-    resetSettings(){
-      this.s['n']= 5,
-      this.s['skintones']= false,
-      this.s['v']= false,
-      this.s['noduplicates']= true,
-      this.s['allstatus']= false,
-      this.s['random']= true,
-      this.s['genders']= false,
-      this.s['maxversion']= 14,
-      this.s['nerdness']= 0,
-      this.s['search']= "",
-      this.s['offset']= 0,
-      this.s['groups']= [true, true, true, true, true, true, true, false, false],
-      this.setEmoji()
+    saveSettings() {
+      window.localStorage.setItem("saved-settings", JSON.stringify(this.s))
+      this.recoverDisabled = false
+
+    },
+    resetSettings() {
+      (this.s["n"] = 5),
+        (this.s["skintones"] = false),
+        (this.s["v"] = false),
+        (this.s["noduplicates"] = true),
+        (this.s["allstatus"] = false),
+        (this.s["random"] = true),
+        (this.s["genders"] = false),
+        (this.s["maxversion"] = 14),
+        (this.s["nerdness"] = 0),
+        (this.s["search"] = ""),
+        (this.s["offset"] = 0),
+        (this.s["groups"] = [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          false,
+          false,
+        ]),
+        this.setEmoji();
     },
     setEmoji() {
       this.list = this.getEmoji();
       this.$emit("update:modelValue", this.list);
     },
     getEmoji() {
-      console.log(this.s['groups']);
+      console.log(this.s["groups"]);
       let gs = "";
-      if (this.s['nerdness'] == 2) {
-        this.s['v'] = true;
+      if (this.s["nerdness"] == 2) {
+        this.s["v"] = true;
       } else {
-        this.s['v'] = false;
+        this.s["v"] = false;
       }
 
       this.groupsOptions.forEach((element, index) => {
-        if (this.s['groups'].at(index))
+        if (this.s["groups"].at(index))
           gs +=
             String(element.toLowerCase())
               .replace("-", " ")
@@ -78,37 +101,36 @@ export default {
       });
       let l;
 
-      if (this.s['random']) {
+      if (this.s["random"]) {
         l = this.emoji.random({
-          n: this.s['n'],
-          skintones: this.s['skintones'],
-          genders: this.s['genders'],
+          n: this.s["n"],
+          skintones: this.s["skintones"],
+          genders: this.s["genders"],
           group: gs,
-          v: this.s['v'],
-          allstatus: this.s['allstatus'],
-          noduplicates: this.s['noduplicates'],
-          maxversion: this.s['maxversion'],
-          search: this.s['search']
-        })
+          v: this.s["v"],
+          allstatus: this.s["allstatus"],
+          noduplicates: this.s["noduplicates"],
+          maxversion: this.s["maxversion"],
+          search: this.s["search"],
+        });
       } else {
         l = this.emoji.list({
-          n: this.s['n'],
-          skintones: this.s['skintones'],
-          genders: this.s['genders'],
+          n: this.s["n"],
+          skintones: this.s["skintones"],
+          genders: this.s["genders"],
           group: gs,
-          v: this.s['v'],
-          allstatus: this.s['allstatus'],
-          noduplicates: this.s['noduplicates'],
-          maxversion: this.s['maxversion'],
-          offset: this.s['offset'],
-          search: this.s['search']
-
+          v: this.s["v"],
+          allstatus: this.s["allstatus"],
+          noduplicates: this.s["noduplicates"],
+          maxversion: this.s["maxversion"],
+          offset: this.s["offset"],
+          search: this.s["search"],
         });
       }
 
       console.log(l);
 
-      if (this.s['nerdness'] == 0) {
+      if (this.s["nerdness"] == 0) {
         let sa = "";
         l.forEach((element) => {
           sa += element;
@@ -125,7 +147,7 @@ export default {
   <div class="card bg-base-200">
     <div class="card-body text-center">
       <p class="card-title font-bold m-auto">Settings</p>
-      <button class="btn btn-primary my-5" v-on:click="setEmoji()">
+      <button class="btn btn-primary mt-5" v-on:click="setEmoji()">
         Regenerate
       </button>
 
@@ -219,11 +241,11 @@ export default {
         <label class="label cursor-pointer">
           <span class="label-text">Max Emoji Version </span>
           <input
-          type="text"
-          class="input input-bordered input-xs w-1/5 max-w-xs"
-          v-model="s['maxversion']"
-          @input="setEmoji()"
-        />
+            type="text"
+            class="input input-bordered input-xs w-1/5 max-w-xs"
+            v-model="s['maxversion']"
+            @input="setEmoji()"
+          />
         </label>
       </div>
 
@@ -231,11 +253,11 @@ export default {
         <label class="label cursor-pointer">
           <span class="label-text">Search filter </span>
           <input
-          type="text"
-          class="input input-bordered input-sm w-1/3 max-w-xs"
-          v-model="s['search']"
-          @input="setEmoji()"
-        />
+            type="text"
+            class="input input-bordered input-sm w-1/3 max-w-xs"
+            v-model="s['search']"
+            @input="setEmoji()"
+          />
         </label>
       </div>
 
@@ -294,7 +316,16 @@ export default {
         <span>|</span>
       </div>
 
-    <button class="btn btn-primary my-5" v-on:click="resetSettings()">Reset Settings</button>
+      <button class="btn btn-primary mt-5" v-on:click="resetSettings()">
+        Reset Settings
+      </button>
+     
+            <button class="btn btn-primary btn-sm" v-on:click="saveSettings()">
+        Save Settings
+      </button>
+      <button class="btn btn-primary btn-sm" :class="{'disabled': !recoverDisabled}" v-on:click="recoverSettings()">
+        Recover Settings
+      </button>
 
     </div>
   </div>
