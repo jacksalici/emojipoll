@@ -185,6 +185,10 @@ export default {
     EmojiPoll📮🏄
   </h1>-->
 
+  <p v-if="this.list.length == 0" class=" max-w-screen-sm text-center">
+    <a class="link link-primary" href="/calc">{{ $t("core.calculate") }}</a>
+  </p>
+
   <h1 class="text-2xl font-bold">{{ $t("title.generator") }}</h1>
 
   <p v-if="this.list.length == 0" class="max-w-screen-sm text-center">

@@ -33,7 +33,8 @@
     "text": {
       "content": "Please answer to this message with the emoji that matches your choice:\n",
       "footer": "Generated with emojipoll.jacksalici.com"
-    }
+    },
+    "calculate": "Already made a poll? Calculate the result 📊"
   },
   "menu": {
     "about": "💁‍♂️ About",
