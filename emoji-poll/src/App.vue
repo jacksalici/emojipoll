@@ -95,11 +95,13 @@ import PollCore from "./components/Poll.vue";
 import AppAnswers from "./pages/Answers.vue";
 import NotFound from "./pages/NotFound.vue";
 import AboutPage from "./pages/AboutPage.vue";
+import ToolBox from "./pages/Tool.vue";
 
 const routes = {
   "/": PollCore,
   "/calc": AppAnswers,
   "/about": AboutPage,
+  "/tool": ToolBox
 };
 
 export default {

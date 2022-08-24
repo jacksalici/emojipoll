@@ -1,43 +1,38 @@
 <template>
-    
-     
-      <h1 class="text-2xl font-bold">  {{$t("title.calc")}}</h1>
-      <p
-   
-    class="max-w-screen-sm"
-  >
-  {{$t("content.calc")}}
-</p>
+  <h1 class="text-2xl font-bold">{{ $t("title.calc") }}</h1>
+  <p class="max-w-screen-sm">
+    {{ $t("content.calc") }}
+  </p>
 
-      <textarea
-        class="textarea textarea-primary w-full"
-        :placeholder='$t("calc.input")'
-        v-model="answer"
-        @input="count"
-      ></textarea>
+  <textarea
+    class="textarea textarea-primary w-full"
+    :placeholder="$t('calc.input')"
+    v-model="answer"
+    @input="count"
+  ></textarea>
 
-      <div v-if="emoji != ''" class="form-control w-full ">
-        <label class="label">
-          <span class="label-text"
-            >Please check below that all the poll's emoji had been parsed
-            correctly and separated by a comma. Correct them if necessary.</span
-          >
-        </label>
-        <input
-          type="text"
-          class="input input-bordered input-primary w-full"
-          v-model="emoji"
-          @input="talling()"
-        />
-      </div>
-
-      <div class="card bg-base-200 text-primary-content">
-        <div class="card-body" v-html="tally"></div>
-      </div>
-
-      <a role="button" class="btn btn-xs ptn-primary ml-0 self-start" href="/">
-        {{$t("back")}}</a
+  <div v-if="emoji != ''" class="form-control w-full">
+    <label class="label">
+      <span class="label-text"
+        >Please check below that all the poll's emoji had been parsed correctly
+        and separated by a comma. Correct them if necessary.</span
       >
+    </label>
+    <input
+      type="text"
+      class="input input-bordered input-primary w-full"
+      v-model="emoji"
+      @input="talling()"
+    />
+  </div>
+
+  <div class="card bg-base-200 text-primary-content">
+    <div class="card-body" v-html="tally"></div>
+  </div>
+
+  <a role="button" class="btn btn-xs ptn-primary ml-0 self-start" href="/">
+    {{ $t("back") }}</a
+  >
 </template>
 
 <script>
@@ -81,10 +76,10 @@ export default {
       items.sort(function (first, second) {
         return second[1] - first[1];
       });
-      console.log(items)
+      console.log(items);
       items.forEach((element) => {
-        let b = '2xl'
-      
+        let b = "2xl";
+
         this.tally += `
         <div>
         <div class="avatar placeholder">
@@ -97,11 +92,7 @@ export default {
         </div>
         
         
-        `
-        
-        
-        
-        
+        `;
       });
     },
   },
