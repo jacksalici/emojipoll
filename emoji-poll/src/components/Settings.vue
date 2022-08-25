@@ -2,7 +2,7 @@
 export default {
   name: "SettingComponent",
   props: {
-    modelValue: String,
+    modelValue: { default: "" },
     settingHidedList: { default: [] },
     np: { default: 10, type: Number },
   },
@@ -29,7 +29,7 @@ export default {
         random: true,
         genders: false,
         maxversion: 14,
-        nerdness: 0,
+        nerdness: 1,
         search: "",
         offset: 0,
         groups: [true, true, true, true, true, true, true, false, false],
