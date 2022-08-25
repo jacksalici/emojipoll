@@ -9,12 +9,15 @@
 import draggable from "vuedraggable";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
+import SettingsComponent from './../components/Settings.vue'
+
 
 export default {
   name: "PollCore",
   components: {
     draggable,
     Datepicker,
+    SettingsComponent
   },
   mounted() {
     this.emoji = require("emoji-random-list");
@@ -23,6 +26,7 @@ export default {
   },
   data() {
     return {
+      emojilist: [],
       list: [],
       title: "",
       task: "",
@@ -131,29 +135,15 @@ export default {
       this.pPrint();
     },
     getEmoji() {
-      let l = this.emoji.random({
-        n: 1,
-        skintones: false,
-        genders: false,
-        nogroup: "flags,symbols",
-      });
-
-      return l[0];
+      return this.$refs.settings.getEmoji(1)[0];
     },
 
     regenerateAll() {
       this.off = Math.floor(Math.random() * this.emoji.len);
-
-      let emojis = this.emoji.list({
-        n: this.list.length,
-        skintones: false,
-        genders: false,
-        nogroup: "flags,symbols",
-        offset: this.off,
-      });
-      console.log(emojis);
+      this.$refs.settings.setEmoji()
+      
       // eslint-disable-next-line
-      emojis.forEach((element, index) => {
+      this.emojilist.forEach((element, index) => {
         console.log(element + index);
         this.setEmoji({ i: index, e: element });
       });
@@ -179,14 +169,6 @@ export default {
 
 <template>
   <!--SUBHEADER-->
-
-  <!--<h1
-    v-if="this.list.length == 0"
-    class="text-4xl font-bold sm:text-5xl lg:text-6xl"
-  >
-    EmojiPoll📮🏄
-  </h1>-->
-
   <p v-if="this.list.length == 0" class=" max-w-screen-sm text-center">
     <a class="link link-primary" href="/calc">{{ $t("core.calculate") }}</a>
   </p>
@@ -333,12 +315,9 @@ export default {
     >
       {{$t("settings.regenerate")}}
     </button>
-     <button
-      v-if="this.list.length > 0"
-      class="btn btn-primary btn-disabled m-1"
-    >
-      {{$t("settings.settings")}}
-    </button>
+    
+    <label v-if="this.list.length > 0" for="my-modal-6" class="btn modal-button btn-primary  btn-outline m-1">{{$t("settings.settings")}}</label>
+
     </div>
 
     <div v-if="this.list.length > 0" class="card bg-base-200 mt-5">
@@ -406,9 +385,23 @@ export default {
       </div>
     </div>
   </div>
+
+<!--MODAL SETTING-->
+  <input type="checkbox" id="my-modal-6" class="modal-toggle " />
+<label class="modal modal-middle my-modal" for="my-modal-6">
+  <label class="modal-box w-4/5" for="">
+        <label for="my-modal-6" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+
+    <SettingsComponent ref="settings" v-model="emojilist" :np="list.length" settingHidedList="['n', 'nerdness', 'regenerate', 'allstatus', 'maxversion']" />
+  </label>
+</label>
 </template>
 
 <style>
+.my-modal {
+    background-color: #ffffff00 !important
+
+}
 .flip-list-move {
   transition: transform 0.5s;
 }

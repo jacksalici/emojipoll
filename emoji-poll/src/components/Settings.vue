@@ -86,7 +86,8 @@ export default {
       this.list = this.getEmoji();
       this.$emit("update:modelValue", this.list);
     },
-    getEmoji() {
+    getEmoji(customN) {
+      this.s["n"] = this.np
       if (this.s["n"] > 3000) {
         this.s["n"] = 3000;
       }
@@ -108,9 +109,11 @@ export default {
       });
       let l;
 
+      if (!customN)
+        customN = this.s["n"]
       if (this.s["random"]) {
         l = this.emoji.random({
-          n: this.s["n"],
+          n: customN,
           skintones: this.s["skintones"],
           genders: this.s["genders"],
           group: gs,
@@ -122,7 +125,7 @@ export default {
         });
       } else {
         l = this.emoji.list({
-          n: this.s["n"],
+          n:customN,
           skintones: this.s["skintones"],
           genders: this.s["genders"],
           group: gs,
@@ -151,12 +154,10 @@ export default {
 </script>
 
 <template>
-  <div class="card bg-base-200">
-    <div class="card-body text-center">
-      <p class="card-title font-bold m-auto">Settings</p>
+  
 
       <!--REGENERATE-->
-      <button class="btn btn-primary mt-5" v-on:click="setEmoji()">
+      <button class="btn btn-primary mt-5" v-if="!settingHidedList.includes('regenerate')" v-on:click="setEmoji()">
         Regenerate
       </button>
 
@@ -401,19 +402,18 @@ export default {
 
       <button
         v-if="!settingHidedList.includes('buttons')"
-        class="btn btn-primary btn-sm"
+        class="btn btn-primary btn-sm mt-2"
         v-on:click="saveSettings()"
       >
         Save Settings
       </button>
       <button
         v-if="!settingHidedList.includes('buttons')"
-        class="btn btn-primary btn-sm"
+        class="btn btn-primary btn-sm mt-2"
         :class="{ disabled: !recoverDisabled }"
         v-on:click="recoverSettings()"
       >
         Recover Settings
       </button>
-    </div>
-  </div>
+    
 </template>

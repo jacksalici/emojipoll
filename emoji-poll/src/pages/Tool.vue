@@ -32,8 +32,12 @@ export default {
   <div class="mockup-code bg-base-200 text-primary-content text-left">
   <pre class="select-all"><code>{{list}}</code></pre>
 </div>
-
+<div class="card bg-base-200">
+    <div class="card-body text-center">
+      <p class="card-title font-bold m-auto">Settings</p>
       <SettingsComponent v-model="list"/>
+    </div>
+  </div>
    
 </template>
 
