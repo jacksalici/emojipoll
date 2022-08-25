@@ -8,7 +8,7 @@ export default {
     this.setEmoji();
 
     if (window.localStorage.getItem("saved-settings"))
-        this.recoverDisabled = false
+      this.recoverDisabled = false;
   },
   data() {
     return {
@@ -43,16 +43,14 @@ export default {
     };
   },
   methods: {
-    recoverSettings(){
-       let t = window.localStorage.getItem("saved-settings")
-        console.log(t)
-       if (t)
-        this.s = JSON.parse(t)
+    recoverSettings() {
+      let t = window.localStorage.getItem("saved-settings");
+      console.log(t);
+      if (t) this.s = JSON.parse(t);
     },
     saveSettings() {
-      window.localStorage.setItem("saved-settings", JSON.stringify(this.s))
-      this.recoverDisabled = false
-
+      window.localStorage.setItem("saved-settings", JSON.stringify(this.s));
+      this.recoverDisabled = false;
     },
     resetSettings() {
       (this.s["n"] = 5),
@@ -84,7 +82,11 @@ export default {
       this.$emit("update:modelValue", this.list);
     },
     getEmoji() {
-      console.log(this.s["groups"]);
+      if (this.s["n"] > 3000) {
+        this.s["n"] = 3000;
+      }
+
+      console.log(this.s);
       let gs = "";
       if (this.s["nerdness"] == 2) {
         this.s["v"] = true;
@@ -164,21 +166,11 @@ export default {
       </div>
 
       <p class="text-lg">Number of emoji</p>
-      <div class="flex">
-        <input
-          type="range"
-          min="1"
-          max="20"
-          class="range range-primary my-auto mr-2"
-          v-model="s['n']"
-          v-on:change="setEmoji()"
-        />
-        <input
-          type="text"
-          class="input input-bordered w-1/4 p-2 max-w-xs"
-          v-model="s['n']"
-          @input="setEmoji()"
-        />
+      <div>
+        <div class="tooltip tooltip-open tooltip-left tooltip-primary" :data-tip="s['n']">
+          <button @click="s['n']++; setEmoji()" class="btn btn-sm btn-ghost">🔺</button>
+          <button @click="s['n']--; setEmoji()" class="btn btn-sm ml-1 btn-ghost">🔻</button>
+        </div>
       </div>
 
       <p v-if="s['random'] == false" class="text-lg">Offset</p>
@@ -186,13 +178,14 @@ export default {
         <input
           type="range"
           min="1"
-          max="5000"
+          max="2000"
           class="range range-primary my-auto mr-2"
           v-model="s['offset']"
           v-on:change="setEmoji()"
         />
         <input
-          type="text"
+          type="number"
+          min="1"
           class="input input-ghost p-0 w-1/4 max-w-xs"
           v-model="s['offset']"
           @input="setEmoji()"
@@ -227,6 +220,18 @@ export default {
 
       <div class="form-control">
         <label class="label cursor-pointer">
+          <span class="label-text">Genders </span>
+          <input
+            type="checkbox"
+            class="toggle toggle-primary"
+            v-model="s['genders']"
+            v-on:change="setEmoji()"
+          />
+        </label>
+      </div>
+
+      <div class="form-control">
+        <label class="label cursor-pointer">
           <span class="label-text">All Status </span>
           <input
             type="checkbox"
@@ -241,15 +246,17 @@ export default {
         <label class="label cursor-pointer">
           <span class="label-text">Max Emoji Version </span>
           <input
-            type="text"
-            class="input input-bordered input-xs w-1/5 max-w-xs"
+            type="range"
+            min="0"
+            max="15"
+            class="range range-primary range-xs my-auto mr-2 w-1/2 max-w-xs"
             v-model="s['maxversion']"
             @input="setEmoji()"
           />
         </label>
       </div>
 
-      <div class="form-control">
+      <!--<div class="form-control">
         <label class="label cursor-pointer">
           <span class="label-text">Search filter </span>
           <input
@@ -259,7 +266,7 @@ export default {
             @input="setEmoji()"
           />
         </label>
-      </div>
+      </div>-->
 
       <p class="text-lg">Allowed groups of emoji</p>
 
@@ -319,14 +326,17 @@ export default {
       <button class="btn btn-primary mt-5" v-on:click="resetSettings()">
         Reset Settings
       </button>
-     
-            <button class="btn btn-primary btn-sm" v-on:click="saveSettings()">
+
+      <button class="btn btn-primary btn-sm" v-on:click="saveSettings()">
         Save Settings
       </button>
-      <button class="btn btn-primary btn-sm" :class="{'disabled': !recoverDisabled}" v-on:click="recoverSettings()">
+      <button
+        class="btn btn-primary btn-sm"
+        :class="{ disabled: !recoverDisabled }"
+        v-on:click="recoverSettings()"
+      >
         Recover Settings
       </button>
-
     </div>
   </div>
 </template>
