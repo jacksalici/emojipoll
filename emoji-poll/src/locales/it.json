@@ -6,7 +6,7 @@
   },
   "content": {
     "calc": "Esegui il conteggio del sondaggio. È sufficiente incollare di seguito il testo di tutte le risposte dei tuoi amici",
-    "generator": "Crea il testo del tuo sondaggio! Basta inserire le scelte e condividere il testo generato con chi vuoi."
+    "generator": "Stanco dei sondaggi che ti rimandando a un link? Crea il testo del tuo sondaggio! Basta inserire le scelte e condividere il testo generato con chi vuoi."
   },
   "core": {
     "card": {
@@ -45,11 +45,11 @@
   "ok": "Ok",
   "title": {
     "calc": "Calcola le risposte",
-    "generator": "Generatore di testi per sondaggi basato su emoji."
+    "generator": "Genera sondaggi basati su emoji"
   },
   "wip": "🧑‍💻 L'app è ancora in lavorazione.",
   "settings": {
     "regenerate": "♻️ Rigenera tutte le emoji",
-    "settings": "⚙️ Impostazioni (presto disponibili)"
+    "settings": "⚙️ Impostazioni"
   }
 }

@@ -46,11 +46,12 @@
   "ok": "OK",
   "title": {
     "calc": "Answers parser",
-    "generator": "Emoji based polls copy generator."
+    "generator": "Generate emoji-based polls"
   },
   "wip": "🧑‍💻 The app is still work in progress.",
   "settings": {
     "regenerate": "♻️ Regenerate all emoji",
-    "settings": "⚙️ Settings (Soon Avaiable)"
-  }
+    "settings": "⚙️ Settings"
+  },
+  "close": "Close"
 }

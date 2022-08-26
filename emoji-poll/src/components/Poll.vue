@@ -9,20 +9,18 @@
 import draggable from "vuedraggable";
 import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
-import SettingsComponent from './../components/Settings.vue'
-
+import SettingsComponent from "./../components/Settings.vue";
 
 export default {
   name: "PollCore",
   components: {
     draggable,
     Datepicker,
-    SettingsComponent
+    SettingsComponent,
   },
   mounted() {
-    this.emoji = require("emoji-random-list");
-
-    
+    this.off = Math.floor(Math.random() * this.$refs.settings.getEmojiLen());
+    this.$refs.settings.s["offset"]=this.off
   },
   data() {
     return {
@@ -100,7 +98,7 @@ export default {
     addEntry(e) {
       const dict = {
         name: e,
-        emoji: this.getEmoji(),
+        emoji: this.getEmoji(this.list.length + 1 ),
       };
 
       this.list.push(dict);
@@ -126,32 +124,48 @@ export default {
       this.count--;
       this.pPrint();
     },
-    setEmoji({ i, e }) {
+    setEmoji({ i, e }= {}) {
       console.log(this.list.at(i));
-      if (e == undefined) this.list.at(i)["emoji"] = this.getEmoji();
+      if (e == undefined) this.list.at(i)["emoji"] = this.getEmoji(i);
       else {
         this.list.at(i)["emoji"] = e;
       }
       this.pPrint();
     },
-    getEmoji() {
-      return this.$refs.settings.getEmoji(1)[0];
+    getEmoji(i = 0) {
+      return this.$refs.settings.getEmoji(1, (this.off+i));
     },
 
-    regenerateAll() {
-      this.off = Math.floor(Math.random() * this.emoji.len);
-      this.$refs.settings.setEmoji()
-      
+    
+    applyEmoji(){
       // eslint-disable-next-line
       this.emojilist.forEach((element, index) => {
         console.log(element + index);
         this.setEmoji({ i: index, e: element });
       });
     },
+    
+    
+    regenerateAll() {
+      this.off = Math.floor(Math.random() * this.$refs.settings.getEmojiLen());
+      this.$refs.settings.s["offset"] = this.off
+      this.$refs.settings.setEmoji();
+
+      this.applyEmoji()
+    },
 
     format(date) {
       return `${this.$t("core.input.format", { num: date.length })}`;
     },
+
+    setSingleEmoji(index){
+      var z = index
+
+      if (!this.$refs.settings.s["random"]){
+        z = this.list.length + 1 + Math.random()*10
+      }
+      this.setEmoji({ i: index, e: this.getEmoji(z) })
+    }
   },
 
   computed: {
@@ -169,7 +183,7 @@ export default {
 
 <template>
   <!--SUBHEADER-->
-  <p v-if="this.list.length == 0" class=" max-w-screen-sm text-center">
+  <p v-if="this.list.length == 0" class="max-w-screen-sm text-center">
     <a class="link link-primary" href="/calc">{{ $t("core.calculate") }}</a>
   </p>
 
@@ -213,7 +227,7 @@ export default {
             <td class="p-2">
               <button
                 class="btn btn-ghost px-1"
-                @click="setEmoji({ i: index })"
+                @click="setSingleEmoji(index)"
               >
                 ♻️
               </button>
@@ -229,10 +243,13 @@ export default {
 
     <!--INPUT TAB-->
     <div v-if="mode == 0">
-    <button @click="togglePollType('date')" class="btn btn-primary m-2">{{ $t("core.mode.date") }}</button>
-    <button @click="togglePollType('text')" class="btn btn-primary m-2">{{ $t("core.mode.option") }}</button>
+      <button @click="togglePollType('date')" class="btn btn-primary m-2">
+        {{ $t("core.mode.date") }}
+      </button>
+      <button @click="togglePollType('text')" class="btn btn-primary m-2">
+        {{ $t("core.mode.option") }}
+      </button>
     </div>
-
 
     <div v-if="this.list.length == 0 && mode != 0" class="tabs tabs-boxed">
       <a
@@ -298,26 +315,35 @@ export default {
     </form>
     <!--RESULT CARD -->
 
-    <input
-      type="text"
-      v-if="this.list.length > 0"
-      :placeholder="$t('core.input.title')"
-      v-model="title"
-      class="input input-bordered input-ghost w-full"
-      v-on:change="pPrint()"
-    />
+    <div v-if="this.list.length > 0" class="form-control w-full max-w-xs">
+      <label class="label">
+        <span class="label-text">{{ $t("core.input.title") }}</span>
+      </label>
+      <input
+        type="text"
+        v-model="title"
+        class="input input-bordered input-ghost w-full"
+        v-on:change="pPrint()"
+      />
+    </div>
+
+    
 
     <div class="my-5">
-<button
-      v-if="this.list.length > 0"
-      class="btn btn-primary btn-outline m-1"
-      @click="regenerateAll()"
-    >
-      {{$t("settings.regenerate")}}
-    </button>
-    
-    <label v-if="this.list.length > 0" for="my-modal-6" class="btn modal-button btn-primary  btn-outline m-1">{{$t("settings.settings")}}</label>
+      <button
+        v-if="this.list.length > 0"
+        class="btn btn-primary btn-outline m-1"
+        @click="regenerateAll()"
+      >
+        {{ $t("settings.regenerate") }}
+      </button>
 
+      <label
+        v-if="this.list.length > 0"
+        for="my-modal-6"
+        class="btn modal-button btn-primary btn-outline m-1"
+        >{{ $t("settings.settings") }}</label
+      >
     </div>
 
     <div v-if="this.list.length > 0" class="card bg-base-200 mt-5">
@@ -386,21 +412,36 @@ export default {
     </div>
   </div>
 
-<!--MODAL SETTING-->
-  <input type="checkbox" id="my-modal-6" class="modal-toggle " />
-<label class="modal modal-middle my-modal" for="my-modal-6">
-  <label class="modal-box w-4/5" for="">
-        <label for="my-modal-6" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+  <!--MODAL SETTING-->
+  <input type="checkbox" id="my-modal-6" class="modal-toggle" />
+  <label class="modal modal-middle my-modal" for="my-modal-6">
+    <label class="modal-box w-4/5" for="">
+      <label
+        for="my-modal-6"
+        class="btn btn-sm btn-circle absolute right-2 top-2"
+        >✕</label
+      >
 
-    <SettingsComponent ref="settings" v-model="emojilist" :np="list.length" settingHidedList="['n', 'nerdness', 'regenerate', 'allstatus', 'maxversion']" />
+      <SettingsComponent
+        ref="settings"
+        v-model="emojilist"
+        @update:modelValue="applyEmoji()"
+        :np="list.length"
+        settingHidedList="['n', 'nerdness', 'regenerate', 'allstatus', 'maxversion']"
+      />
+
+      <label
+        for="my-modal-6"
+        class="btn btn-sm"
+        >{{$t("close")}}</label
+      >
+    </label>
   </label>
-</label>
 </template>
 
 <style>
 .my-modal {
-    background-color: #ffffff00 !important
-
+  background-color: #ffffff00 !important;
 }
 .flip-list-move {
   transition: transform 0.5s;

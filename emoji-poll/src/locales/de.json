@@ -45,11 +45,11 @@
   "ok": "OK",
   "title": {
     "calc": "Antwort-Parser",
-    "generator": "Emoji-basierter Umfragen-Kopiergenerator."
+    "generator": "Erstellen Sie Emoji-basierte Umfragen"
   },
   "wip": "🧑‍💻 Die App ist noch in Arbeit.",
   "settings": {
     "regenerate": "♻️ Regenerieren Sie alle Emoji",
-    "settings": "⚙️ Einstellungen (bald verfügbar)"
+    "settings": "⚙️ Einstellungen"
   }
 }

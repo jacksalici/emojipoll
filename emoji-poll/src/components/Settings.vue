@@ -10,7 +10,7 @@ export default {
   mounted() {
     this.emoji = require("emoji-random-list");
     this.s["n"] = this.np;
-    this.setEmoji();
+    
 
     if (window.localStorage.getItem("saved-settings"))
       this.recoverDisabled = false;
@@ -26,7 +26,7 @@ export default {
         v: false,
         noduplicates: true,
         allstatus: false,
-        random: true,
+        random: false,
         genders: false,
         maxversion: 14,
         nerdness: 1,
@@ -48,6 +48,30 @@ export default {
     };
   },
   methods: {
+    groups2String(){
+      var gs = ""
+      this.groupsOptions.forEach((element, index) => {
+        if (this.s["groups"].at(index))
+          gs +=
+            String(element.toLowerCase())
+              .replace(/-/gm, " ")
+              .replace(/and/gm, "&") + ",";
+      });
+      return gs
+    },
+    getEmojiLen(){
+      
+
+      return this.emoji.calc({
+        skintones: this.s['skintones'],
+        noduplicates: this.s['noduplicates'],
+        allstatus: this.s['allstatus'],
+        genders: this.s['genders'],
+        group: this.groups2String(),
+        maxversion: this.s['maxversion'],
+        search: this.s['search']
+      })
+    },
     recoverSettings() {
       let t = window.localStorage.getItem("saved-settings");
       console.log(t);
@@ -58,15 +82,15 @@ export default {
       this.recoverDisabled = false;
     },
     resetSettings() {
-      (this.s["n"] = 5),
+      
         (this.s["skintones"] = false),
         (this.s["v"] = false),
         (this.s["noduplicates"] = true),
         (this.s["allstatus"] = false),
-        (this.s["random"] = true),
+        (this.s["random"] = false),
         (this.s["genders"] = false),
         (this.s["maxversion"] = 14),
-        (this.s["nerdness"] = 0),
+        (this.s["nerdness"] = 1),
         (this.s["search"] = ""),
         (this.s["offset"] = 0),
         (this.s["groups"] = [
@@ -82,41 +106,38 @@ export default {
         ]),
         this.setEmoji();
     },
-    setEmoji() {
-      this.list = this.getEmoji();
+    setEmoji(off = this.s['offset']) {
+      this.list = this.getEmoji(0, off);
       this.$emit("update:modelValue", this.list);
     },
-    getEmoji(customN) {
+    getEmoji(myN = 0, myOffset = 0) {
       this.s["n"] = this.np
       if (this.s["n"] > 3000) {
         this.s["n"] = 3000;
       }
 
       console.log(this.s);
-      let gs = "";
       if (this.s["nerdness"] == 2) {
         this.s["v"] = true;
       } else {
         this.s["v"] = false;
       }
 
-      this.groupsOptions.forEach((element, index) => {
-        if (this.s["groups"].at(index))
-          gs +=
-            String(element.toLowerCase())
-              .replace("-", " ")
-              .replace("and", "&") + ",";
-      });
+     
       let l;
 
-      if (!customN)
-        customN = this.s["n"]
+      if (!myN)
+        myN = this.s["n"]
+      
+      if (!myOffset)
+        myOffset = this.s['myOffset']
+
       if (this.s["random"]) {
         l = this.emoji.random({
-          n: customN,
+          n: myN,
           skintones: this.s["skintones"],
           genders: this.s["genders"],
-          group: gs,
+          group: this.groups2String(),
           v: this.s["v"],
           allstatus: this.s["allstatus"],
           noduplicates: this.s["noduplicates"],
@@ -125,15 +146,15 @@ export default {
         });
       } else {
         l = this.emoji.list({
-          n:customN,
+          n: myN,
           skintones: this.s["skintones"],
           genders: this.s["genders"],
-          group: gs,
+          group: this.groups2String(),
           v: this.s["v"],
           allstatus: this.s["allstatus"],
           noduplicates: this.s["noduplicates"],
           maxversion: this.s["maxversion"],
-          offset: this.s["offset"],
+          offset: myOffset,
           search: this.s["search"],
         });
       }
@@ -184,15 +205,7 @@ export default {
           class="tooltip tooltip-open tooltip-left tooltip-primary"
           :data-tip="s['n']"
         >
-          <button
-            @click="
-              s['n']++;
-              setEmoji();
-            "
-            class="btn btn-sm btn-ghost"
-          >
-            🔺
-          </button>
+          
           <button
             @click="
               s['n']--;
@@ -200,7 +213,17 @@ export default {
             "
             class="btn btn-sm ml-1 btn-ghost"
           >
-            🔻
+            -
+          </button>
+
+          <button
+            @click="
+              s['n']++;
+              setEmoji();
+            "
+            class="btn btn-sm btn-ghost"
+          >
+            +
           </button>
         </div>
       </div>
@@ -212,25 +235,32 @@ export default {
       >
         Offset
       </p>
-      <div
-        class="flex"
-        v-if="s['random'] == false && !settingHidedList.includes('offset')"
-      >
-        <input
-          type="range"
-          min="1"
-          max="2000"
-          class="range range-primary my-auto mr-2"
-          v-model="s['offset']"
-          v-on:change="setEmoji()"
-        />
-        <input
-          type="number"
-          min="1"
-          class="input input-ghost p-0 w-1/4 max-w-xs"
-          v-model="s['offset']"
-          @input="setEmoji()"
-        />
+      <div v-if="s['random'] == false && !settingHidedList.includes('offset')">
+        <div
+          class="tooltip tooltip-open tooltip-left tooltip-primary"
+          :data-tip="s['offset']"
+        >
+           <button
+            @click="
+              s['offset']--;
+              setEmoji();
+            "
+            class="btn btn-sm ml-1 btn-ghost"
+          >
+            -
+          </button>
+          
+          <button
+            @click="
+              s['offset']++;
+              setEmoji();
+            "
+            class="btn btn-sm btn-ghost"
+          >
+            +
+          </button>
+         
+        </div>
       </div>
 
       <p class="text-lg">Other settings</p>
@@ -391,29 +421,31 @@ export default {
       </div>
 
       <!--BUTTONS-->
-
+      <div class="flex mt-2 m-auto">
       <button
         v-if="!settingHidedList.includes('buttons')"
-        class="btn btn-primary mt-5"
+        class="btn btn-primary m-1 ml-auto btn-xs"
         v-on:click="resetSettings()"
       >
-        Reset Settings
+        Reset
       </button>
 
       <button
         v-if="!settingHidedList.includes('buttons')"
-        class="btn btn-primary btn-sm mt-2"
+        class="btn btn-primary btn-xs m-1"
         v-on:click="saveSettings()"
       >
-        Save Settings
+        Backup
       </button>
       <button
         v-if="!settingHidedList.includes('buttons')"
-        class="btn btn-primary btn-sm mt-2"
+        class="btn btn-primary btn-xs m-1 mr-auto"
         :class="{ disabled: !recoverDisabled }"
         v-on:click="recoverSettings()"
       >
-        Recover Settings
+        Load
       </button>
+      </div>
+    
     
 </template>

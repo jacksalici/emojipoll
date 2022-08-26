@@ -45,11 +45,11 @@
   "ok": "De acuerdo",
   "title": {
     "calc": "Analizador de respuestas",
-    "generator": "Generador de copia de encuestas basado en emoji."
+    "generator": "Generar encuestas basadas en emoji"
   },
   "wip": "🧑‍💻 La aplicación aún está en proceso.",
   "settings": {
     "regenerate": "♻️ Regenerar todos los emoji",
-    "settings": "⚙️ Configuración (Pronto disponible)"
+    "settings": "⚙️ Configuración"
   }
 }
