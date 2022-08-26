@@ -31,7 +31,7 @@
       "header": "Choix d'EmojiPoll"
     },
     "text": {
-      "content": "Merci de répondre à ce message avec l'emoji correspondant à votre choix :\n",
+      "content": "Merci de répondre à ce message avec l'emoji correspondant à votre choix :\n\n",
       "footer": "Généré avec emojipoll.jacksalici.com"
     },
     "calculate": "Déjà fait un sondage ? \nCalculez le résultat 📊"

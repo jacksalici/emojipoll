@@ -82,7 +82,7 @@ export default {
     pPrint() {
       this.prettyString = "";
       if (this.title != "") {
-        this.prettyString += "*" + this.title.toUpperCase() + "*\n";
+        this.prettyString += "*" + this.title.toUpperCase() + "*\n\n";
       }
       this.prettyString += this.$t("core.text.content");
       this.list.forEach((element) => {

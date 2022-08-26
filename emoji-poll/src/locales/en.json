@@ -31,7 +31,7 @@
       "header": "EmojiPoll choices"
     },
     "text": {
-      "content": "Please answer to this message with the emoji that matches your choice:\n",
+      "content": "Please answer to this message with the emoji that matches your choice:\n\n",
       "footer": "Generated with emojipoll.jacksalici.com"
     },
     "calculate": "Already made a poll? Calculate the result 📊"
