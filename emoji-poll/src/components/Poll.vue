@@ -89,7 +89,7 @@ export default {
 
      this.datelistLocale.forEach((date)=>{
       times.forEach((time) => {
-        this.addEntry(date + "&emsp;" + time)
+        this.addEntry(date + "&emsp;" + time.trim())
       })
      })
 
@@ -99,11 +99,11 @@ export default {
     pPrint() {
       this.prettyString = "";
       if (this.title != "") {
-        this.prettyString += "*" + this.title.toUpperCase() + "*\n\n";
+        this.prettyString += "*" + this.title.trim().toUpperCase() + "*\n\n";
       }
       this.prettyString += this.$t("core.text.content");
       this.list.forEach((element) => {
-        this.prettyString += element.emoji + "    *" + element.name.replace("&emsp;", "\t") + "*\n";
+        this.prettyString += element.emoji + "    *" + element.name.trim().replace("&emsp;", "\t") + "*\n";
       });
       this.prettyString += `\n_${this.$t("core.text.footer")}_`;
       this.tipIsOpen = false;
