@@ -7,7 +7,8 @@
   },
   "content": {
     "calc": "Execute the tally of the poll. Just paste below all your fellows text answers.",
-    "generator": "Create the text of your poll! Just insert the choices and share it with your fellows."
+    "generator": "Create your EmojiPoll text and say goodbye to traditional link polls! Just enter the possible options and share the text on your favorite messaging app. Once they have answered you (with emoji), you can calculate the outcome of the survey with the link above!",
+    "catchphrase": " What do you want to create a poll for?"
   },
   "core": {
     "card": {
@@ -26,8 +27,8 @@
       "time": "Add time options (optional, separated by a comma)"
     },
     "mode": {
-      "date": "Find a date",
-      "option": "Find an option"
+      "date": "To find a date",
+      "option": "To find an option"
     },
     "table": {
       "header": "EmojiPoll choices"
@@ -36,7 +37,7 @@
       "content": "Please answer to this message with the emoji that matches your choice:\n\n",
       "footer": "Generated with emojipoll.jacksalici.com"
     },
-    "calculate": "Already made a poll? Calculate the result 📊"
+    "calculate": "Already made a poll? Check the result!"
   },
   "menu": {
     "about": "💁‍♂️ About",
@@ -48,7 +49,7 @@
   "ok": "OK",
   "title": {
     "calc": "Answers parser",
-    "generator": "Generate emoji-based polls"
+    "generator": "Generate emoji-based polls!"
   },
   "wip": "🧑‍💻 The app is still work in progress.",
   "settings": {

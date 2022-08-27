@@ -29,7 +29,7 @@ export default {
   </p>
 
   
-  <div class="mockup-code bg-base-200 text-primary-content text-left">
+  <div class="mockup-code bg-base-200 text-left">
   <pre class="select-all"><code>{{list}}</code></pre>
 </div>
 <div class="card bg-base-200">

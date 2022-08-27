@@ -85,7 +85,7 @@
       </div>
       <div class="navbar-center">
         <a href="/" class="btn btn-ghost normal-case text-xl font-bold"
-          >EmojiPoll 📮🏄</a
+          > <img src="logo.png" class="inline h-7 mx-1"/>EmojiPoll</a
         >
       </div>
       <div class="navbar-end"></div>

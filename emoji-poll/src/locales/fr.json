@@ -7,7 +7,8 @@
   },
   "content": {
     "calc": "Exécuter le décompte du scrutin. Collez simplement ci-dessous toutes les réponses textuelles de vos collègues.",
-    "generator": "Créez le texte de votre sondage ! Insérez simplement les choix et partagez-les avec vos collègues."
+    "generator": "Créez votre texte EmojiPoll et dites adieu aux sondages traditionnels sur les liens ! \nEntrez simplement les options possibles et partagez le texte sur votre application de messagerie préférée. \nUne fois qu'ils vous ont répondu (avec emoji), vous pouvez calculer le résultat de l'enquête avec le lien ci-dessus !",
+    "catchphrase": "Pour quoi voulez-vous créer un sondage ?"
   },
   "core": {
     "card": {
@@ -36,7 +37,7 @@
       "content": "Merci de répondre à ce message avec l'emoji correspondant à votre choix :\n\n",
       "footer": "Généré avec emojipoll.jacksalici.com"
     },
-    "calculate": "Déjà fait un sondage ? \nCalculez le résultat 📊"
+    "calculate": "Déjà fait un sondage ? \nVérifiez le résultat !"
   },
   "menu": {
     "about": "💁‍♂️ À propos",
@@ -48,7 +49,7 @@
   "ok": "D'accord",
   "title": {
     "calc": "Analyseur de réponses",
-    "generator": "Générer des sondages basés sur les emoji"
+    "generator": "Générez des sondages basés sur les emoji!"
   },
   "wip": "🧑‍💻 L'application est toujours en cours de développement.",
   "settings": {

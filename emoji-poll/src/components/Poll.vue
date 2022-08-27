@@ -208,11 +208,12 @@ export default {
     <a class="link link-primary" href="/calc">{{ $t("core.calculate") }}</a>
   </p>
 
-  <h1 class="text-2xl font-bold text-center m-auto">{{ $t("title.generator") }}</h1>
+  <h1 class="text-4xl font-bold text-center m-auto">{{ $t("title.generator") }}</h1>
 
-  <p class="max-w-screen-sm text-center m-auto">
+  <p class="max-w-screen-sm text-center m-auto text-sm">
     {{ $t("content.generator") }}
   </p>
+
   </div>
 
   <div class="md-5 overflow-x-auto">
@@ -266,24 +267,29 @@ export default {
           </Transition>
 
     <!--INPUT TAB-->
-    <div v-if="mode == 0">
+    <div class="card bg-base-200" v-if="mode == 0">
+        <div class="card-body">
+
+      <h1 class="text-2xl text-primary font-bold text-center m-auto">{{ $t("content.catchphrase") }}</h1>
+
       <button @click="togglePollType('date')" class="btn btn-primary m-2">
         {{ $t("core.mode.date") }}
       </button>
       <button @click="togglePollType('text')" class="btn btn-primary m-2">
         {{ $t("core.mode.option") }}
       </button>
+        </div>
     </div>
 
     <div v-if="this.list.length == 0 && mode != 0" class="tabs tabs-boxed">
       <a
-        class="tab ml-auto"
+        class="tab m-auto"
         :class="{ 'tab-active': mode == 1 }"
         @click="togglePollType('date')"
         >{{ $t("core.mode.date") }}</a
       >
       <a
-        class="tab mr-auto"
+        class="tab m-auto"
         :class="{ 'tab-active': mode == 2 }"
         @click="togglePollType('text')"
         >{{ $t("core.mode.option") }}</a

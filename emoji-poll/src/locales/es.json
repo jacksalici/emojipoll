@@ -7,7 +7,8 @@
   },
   "content": {
     "calc": "Ejecutar el conteo de la encuesta. Simplemente pegue debajo de todas las respuestas de texto de sus compañeros.",
-    "generator": "¡Crea el texto de tu encuesta! Simplemente inserte las opciones y compártalas con sus compañeros."
+    "generator": "¡Cree su texto EmojiPoll y diga adiós a las encuestas de enlaces tradicionales! \nSimplemente ingrese las opciones posibles y comparta el texto en su aplicación de mensajería favorita. \nUna vez que te hayan respondido (con emoji), ¡puedes calcular el resultado de la encuesta con el enlace de arriba!",
+    "catchphrase": "¿Para qué quieres crear una encuesta?"
   },
   "core": {
     "card": {
@@ -36,7 +37,7 @@
       "content": "Responda a este mensaje con el emoji que coincida con su elección:\n\n",
       "footer": "Generado con emojipoll.jacksalici.com"
     },
-    "calculate": "¿Ya hiciste una encuesta? \nCalcula el resultado 📊"
+    "calculate": "¿Ya hiciste una encuesta? \n¡Comprueba el resultado!"
   },
   "menu": {
     "about": "💁‍♂️ Acerca de",
@@ -48,7 +49,7 @@
   "ok": "De acuerdo",
   "title": {
     "calc": "Analizador de respuestas",
-    "generator": "Generar encuestas basadas en emoji"
+    "generator": "¡Genera encuestas basadas en emojis!"
   },
   "wip": "🧑‍💻 La aplicación aún está en proceso.",
   "settings": {

@@ -7,7 +7,8 @@
   },
   "content": {
     "calc": "Führen Sie die Auszählung der Umfrage durch. Fügen Sie einfach unter allen Textantworten Ihrer Kollegen ein.",
-    "generator": "Erstellen Sie den Text Ihrer Umfrage! Fügen Sie einfach die Auswahl ein und teilen Sie sie mit Ihren Kollegen."
+    "generator": "Erstellen Sie Ihren EmojiPoll-Text und verabschieden Sie sich von traditionellen Link-Umfragen! \nGeben Sie einfach die möglichen Optionen ein und teilen Sie den Text in Ihrer bevorzugten Messaging-App. \nSobald sie Ihnen geantwortet haben (mit Emoji), können Sie das Ergebnis der Umfrage mit dem obigen Link berechnen!",
+    "catchphrase": "Wofür möchten Sie eine Umfrage erstellen?"
   },
   "core": {
     "card": {
@@ -36,7 +37,7 @@
       "content": "Bitte antworten Sie auf diese Nachricht mit dem Emoji, das Ihrer Wahl entspricht:\n\n",
       "footer": "Erstellt mit emojipoll.jacksalici.com"
     },
-    "calculate": "Schon eine Umfrage gemacht? \nBerechnen Sie das Ergebnis 📊"
+    "calculate": "Schon eine Umfrage gemacht? \nÜberprüfen Sie das Ergebnis!"
   },
   "menu": {
     "about": "💁‍♂️ Über",
@@ -48,7 +49,7 @@
   "ok": "OK",
   "title": {
     "calc": "Antwort-Parser",
-    "generator": "Erstellen Sie Emoji-basierte Umfragen"
+    "generator": "Erstellen Sie Emoji-basierte Umfragen!"
   },
   "wip": "🧑‍💻 Die App ist noch in Arbeit.",
   "settings": {
