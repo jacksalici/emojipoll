@@ -21,7 +21,8 @@
       "date": "Add a new date ✏️🦄",
       "format": "{num} selected. Click to add new dates.",
       "option": "Add a new option ✏️🦄",
-      "title": "Insert the poll's title (optional)"
+      "title": "Insert the poll's title (optional)",
+      "time": "Add time options (optional, separated by a comma)"
     },
     "mode": {
       "date": "Find a date",

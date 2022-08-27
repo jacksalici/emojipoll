@@ -21,7 +21,8 @@
       "date": "Neues Datum hinzufügen ✏️🦄",
       "format": "{num} ausgewählt. Klicken Sie hier, um neue Daten hinzuzufügen.",
       "option": "Füge eine neue Option hinzu ✏️🦄",
-      "title": "Geben Sie den Titel der Umfrage ein (optional)"
+      "title": "Geben Sie den Titel der Umfrage ein (optional)",
+      "time": "Zeitoptionen hinzufügen (optional, durch Komma getrennt)"
     },
     "mode": {
       "date": "Finden Sie ein Datum",

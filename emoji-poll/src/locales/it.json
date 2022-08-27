@@ -21,7 +21,8 @@
       "date": "Aggiungi una nuova data ✏️🦄",
       "format": "{num} selezionate. Clicca per aggiungere nuove date.",
       "option": "Aggiungi una nuova opzione ✏️🦄",
-      "title": "Inserisci il titolo del sondaggio (facoltativo)"
+      "title": "Inserisci il titolo del sondaggio (facoltativo)",
+      "time": "Aggiungi opzioni di tempo (facoltativo, separato da una virgola)"
     },
     "mode": {
       "date": "Trova una data",

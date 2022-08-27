@@ -37,6 +37,7 @@ export default {
       datelistLocale: [],
       emoji: "",
       off: "",
+      timelist: []
     };
   },
 
@@ -78,6 +79,18 @@ export default {
       } else if (str == "text") {
         this.mode = 2;
       }
+    },
+    changeTime() {
+     var times = this.timelist.split(',')
+     this.list = []
+
+     this.datelistLocale.forEach((date)=>{
+      times.forEach((time) => {
+        this.addEntry(date + "   " + time)
+      })
+     })
+
+     
     },
     pPrint() {
       this.prettyString = "";
@@ -162,7 +175,7 @@ export default {
       var z = index
 
       if (!this.$refs.settings.s["random"]){
-        z = this.list.length + 1 + Math.random()*10
+        z = index + this.list.length + 1 + Math.random()*10
       }
       this.setEmoji({ i: index, e: this.getEmoji(z) })
     }
@@ -183,18 +196,22 @@ export default {
 
 <template>
   <!--SUBHEADER-->
-  <p v-if="this.list.length == 0" class="max-w-screen-sm text-center">
+  <div v-if="this.list.length == 0" class="space-y-4">
+  <p  class="max-w-screen-sm text-center m-auto">
     <a class="link link-primary" href="/calc">{{ $t("core.calculate") }}</a>
   </p>
 
-  <h1 class="text-2xl font-bold">{{ $t("title.generator") }}</h1>
+  <h1 class="text-2xl font-bold text-center m-auto">{{ $t("title.generator") }}</h1>
 
-  <p v-if="this.list.length == 0" class="max-w-screen-sm text-center">
+  <p class="max-w-screen-sm text-center m-auto">
     {{ $t("content.generator") }}
   </p>
+  </div>
 
   <div class="md-5 overflow-x-auto">
     <!--TABLE - ENTRY LIST -->
+          <Transition name="bounce">
+
     <table v-if="this.list.length > 0" class="table w-full table-fixed">
       <thead>
         <tr>
@@ -240,6 +257,7 @@ export default {
         </template>
       </draggable>
     </table>
+          </Transition>
 
     <!--INPUT TAB-->
     <div v-if="mode == 0">
@@ -315,9 +333,9 @@ export default {
     </form>
     <!--RESULT CARD -->
 
-    <div v-if="this.list.length > 0" class="form-control w-full max-w-xs">
+    <div v-if="this.list.length > 0" class="form-control w-full">
       <label class="label">
-        <span class="label-text">{{ $t("core.input.title") }}</span>
+        <span class="label-text w-full">{{ $t("core.input.title") }}</span>
       </label>
       <input
         type="text"
@@ -327,11 +345,23 @@ export default {
       />
     </div>
 
-    
+    <div v-if="this.list.length > 0 && this.mode == 1" class="form-control w-full">
+      <label class="label">
+        <span class="label-text w-full">{{ $t("core.input.time") }}</span>
+      </label>
+      <input
+        type="text"
+        v-model="timelist"
+        class="input input-bordered input-ghost w-full"
+        v-on:change="changeTime()"
+      />
+    </div>
 
-    <div class="my-5">
+    
+        <Transition name="bounce">
+
+    <div class="my-5"  v-if="this.list.length > 0">
       <button
-        v-if="this.list.length > 0"
         class="btn btn-primary btn-outline m-1"
         @click="regenerateAll()"
       >
@@ -339,13 +369,15 @@ export default {
       </button>
 
       <label
-        v-if="this.list.length > 0"
+       
         for="my-modal-6"
         class="btn modal-button btn-primary btn-outline m-1"
         >{{ $t("settings.settings") }}</label
       >
     </div>
+        </Transition>
 
+    <Transition name="bounce">
     <div v-if="this.list.length > 0" class="card bg-base-200 mt-5">
       <div class="card-body">
         <h2 class="card-title">{{ $t("core.card.title") }}</h2>
@@ -410,6 +442,7 @@ export default {
         </a>-->
       </div>
     </div>
+    </Transition>
   </div>
 
   <!--MODAL SETTING-->
@@ -457,5 +490,23 @@ export default {
 }
 .list-group-item i {
   cursor: pointer;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>

@@ -21,7 +21,8 @@
       "date": "Agrega una nueva fecha ✏️🦄",
       "format": "{num} seleccionado. Haga clic para agregar nuevas fechas.",
       "option": "Agrega una nueva opción ✏️🦄",
-      "title": "Inserta el título de la encuesta (opcional)"
+      "title": "Inserta el título de la encuesta (opcional)",
+      "time": "Agregar opciones de tiempo (opcional, separados por una coma)"
     },
     "mode": {
       "date": "Encuentra una fecha",

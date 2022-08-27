@@ -2,9 +2,9 @@
   <div
     class="container mx-auto px-4 py-4 sm:px-6 xl:px-12 max-w-3xl items-center justify-center space-y-6 text-center"
   >
-    <p class="text-accent" v-if="!hideWipBanner">
+    <!--<p class="text-accent" v-if="!hideWipBanner">
       {{ $t("wip") }}
-    </p>
+    </p>-->
 
     <div class="navbar bg-base-200 rounded-3xl">
       <div class="navbar-start">
