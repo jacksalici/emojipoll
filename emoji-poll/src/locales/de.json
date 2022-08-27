@@ -41,7 +41,8 @@
     "about": "💁‍♂️ Über",
     "calc": "📊 Rechner",
     "generator": "🏡Generator",
-    "lang": "🌐 Sprachen"
+    "lang": "🌐 Sprachen",
+    "tool": "🧰 Toolbox"
   },
   "ok": "OK",
   "title": {
@@ -52,5 +53,6 @@
   "settings": {
     "regenerate": "♻️ Regenerieren Sie alle Emoji",
     "settings": "⚙️ Einstellungen"
-  }
+  },
+  "close": "Nah dran"
 }

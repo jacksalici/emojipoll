@@ -37,7 +37,7 @@ export default {
       datelistLocale: [],
       emoji: "",
       off: "",
-      timelist: []
+      timelist: ""
     };
   },
 
@@ -72,6 +72,9 @@ export default {
           this.addEntry(d);
         }
       });
+
+      if(this.timelist != "")
+        this.changeTime()
     },
     togglePollType(str) {
       if (str == "date") {
@@ -86,10 +89,11 @@ export default {
 
      this.datelistLocale.forEach((date)=>{
       times.forEach((time) => {
-        this.addEntry(date + "   " + time)
+        this.addEntry(date + "&emsp;" + time)
       })
      })
 
+      this.pPrint()
      
     },
     pPrint() {
@@ -99,10 +103,11 @@ export default {
       }
       this.prettyString += this.$t("core.text.content");
       this.list.forEach((element) => {
-        this.prettyString += element.emoji + "    *" + element.name + "*\n";
+        this.prettyString += element.emoji + "    *" + element.name.replace("&emsp;", "\t") + "*\n";
       });
       this.prettyString += `\n_${this.$t("core.text.footer")}_`;
       this.tipIsOpen = false;
+      console.log(this.prettyString)
     },
     copy() {
       navigator.clipboard.writeText(this.prettyString);
@@ -156,6 +161,7 @@ export default {
         console.log(element + index);
         this.setEmoji({ i: index, e: element });
       });
+      this.pPrint()
     },
     
     
@@ -178,6 +184,7 @@ export default {
         z = index + this.list.length + 1 + Math.random()*10
       }
       this.setEmoji({ i: index, e: this.getEmoji(z) })
+      this.pPrint()
     }
   },
 
@@ -237,8 +244,7 @@ export default {
             </td>
             <td class="text-xl p-2" v-html="element.emoji"></td>
 
-            <td class="p-2 w-2/5 truncate">
-              {{ element.name }}
+            <td class="p-2 w-2/5 truncate" v-html="element.name">
             </td>
 
             <td class="p-2">
@@ -408,7 +414,7 @@ export default {
             role="button"
             :href="
               'https://api.whatsapp.com/send/?text=' +
-              this.prettyString.replace(/\x20+/g, '%20').replace(/\n/g, '%0A')
+              this.prettyString.replace(/\t/g, '%20%20%20').replace(/\x20/g, '%20').replace(/\n/g, '%0A')
             "
             class="btn btn-primary btn-sm"
             :class="{ 'btn-disabled': disabled }"

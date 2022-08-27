@@ -41,7 +41,8 @@
     "about": "💁‍♂️ About",
     "calc": "📊 Calcolatore",
     "generator": "🏡 Generatore",
-    "lang": "🌐 Lingue"
+    "lang": "🌐 Lingue",
+    "tool": "🧰 Toolbox"
   },
   "ok": "Ok",
   "title": {
@@ -52,5 +53,6 @@
   "settings": {
     "regenerate": "♻️ Rigenera tutte le emoji",
     "settings": "⚙️ Impostazioni"
-  }
+  },
+  "close": "Chiudi"
 }
