@@ -2,7 +2,8 @@
   "back": " 👈 Ritorna al generatore",
   "calc": {
     "helper": "Controlla di seguito che tutte le emoji del sondaggio siano state analizzate correttamente e che siano separate da una virgola. Correggerli se necessario.",
-    "input": "Incolla le risposte."
+    "input": "Incolla le risposte.",
+    "parser": "Controlla di seguito che le emoji del sondaggio siano state riconosciute correttamente e che siano separate da una virgola. \nCorreggile se necessario."
   },
   "content": {
     "calc": "Esegui il conteggio del sondaggio. È sufficiente incollare di seguito il testo di tutte le risposte dei tuoi amici",

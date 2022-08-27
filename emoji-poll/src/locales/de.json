@@ -2,7 +2,8 @@
   "back": " 👈 Geh zurück zum Generator",
   "calc": {
     "helper": "Bitte überprüfen Sie unten, ob alle Emojis der Umfrage korrekt geparst und durch ein Komma getrennt wurden. Korrigieren Sie sie gegebenenfalls.",
-    "input": "Fügen Sie die Antworten ein."
+    "input": "Fügen Sie die Antworten ein.",
+    "parser": "Bitte überprüfen Sie unten, ob alle Emojis der Umfrage korrekt geparst und durch ein Komma getrennt wurden. \nKorrigieren Sie sie gegebenenfalls."
   },
   "content": {
     "calc": "Führen Sie die Auszählung der Umfrage durch. Fügen Sie einfach unter allen Textantworten Ihrer Kollegen ein.",

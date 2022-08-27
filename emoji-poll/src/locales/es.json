@@ -2,7 +2,8 @@
   "back": " 👈 Volver al generador",
   "calc": {
     "helper": "Verifique a continuación que todos los emoji de la encuesta se hayan analizado correctamente y separados por una coma. Corríjalos si es necesario.",
-    "input": "Pega las respuestas."
+    "input": "Pega las respuestas.",
+    "parser": "Verifique a continuación que todos los emoji de la encuesta se hayan analizado correctamente y separados por una coma. \nCorríjalos si es necesario."
   },
   "content": {
     "calc": "Ejecutar el conteo de la encuesta. Simplemente pegue debajo de todas las respuestas de texto de sus compañeros.",

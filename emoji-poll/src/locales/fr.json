@@ -2,7 +2,8 @@
   "back": " 👈 Retournez au générateur",
   "calc": {
     "helper": "Veuillez vérifier ci-dessous que tous les emoji du sondage ont été analysés correctement et séparés par une virgule. Corrigez-les si nécessaire.",
-    "input": "Collez les réponses."
+    "input": "Collez les réponses.",
+    "parser": "Veuillez vérifier ci-dessous que tous les emoji du sondage ont été analysés correctement et séparés par une virgule. \nCorrigez-les si nécessaire."
   },
   "content": {
     "calc": "Exécuter le décompte du scrutin. Collez simplement ci-dessous toutes les réponses textuelles de vos collègues.",

@@ -2,7 +2,8 @@
   "back": " 👈 Go back to the generator",
   "calc": {
     "helper": "Please check below that all the poll's emoji had been parsed correctly and separated by a comma. Correct them if necessary.",
-    "input": "Paste the answers."
+    "input": "Paste the answers.",
+    "parser": "Please check below that all the poll's emoji had been parsed correctly and separated by a comma. Correct them if necessary."
   },
   "content": {
     "calc": "Execute the tally of the poll. Just paste below all your fellows text answers.",

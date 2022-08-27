@@ -14,8 +14,7 @@
   <div v-if="emoji != ''" class="form-control w-full">
     <label class="label">
       <span class="label-text"
-        >Please check below that all the poll's emoji had been parsed correctly
-        and separated by a comma. Correct them if necessary.</span
+        >{{$t("calc.parser")}}</span
       >
     </label>
     <input
