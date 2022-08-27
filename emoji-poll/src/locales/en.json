@@ -56,5 +56,9 @@
     "regenerate": "♻️ Regenerate all emoji",
     "settings": "⚙️ Settings"
   },
-  "close": "Close"
+  "close": "Close",
+  "input": {
+    "ph1": "My favourite poll 🗳",
+    "ph2": "h18🌅,h21🌃"
+  }
 }

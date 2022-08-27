@@ -56,5 +56,9 @@
     "regenerate": "♻️ Régénérer tous les emoji",
     "settings": "⚙️ Paramètres"
   },
-  "close": "proche"
+  "close": "proche",
+  "input": {
+    "ph1": "Mon sondage préféré 🗳",
+    "ph2": "h18🌅,h21🌃"
+  }
 }

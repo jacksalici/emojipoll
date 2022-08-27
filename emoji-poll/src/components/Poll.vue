@@ -352,6 +352,7 @@ export default {
       <input
         type="text"
         v-model="title"
+        :placeholder="$t('input.ph1')"
         class="input input-bordered input-ghost w-full"
         v-on:change="pPrint()"
       />
@@ -364,6 +365,7 @@ export default {
       <input
         type="text"
         v-model="timelist"
+        :placeholder="$t('input.ph2')"
         class="input input-bordered input-ghost w-full"
         v-on:change="changeTime()"
       />
