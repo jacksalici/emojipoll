@@ -220,7 +220,7 @@ export default {
     <!--TABLE - ENTRY LIST -->
           <Transition name="bounce">
 
-    <table v-if="this.list.length > 0" class="table w-full table-fixed">
+    <table v-if="this.list.length > 0" class="table w-full table-auto">
       <thead>
         <tr>
           <th colspan="4" class="text-center">{{ $t("core.table.header") }}</th>
@@ -240,15 +240,15 @@ export default {
       >
         <template #item="{ element, index }">
           <tr class="list-group-item">
-            <td class="handle p-2">
+            <td class="handle p-2 min-w-min">
               <button class="btn btn-ghost px-1">🔃</button>
             </td>
-            <td class="text-xl p-2" v-html="element.emoji"></td>
+            <td class="text-xl p-2 min-w-min" v-html="element.emoji"></td>
 
-            <td class="p-2 w-2/5 truncate" v-html="element.name">
+            <td class="p-2 w-3/5 truncate text-center" v-html="element.name">
             </td>
 
-            <td class="p-2">
+            <td class="p-2 min-w-min">
               <button
                 class="btn btn-ghost px-1"
                 @click="setSingleEmoji(index)"
@@ -266,6 +266,8 @@ export default {
     </table>
           </Transition>
 
+  </div>
+  <div class="md-5 overflow-x-auto">
     <!--INPUT TAB-->
     <div class="card bg-base-200" v-if="mode == 0">
         <div class="card-body">
