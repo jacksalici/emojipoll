@@ -1,10 +1,13 @@
 <template>
+  <div class="flex flex-col h-screen justify-between">
+  
   <div
     class="container mx-auto px-4 py-4 sm:px-6 xl:px-12 max-w-3xl items-center justify-center space-y-6 text-center"
   >
-    <!--<p class="text-accent" v-if="!hideWipBanner">
-      {{ $t("wip") }}
-    </p>-->
+    <p class="text-primary text-xs" v-if="!($i18n.locale == 'it' || $i18n.locale == 'en') && hideWipBanner">
+      This page has been translated with an automatic translator, please forgive any inaccuracies. If you want contributing in the translation see the <a  class="link" href="https://github.com/jacksalici/emojipoll">Github page</a>.
+      <button  class="btn btn-xs btn-ghost">Dismiss</button>
+    </p>
 
     <div class="navbar bg-base-200 rounded-3xl">
       <div class="navbar-start">
@@ -29,27 +32,19 @@
             tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p-2 shadow-xl bg-base-100 rounded-box w-52"
           >
-            <li class="menu-title">
-              <span>CORE</span>
-            </li>
+           
             <li>
               <a href="/">{{ $t("menu.generator") }}</a>
             </li>
             <li>
               <a href="/calc">{{ $t("menu.calc") }}</a>
             </li>
-            <li class="menu-title">
-              <span>NERD</span>
-            </li>
-            <li>
-              <a href="/about">{{ $t("menu.about") }}</a>
-            </li>
+            
+           
             <li>
               <a href="/tool">{{ $t("menu.tool") }}</a>
             </li>
-            <li class="menu-title">
-              <span>LOCALE</span>
-            </li>
+            
             <li tabindex="0">
               <span>{{ $t("menu.lang") }}</span>
               <ul class="bg-base-100 shadow-xl">
@@ -118,6 +113,18 @@
     </div>
 
     <component :is="currentView" />
+
+    
+  </div>
+
+  <footer class="footer footer-center p-10 bg-base-200 mt-20 mb-0">
+  <div>
+    <img src="logo2.png" class="h-14 p-2"/>
+    <p>Created with ❤️‍🔥 on 🌍 by <a class="link" href="https://jacksalici.com">Jack Salici</a>. <br> </p>
+    <p class="text-xs">The website is realead under MIT Licence. Contibute or suggest improvements on <a  class="link" href="https://github.com/jacksalici/emojipoll">GitHub</a>!</p>
+  </div> 
+</footer> 
+
   </div>
 </template>
 
@@ -153,13 +160,13 @@ export default {
     },
   },
   mounted() {
-    if (sessionStorage.getItem("emojipoll-wip")) {
+    if (sessionStorage.getItem("lang-wip")) {
       this.hideWipBanner = true;
     }
   },
   methods: {
     wipBanner() {
-      sessionStorage.setItem("emojipoll-wip", true);
+      sessionStorage.setItem("lang-wip", true);
       this.hideWipBanner = true;
     },
     lang(lang) {

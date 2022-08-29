@@ -6,7 +6,7 @@
     "parser": "Controlla di seguito che le emoji del sondaggio siano state riconosciute correttamente e che siano separate da una virgola. \nCorreggile se necessario."
   },
   "content": {
-    "calc": "Esegui il conteggio del sondaggio. È sufficiente incollare di seguito il testo di tutte le risposte dei tuoi amici",
+    "calc": "Esegui il conteggio del sondaggio. È sufficiente incollare di seguito il testo di tutte le risposte dei tuoi amici.",
     "generator": "Crea il testo del tuo EmojiPoll e dì addio ai tradizionali sondaggi via link! Basta inserire le opzioni possibili e condividere il testo sulla tua app di messaggi preferita. Una volta che ti avranno risposto (usando emoji) potrai calcolare l'esito del sondaggio con il link sopra! ",
     "catchphrase": "Per cosa vuoi creare un sondaggio?"
   },
@@ -48,7 +48,7 @@
   },
   "ok": "Ok",
   "title": {
-    "calc": "Calcola le risposte",
+    "calc": "Calcola il risultato!",
     "generator": "Genera sondaggi basati su emoji!"
   },
   "wip": "🧑‍💻 L'app è ancora in lavorazione.",
