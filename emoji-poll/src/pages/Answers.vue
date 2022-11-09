@@ -38,6 +38,11 @@
 export default {
   name: "AppAnswers",
   components: {},
+  mounted(){
+
+    document.title = "execute the tally of your emojipoll"
+
+  },
   data() {
     return {
       emoji: "",

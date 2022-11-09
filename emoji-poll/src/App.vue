@@ -121,7 +121,7 @@
   <div>
     <img src="logo2.png" class="h-14 p-2"/>
     <p>Created with ❤️‍🔥 on 🌍 by <a class="link" href="https://jacksalici.com">Jack Salici</a>. <br> </p>
-    <p class="text-xs">The website is realead under MIT Licence. Contibute or suggest improvements on <a  class="link" href="https://github.com/jacksalici/emojipoll">GitHub</a>!</p>
+    <p class="text-xs">The website is released under MIT Licence. Contibute or suggest improvements on <a  class="link" href="https://github.com/jacksalici/emojipoll">GitHub</a>!</p>
   </div> 
 </footer> 
 

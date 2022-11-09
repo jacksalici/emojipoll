@@ -3,4 +3,4 @@ node_modules/
 emoji-poll/localhost-key.pem
 .gitignore
 emoji-poll/localhost.pem
-/.vscode
+.vscode
